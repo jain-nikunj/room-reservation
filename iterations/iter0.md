@@ -5,7 +5,7 @@
 3. Andre Andreassa - https://www.youtube.com/watch?v=tCtdLpwzsuM 
 4. Kathryn Wu -
 5. Zhanshi Wang - 
-6. Yichao Shen - 
+6. Yichao Shen - https://www.youtube.com/watch?v=j_DHc_smRyU
 
 
 ### Customer Meeting Video: https://www.youtube.com/watch?v=hr18ehM_i9Y
