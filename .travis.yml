@@ -1,15 +1,12 @@
 language: ruby
 
-rvm:
-  - 2.2
-
-env:
-  - DB=pgsql
+bundler_args: --without production
 
 services:
   - postgresql
 
+env:
+  - DB=pgsql
+
 script:
-  - RAILS_ENV=test bundle exec rake db:migrate --trace
-  - bundle exec rake db:test:prepare
-  - bundle exec rake
+  - bundle exec rake db:create
