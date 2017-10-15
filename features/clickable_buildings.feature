@@ -5,5 +5,5 @@ Feature: display rooms in a specific building
     
 Scenario: display rooms in Evans building
     Given I am on the "homepage" 
-    and I click on "Evans building"
+    And I click on "Evans building"
     Then I should see "Available rooms in Evans"
