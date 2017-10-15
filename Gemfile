@@ -31,6 +31,13 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+group :test do
+  gem 'simplecov', :require => false
+  gem 'cucumber-rails'
+  gem 'cucumber-rails-training-wheels'
+  gem 'autotest-rails'
+  gem 'database_cleaner'
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

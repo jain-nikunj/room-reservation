@@ -1,0 +1,12 @@
+language: ruby
+
+bundler_args: --without production
+
+services:
+  - postgresql
+
+env:
+  - DB=pgsql
+
+script:
+  - bundle exec rake db:create
