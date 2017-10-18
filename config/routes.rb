@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  root 'buildings#index'
+  get 'buildings/index'
+
+  get 'buildings/search'
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
