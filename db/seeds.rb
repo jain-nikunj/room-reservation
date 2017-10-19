@@ -51,3 +51,18 @@ csv.each do |row|
 end
 
 puts "There are now #{Room.count} rows in the Room table"
+
+csv_text = File.read(Rails.root.join('lib', 'seeds', 'rooms_central.csv'))
+csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+csv.each do |row|
+  t = Room.new
+  t.building_id = Building.where("name = :name", {name: row['Location']})[0].id
+  t.number = row['Classroom #']
+  t.capacity = row['Capacity']
+  t.facilities = row['Feature']
+  t.misc = row['Categories']
+  t.save
+  puts "#{t.building_id}, #{t.capacity} saved"
+end
+
+puts "There are now #{Room.count} rows in the Room table"
