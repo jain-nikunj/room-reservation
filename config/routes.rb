@@ -1,11 +1,9 @@
 Rails.application.routes.draw do
   
   
-  resources :buildings
-  root 'buildings#index'
-  get 'buildings/index'
-
-  get 'buildings/search'
+  resources :buildings, :except => [:new, :edit, :create]
+  root :to => redirect('/buildings')
+  get "*path", to: redirect('/')  # Redirect invalid routes to home page.
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
