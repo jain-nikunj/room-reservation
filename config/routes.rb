@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  
+  
+  resources :buildings
   root 'buildings#index'
   get 'buildings/index'
 

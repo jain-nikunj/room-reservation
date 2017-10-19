@@ -1,14 +1,14 @@
 {
   "RSpec": {
     "coverage": {
-      "/home/ubuntu/workspace/node_modules/project/room-reservation/config/environment.rb": [
+      "/home/ubuntu/workspace/room-reservation/config/environment.rb": [
         null,
         1,
         null,
         null,
         1
       ],
-      "/home/ubuntu/workspace/node_modules/project/room-reservation/config/application.rb": [
+      "/home/ubuntu/workspace/room-reservation/config/application.rb": [
         1,
         null,
         1,
@@ -36,12 +36,12 @@
         null,
         null
       ],
-      "/home/ubuntu/workspace/node_modules/project/room-reservation/config/boot.rb": [
+      "/home/ubuntu/workspace/room-reservation/config/boot.rb": [
         1,
         null,
         1
       ],
-      "/home/ubuntu/workspace/node_modules/project/room-reservation/config/environments/test.rb": [
+      "/home/ubuntu/workspace/room-reservation/config/environments/test.rb": [
         1,
         null,
         null,
@@ -85,7 +85,7 @@
         null,
         null
       ],
-      "/home/ubuntu/workspace/node_modules/project/room-reservation/config/initializers/assets.rb": [
+      "/home/ubuntu/workspace/room-reservation/config/initializers/assets.rb": [
         null,
         null,
         null,
@@ -98,7 +98,7 @@
         null,
         null
       ],
-      "/home/ubuntu/workspace/node_modules/project/room-reservation/config/initializers/backtrace_silencers.rb": [
+      "/home/ubuntu/workspace/room-reservation/config/initializers/backtrace_silencers.rb": [
         null,
         null,
         null,
@@ -107,120 +107,18 @@
         null,
         null
       ],
-      "/home/ubuntu/workspace/node_modules/project/room-reservation/config/initializers/cookies_serializer.rb": [
+      "/home/ubuntu/workspace/room-reservation/config/initializers/cookies_serializer.rb": [
         null,
         null,
         1
       ],
-      "/home/ubuntu/workspace/node_modules/project/room-reservation/config/initializers/filter_parameter_logging.rb": [
-        null,
-        null,
-        null,
-        1
-      ],
-      "/home/ubuntu/workspace/node_modules/project/room-reservation/config/initializers/inflections.rb": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "/home/ubuntu/workspace/node_modules/project/room-reservation/config/initializers/mime_types.rb": [
-        null,
-        null,
-        null,
-        null
-      ],
-      "/home/ubuntu/workspace/node_modules/project/room-reservation/config/initializers/session_store.rb": [
-        null,
-        null,
-        1
-      ],
-      "/home/ubuntu/workspace/node_modules/project/room-reservation/config/initializers/to_time_preserves_timezone.rb": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
+      "/home/ubuntu/workspace/room-reservation/config/initializers/filter_parameter_logging.rb": [
         null,
         null,
         null,
         1
       ],
-      "/home/ubuntu/workspace/node_modules/project/room-reservation/config/initializers/wrap_parameters.rb": [
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        1,
-        1,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null
-      ],
-      "/home/ubuntu/workspace/node_modules/project/room-reservation/config/routes.rb": [
-        1,
-        1,
-        1,
-        null,
-        1,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
-        null,
+      "/home/ubuntu/workspace/room-reservation/config/initializers/inflections.rb": [
         null,
         null,
         null,
@@ -238,31 +136,133 @@
         null,
         null
       ],
-      "/home/ubuntu/workspace/node_modules/project/room-reservation/app/helpers/application_helper.rb": [
-        1,
-        null
-      ],
-      "/home/ubuntu/workspace/node_modules/project/room-reservation/app/helpers/buildings_helper.rb": [
-        1,
-        null
-      ],
-      "/home/ubuntu/workspace/node_modules/project/room-reservation/app/controllers/buildings_controller.rb": [
-        1,
-        1,
+      "/home/ubuntu/workspace/room-reservation/config/initializers/mime_types.rb": [
         null,
         null,
-        1,
         null,
         null
       ],
-      "/home/ubuntu/workspace/node_modules/project/room-reservation/app/controllers/application_controller.rb": [
+      "/home/ubuntu/workspace/room-reservation/config/initializers/session_store.rb": [
+        null,
+        null,
+        1
+      ],
+      "/home/ubuntu/workspace/room-reservation/config/initializers/to_time_preserves_timezone.rb": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1
+      ],
+      "/home/ubuntu/workspace/room-reservation/config/initializers/wrap_parameters.rb": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        1,
+        1,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "/home/ubuntu/workspace/room-reservation/config/routes.rb": [
+        1,
+        1,
+        1,
+        null,
+        1,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "/home/ubuntu/workspace/room-reservation/app/helpers/application_helper.rb": [
+        1,
+        null
+      ],
+      "/home/ubuntu/workspace/room-reservation/app/helpers/buildings_helper.rb": [
+        1,
+        null
+      ],
+      "/home/ubuntu/workspace/room-reservation/app/controllers/buildings_controller.rb": [
+        1,
+        1,
+        null,
+        null,
+        1,
+        null,
+        null
+      ],
+      "/home/ubuntu/workspace/room-reservation/app/controllers/application_controller.rb": [
         1,
         null,
         null,
         1,
         null
       ],
-      "/home/ubuntu/workspace/node_modules/project/room-reservation/spec/helpers/buildings_helper_spec.rb": [
+      "/home/ubuntu/workspace/room-reservation/spec/helpers/buildings_helper_spec.rb": [
         1,
         null,
         null,
@@ -279,37 +279,37 @@
         1,
         null
       ],
-      "/home/ubuntu/workspace/node_modules/project/room-reservation/spec/models/building_spec.rb": [
+      "/home/ubuntu/workspace/room-reservation/spec/models/building_spec.rb": [
         1,
         null,
         1,
         1,
         null
       ],
-      "/home/ubuntu/workspace/node_modules/project/room-reservation/app/models/building.rb": [
+      "/home/ubuntu/workspace/room-reservation/app/models/building.rb": [
         1,
         null
       ],
-      "/home/ubuntu/workspace/node_modules/project/room-reservation/spec/models/room_spec.rb": [
+      "/home/ubuntu/workspace/room-reservation/spec/models/room_spec.rb": [
         1,
         null,
         1,
         1,
         null
       ],
-      "/home/ubuntu/workspace/node_modules/project/room-reservation/app/models/room.rb": [
+      "/home/ubuntu/workspace/room-reservation/app/models/room.rb": [
         1,
         1,
         null
       ],
-      "/home/ubuntu/workspace/node_modules/project/room-reservation/spec/views/buildings/index.html.erb_spec.rb": [
+      "/home/ubuntu/workspace/room-reservation/spec/views/buildings/index.html.erb_spec.rb": [
         1,
         null,
         1,
         1,
         null
       ],
-      "/home/ubuntu/workspace/node_modules/project/room-reservation/spec/views/buildings/search.html.erb_spec.rb": [
+      "/home/ubuntu/workspace/room-reservation/spec/views/buildings/search.html.erb_spec.rb": [
         1,
         null,
         1,
@@ -317,6 +317,6 @@
         null
       ]
     },
-    "timestamp": 1508367197
+    "timestamp": 1508372597
   }
 }

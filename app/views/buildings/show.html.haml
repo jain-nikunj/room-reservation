@@ -1,0 +1,17 @@
+%h1 Rooms in #{@building.name} Hall
+
+%html
+  %head
+    %link{:href => "https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css", :rel => "stylesheet"}/
+    %script{:src => "https://code.jquery.com/jquery-1.11.3.min.js"}
+    %script{:src => "https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"}
+  %body
+    .ui-content{"data-role" => "main"}
+    - @rooms.each do |room|
+      %div{"data-role" => "collapsible"}
+        %h1 #{@building.name} #{room.number}
+        %p Capacity: #{room.capacity}
+        %p Room Type: #{room.misc}
+        %p Features: #{room.facilities}
+
+= link_to 'Home Page', buildings_path, :class => "home_page"
