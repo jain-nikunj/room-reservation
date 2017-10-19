@@ -418,3 +418,1264 @@ Cannot render console from 73.70.83.137! Allowed networks: 127.0.0.1, ::1, 127.0
 Processing by Rails::WelcomeController#index as HTML
   Rendered /usr/local/rvm/gems/ruby-2.3.0/gems/railties-4.2.9/lib/rails/templates/rails/welcome/index.html.erb (2.7ms)
 Completed 200 OK in 24ms (Views: 15.7ms | ActiveRecord: 0.0ms)
+  [1m[36mActiveRecord::SchemaMigration Load (3.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (3.4ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'buildings'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (3.1ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'rooms'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (3.5ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'buildings'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (3.5ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'rooms'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36m (10.1ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL) [0m
+  [1m[35m (4.8ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateBuildings (20171018021754)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (11.8ms)[0m  [1mCREATE TABLE "buildings" ("id" serial primary key, "name" character varying, "misc" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20171018021754"]]
+  [1m[36m (4.9ms)[0m  [1mCOMMIT[0m
+Migrating to CreateRooms (20171018021949)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (11.1ms)[0m  [1mCREATE TABLE "rooms" ("id" serial primary key, "number" character varying, "capacity" integer, "building_id" integer, "facilities" text, "misc" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+  [1m[35m (4.5ms)[0m  CREATE  INDEX  "index_rooms_on_building_id" ON "rooms"  ("building_id")
+  [1m[36m (1.8ms)[0m  [1mALTER TABLE "rooms" ADD CONSTRAINT "fk_rails_a3957b23a8"
+FOREIGN KEY ("building_id")
+  REFERENCES "buildings" ("id")
+[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20171018021949"]]
+  [1m[36m (4.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (2.7ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'buildings'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.1ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'rooms'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (4.1ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Barrows"], ["misc", "Central"], ["created_at", "2017-10-18 23:27:12.686249"], ["updated_at", "2017-10-18 23:27:12.686249"]]
+  [1m[35m (3.9ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Dwinelle"], ["misc", "Central"], ["created_at", "2017-10-18 23:27:12.697041"], ["updated_at", "2017-10-18 23:27:12.697041"]]
+  [1m[36m (1.9ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Life Sciences Addition"], ["misc", "Central"], ["created_at", "2017-10-18 23:27:12.701047"], ["updated_at", "2017-10-18 23:27:12.701047"]]
+  [1m[35m (1.9ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Moffit"], ["misc", "Central"], ["created_at", "2017-10-18 23:27:12.704568"], ["updated_at", "2017-10-18 23:27:12.704568"]]
+  [1m[36m (1.8ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "VLSB"], ["misc", "Central"], ["created_at", "2017-10-18 23:27:12.707823"], ["updated_at", "2017-10-18 23:27:12.707823"]]
+  [1m[35m (2.0ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Wheeler"], ["misc", "Central"], ["created_at", "2017-10-18 23:27:12.711537"], ["updated_at", "2017-10-18 23:27:12.711537"]]
+  [1m[36m (2.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Birge"], ["misc", "North Campus"], ["created_at", "2017-10-18 23:27:12.715835"], ["updated_at", "2017-10-18 23:27:12.715835"]]
+  [1m[35m (2.0ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Cory"], ["misc", "North Campus"], ["created_at", "2017-10-18 23:27:12.719677"], ["updated_at", "2017-10-18 23:27:12.719677"]]
+  [1m[36m (2.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (1.6ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Davis"], ["misc", "North Campus"], ["created_at", "2017-10-18 23:27:12.723216"], ["updated_at", "2017-10-18 23:27:12.723216"]]
+  [1m[35m (2.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Donner Laboratory"], ["misc", "North Campus"], ["created_at", "2017-10-18 23:27:12.728696"], ["updated_at", "2017-10-18 23:27:12.728696"]]
+  [1m[36m (1.9ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Etcheverry"], ["misc", "North Campus"], ["created_at", "2017-10-18 23:27:12.732402"], ["updated_at", "2017-10-18 23:27:12.732402"]]
+  [1m[35m (2.0ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Evans"], ["misc", "North Campus"], ["created_at", "2017-10-18 23:27:12.735910"], ["updated_at", "2017-10-18 23:27:12.735910"]]
+  [1m[36m (2.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Goldman School of Public Policy"], ["misc", "North Campus"], ["created_at", "2017-10-18 23:27:12.746086"], ["updated_at", "2017-10-18 23:27:12.746086"]]
+  [1m[35m (2.1ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Hildebrand"], ["misc", "North Campus"], ["created_at", "2017-10-18 23:27:12.750033"], ["updated_at", "2017-10-18 23:27:12.750033"]]
+  [1m[36m (2.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Hearst Mining"], ["misc", "North Campus"], ["created_at", "2017-10-18 23:27:12.753891"], ["updated_at", "2017-10-18 23:27:12.753891"]]
+  [1m[35m (2.0ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Haas Faculty Wing"], ["misc", "South Campus"], ["created_at", "2017-10-18 23:27:12.757495"], ["updated_at", "2017-10-18 23:27:12.757495"]]
+  [1m[36m (2.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Hearst Field Annex"], ["misc", "South Campus"], ["created_at", "2017-10-18 23:27:12.761029"], ["updated_at", "2017-10-18 23:27:12.761029"]]
+  [1m[35m (2.0ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Hearst Memorial Gymnasium"], ["misc", "South Campus"], ["created_at", "2017-10-18 23:27:12.764623"], ["updated_at", "2017-10-18 23:27:12.764623"]]
+  [1m[36m (2.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Kroeber Hall"], ["misc", "South Campus"], ["created_at", "2017-10-18 23:27:12.768577"], ["updated_at", "2017-10-18 23:27:12.768577"]]
+  [1m[35m (2.0ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Wurster Hall"], ["misc", "South Campus"], ["created_at", "2017-10-18 23:27:12.772108"], ["updated_at", "2017-10-18 23:27:12.772108"]]
+  [1m[36m (1.9ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Barker Hall"], ["misc", "West Campus"], ["created_at", "2017-10-18 23:27:12.776181"], ["updated_at", "2017-10-18 23:27:12.776181"]]
+  [1m[35m (1.9ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Giannini Hall"], ["misc", "West Campus"], ["created_at", "2017-10-18 23:27:12.779843"], ["updated_at", "2017-10-18 23:27:12.779843"]]
+  [1m[36m (1.9ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Genetics & Plant Biology"], ["misc", "West Campus"], ["created_at", "2017-10-18 23:27:12.783378"], ["updated_at", "2017-10-18 23:27:12.783378"]]
+  [1m[35m (1.8ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Haviland"], ["misc", "West Campus"], ["created_at", "2017-10-18 23:27:12.786990"], ["updated_at", "2017-10-18 23:27:12.786990"]]
+  [1m[36m (2.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Li Ka Shing"], ["misc", "West Campus"], ["created_at", "2017-10-18 23:27:12.790934"], ["updated_at", "2017-10-18 23:27:12.790934"]]
+  [1m[35m (1.9ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Morgan"], ["misc", "West Campus"], ["created_at", "2017-10-18 23:27:12.794581"], ["updated_at", "2017-10-18 23:27:12.794581"]]
+  [1m[36m (1.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Mulford"], ["misc", "West Campus"], ["created_at", "2017-10-18 23:27:12.797014"], ["updated_at", "2017-10-18 23:27:12.797014"]]
+  [1m[35m (2.0ms)[0m  COMMIT
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "buildings"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Barrows"], ["misc", "Central"], ["created_at", "2017-10-18 23:38:53.732919"], ["updated_at", "2017-10-18 23:38:53.732919"]]
+  [1m[35m (4.4ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Dwinelle"], ["misc", "Central"], ["created_at", "2017-10-18 23:38:53.740210"], ["updated_at", "2017-10-18 23:38:53.740210"]]
+  [1m[36m (1.9ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Life Sciences Addition"], ["misc", "Central"], ["created_at", "2017-10-18 23:38:53.744169"], ["updated_at", "2017-10-18 23:38:53.744169"]]
+  [1m[35m (2.0ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Moffit"], ["misc", "Central"], ["created_at", "2017-10-18 23:38:53.747851"], ["updated_at", "2017-10-18 23:38:53.747851"]]
+  [1m[36m (1.9ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "VLSB"], ["misc", "Central"], ["created_at", "2017-10-18 23:38:53.751406"], ["updated_at", "2017-10-18 23:38:53.751406"]]
+  [1m[35m (2.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Wheeler"], ["misc", "Central"], ["created_at", "2017-10-18 23:38:53.755477"], ["updated_at", "2017-10-18 23:38:53.755477"]]
+  [1m[36m (2.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Birge"], ["misc", "North Campus"], ["created_at", "2017-10-18 23:38:53.759651"], ["updated_at", "2017-10-18 23:38:53.759651"]]
+  [1m[35m (2.0ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Cory"], ["misc", "North Campus"], ["created_at", "2017-10-18 23:38:53.763549"], ["updated_at", "2017-10-18 23:38:53.763549"]]
+  [1m[36m (2.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Davis"], ["misc", "North Campus"], ["created_at", "2017-10-18 23:38:53.767523"], ["updated_at", "2017-10-18 23:38:53.767523"]]
+  [1m[35m (1.8ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Donner Laboratory"], ["misc", "North Campus"], ["created_at", "2017-10-18 23:38:53.770948"], ["updated_at", "2017-10-18 23:38:53.770948"]]
+  [1m[36m (1.9ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Etcheverry"], ["misc", "North Campus"], ["created_at", "2017-10-18 23:38:53.774404"], ["updated_at", "2017-10-18 23:38:53.774404"]]
+  [1m[35m (0.7ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Evans"], ["misc", "North Campus"], ["created_at", "2017-10-18 23:38:53.776598"], ["updated_at", "2017-10-18 23:38:53.776598"]]
+  [1m[36m (1.8ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Goldman School of Public Policy"], ["misc", "North Campus"], ["created_at", "2017-10-18 23:38:53.779861"], ["updated_at", "2017-10-18 23:38:53.779861"]]
+  [1m[35m (1.9ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Hildebrand"], ["misc", "North Campus"], ["created_at", "2017-10-18 23:38:53.783183"], ["updated_at", "2017-10-18 23:38:53.783183"]]
+  [1m[36m (2.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Hearst Mining"], ["misc", "North Campus"], ["created_at", "2017-10-18 23:38:53.786779"], ["updated_at", "2017-10-18 23:38:53.786779"]]
+  [1m[35m (0.8ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Haas Faculty Wing"], ["misc", "South Campus"], ["created_at", "2017-10-18 23:38:53.788885"], ["updated_at", "2017-10-18 23:38:53.788885"]]
+  [1m[36m (1.9ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Hearst Field Annex"], ["misc", "South Campus"], ["created_at", "2017-10-18 23:38:53.792485"], ["updated_at", "2017-10-18 23:38:53.792485"]]
+  [1m[35m (2.1ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Hearst Memorial Gymnasium"], ["misc", "South Campus"], ["created_at", "2017-10-18 23:38:53.796412"], ["updated_at", "2017-10-18 23:38:53.796412"]]
+  [1m[36m (2.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Kroeber Hall"], ["misc", "South Campus"], ["created_at", "2017-10-18 23:38:53.799888"], ["updated_at", "2017-10-18 23:38:53.799888"]]
+  [1m[35m (1.9ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Wurster Hall"], ["misc", "South Campus"], ["created_at", "2017-10-18 23:38:53.803406"], ["updated_at", "2017-10-18 23:38:53.803406"]]
+  [1m[36m (1.9ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Barker Hall"], ["misc", "West Campus"], ["created_at", "2017-10-18 23:38:53.806914"], ["updated_at", "2017-10-18 23:38:53.806914"]]
+  [1m[35m (2.0ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Giannini Hall"], ["misc", "West Campus"], ["created_at", "2017-10-18 23:38:53.810645"], ["updated_at", "2017-10-18 23:38:53.810645"]]
+  [1m[36m (2.5ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Genetics & Plant Biology"], ["misc", "West Campus"], ["created_at", "2017-10-18 23:38:53.814823"], ["updated_at", "2017-10-18 23:38:53.814823"]]
+  [1m[35m (2.1ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Haviland"], ["misc", "West Campus"], ["created_at", "2017-10-18 23:38:53.818842"], ["updated_at", "2017-10-18 23:38:53.818842"]]
+  [1m[36m (2.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Li Ka Shing"], ["misc", "West Campus"], ["created_at", "2017-10-18 23:38:53.822706"], ["updated_at", "2017-10-18 23:38:53.822706"]]
+  [1m[35m (2.0ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Morgan"], ["misc", "West Campus"], ["created_at", "2017-10-18 23:38:53.826506"], ["updated_at", "2017-10-18 23:38:53.826506"]]
+  [1m[36m (0.8ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Mulford"], ["misc", "West Campus"], ["created_at", "2017-10-18 23:38:53.828787"], ["updated_at", "2017-10-18 23:38:53.828787"]]
+  [1m[35m (2.0ms)[0m  COMMIT
+  [1m[36m (0.4ms)[0m  [1mSELECT COUNT(*) FROM "buildings"[0m
+  [1m[35mBuilding Load (0.4ms)[0m  SELECT "buildings".* FROM "buildings" WHERE "buildings"."name" = $1  [["name", "Haas Faculty Wing"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Barrows"], ["misc", "Central"], ["created_at", "2017-10-18 23:42:12.260025"], ["updated_at", "2017-10-18 23:42:12.260025"]]
+  [1m[35m (4.5ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Dwinelle"], ["misc", "Central"], ["created_at", "2017-10-18 23:42:12.267722"], ["updated_at", "2017-10-18 23:42:12.267722"]]
+  [1m[36m (2.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Life Sciences Addition"], ["misc", "Central"], ["created_at", "2017-10-18 23:42:12.272338"], ["updated_at", "2017-10-18 23:42:12.272338"]]
+  [1m[35m (2.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Moffit"], ["misc", "Central"], ["created_at", "2017-10-18 23:42:12.276469"], ["updated_at", "2017-10-18 23:42:12.276469"]]
+  [1m[36m (3.6ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "VLSB"], ["misc", "Central"], ["created_at", "2017-10-18 23:42:12.282137"], ["updated_at", "2017-10-18 23:42:12.282137"]]
+  [1m[35m (2.0ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Wheeler"], ["misc", "Central"], ["created_at", "2017-10-18 23:42:12.285884"], ["updated_at", "2017-10-18 23:42:12.285884"]]
+  [1m[36m (2.9ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Birge"], ["misc", "North Campus"], ["created_at", "2017-10-18 23:42:12.290710"], ["updated_at", "2017-10-18 23:42:12.290710"]]
+  [1m[35m (2.1ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Cory"], ["misc", "North Campus"], ["created_at", "2017-10-18 23:42:12.294826"], ["updated_at", "2017-10-18 23:42:12.294826"]]
+  [1m[36m (2.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Davis"], ["misc", "North Campus"], ["created_at", "2017-10-18 23:42:12.298894"], ["updated_at", "2017-10-18 23:42:12.298894"]]
+  [1m[35m (2.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Donner Laboratory"], ["misc", "North Campus"], ["created_at", "2017-10-18 23:42:12.302690"], ["updated_at", "2017-10-18 23:42:12.302690"]]
+  [1m[36m (0.8ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Etcheverry"], ["misc", "North Campus"], ["created_at", "2017-10-18 23:42:12.304930"], ["updated_at", "2017-10-18 23:42:12.304930"]]
+  [1m[35m (2.1ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Evans"], ["misc", "North Campus"], ["created_at", "2017-10-18 23:42:12.308833"], ["updated_at", "2017-10-18 23:42:12.308833"]]
+  [1m[36m (2.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Goldman School of Public Policy"], ["misc", "North Campus"], ["created_at", "2017-10-18 23:42:12.312524"], ["updated_at", "2017-10-18 23:42:12.312524"]]
+  [1m[35m (4.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Hildebrand"], ["misc", "North Campus"], ["created_at", "2017-10-18 23:42:12.318867"], ["updated_at", "2017-10-18 23:42:12.318867"]]
+  [1m[36m (2.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Hearst Mining"], ["misc", "North Campus"], ["created_at", "2017-10-18 23:42:12.323559"], ["updated_at", "2017-10-18 23:42:12.323559"]]
+  [1m[35m (2.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Haas Faculty Wing"], ["misc", "South Campus"], ["created_at", "2017-10-18 23:42:12.327894"], ["updated_at", "2017-10-18 23:42:12.327894"]]
+  [1m[36m (2.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Hearst Field Annex"], ["misc", "South Campus"], ["created_at", "2017-10-18 23:42:12.332328"], ["updated_at", "2017-10-18 23:42:12.332328"]]
+  [1m[35m (3.0ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Hearst Memorial Gymnasium"], ["misc", "South Campus"], ["created_at", "2017-10-18 23:42:12.337255"], ["updated_at", "2017-10-18 23:42:12.337255"]]
+  [1m[36m (2.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Kroeber Hall"], ["misc", "South Campus"], ["created_at", "2017-10-18 23:42:12.341366"], ["updated_at", "2017-10-18 23:42:12.341366"]]
+  [1m[35m (2.1ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Wurster Hall"], ["misc", "South Campus"], ["created_at", "2017-10-18 23:42:12.345268"], ["updated_at", "2017-10-18 23:42:12.345268"]]
+  [1m[36m (2.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Barker Hall"], ["misc", "West Campus"], ["created_at", "2017-10-18 23:42:12.349506"], ["updated_at", "2017-10-18 23:42:12.349506"]]
+  [1m[35m (3.7ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Giannini Hall"], ["misc", "West Campus"], ["created_at", "2017-10-18 23:42:12.355430"], ["updated_at", "2017-10-18 23:42:12.355430"]]
+  [1m[36m (2.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Genetics & Plant Biology"], ["misc", "West Campus"], ["created_at", "2017-10-18 23:42:12.360084"], ["updated_at", "2017-10-18 23:42:12.360084"]]
+  [1m[35m (2.0ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Haviland"], ["misc", "West Campus"], ["created_at", "2017-10-18 23:42:12.364173"], ["updated_at", "2017-10-18 23:42:12.364173"]]
+  [1m[36m (2.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Li Ka Shing"], ["misc", "West Campus"], ["created_at", "2017-10-18 23:42:12.368238"], ["updated_at", "2017-10-18 23:42:12.368238"]]
+  [1m[35m (2.1ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Morgan"], ["misc", "West Campus"], ["created_at", "2017-10-18 23:42:12.372132"], ["updated_at", "2017-10-18 23:42:12.372132"]]
+  [1m[36m (2.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Mulford"], ["misc", "West Campus"], ["created_at", "2017-10-18 23:42:12.376060"], ["updated_at", "2017-10-18 23:42:12.376060"]]
+  [1m[35m (1.9ms)[0m  COMMIT
+  [1m[36m (0.5ms)[0m  [1mSELECT COUNT(*) FROM "buildings"[0m
+  [1m[35mBuilding Load (0.8ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Haas Faculty Wing')
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Barrows"], ["misc", "Central"], ["created_at", "2017-10-18 23:42:45.725818"], ["updated_at", "2017-10-18 23:42:45.725818"]]
+  [1m[35m (3.0ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Dwinelle"], ["misc", "Central"], ["created_at", "2017-10-18 23:42:45.732593"], ["updated_at", "2017-10-18 23:42:45.732593"]]
+  [1m[36m (2.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Life Sciences Addition"], ["misc", "Central"], ["created_at", "2017-10-18 23:42:45.736922"], ["updated_at", "2017-10-18 23:42:45.736922"]]
+  [1m[35m (2.7ms)[0m  COMMIT
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Moffit"], ["misc", "Central"], ["created_at", "2017-10-18 23:42:45.741922"], ["updated_at", "2017-10-18 23:42:45.741922"]]
+  [1m[36m (2.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "VLSB"], ["misc", "Central"], ["created_at", "2017-10-18 23:42:45.746726"], ["updated_at", "2017-10-18 23:42:45.746726"]]
+  [1m[35m (2.0ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Wheeler"], ["misc", "Central"], ["created_at", "2017-10-18 23:42:45.750464"], ["updated_at", "2017-10-18 23:42:45.750464"]]
+  [1m[36m (6.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (1.4ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Birge"], ["misc", "North Campus"], ["created_at", "2017-10-18 23:42:45.758931"], ["updated_at", "2017-10-18 23:42:45.758931"]]
+  [1m[35m (2.5ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Cory"], ["misc", "North Campus"], ["created_at", "2017-10-18 23:42:45.765155"], ["updated_at", "2017-10-18 23:42:45.765155"]]
+  [1m[36m (0.9ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Davis"], ["misc", "North Campus"], ["created_at", "2017-10-18 23:42:45.768391"], ["updated_at", "2017-10-18 23:42:45.768391"]]
+  [1m[35m (3.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Donner Laboratory"], ["misc", "North Campus"], ["created_at", "2017-10-18 23:42:45.773913"], ["updated_at", "2017-10-18 23:42:45.773913"]]
+  [1m[36m (2.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Etcheverry"], ["misc", "North Campus"], ["created_at", "2017-10-18 23:42:45.777941"], ["updated_at", "2017-10-18 23:42:45.777941"]]
+  [1m[35m (1.8ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Evans"], ["misc", "North Campus"], ["created_at", "2017-10-18 23:42:45.781261"], ["updated_at", "2017-10-18 23:42:45.781261"]]
+  [1m[36m (2.8ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Goldman School of Public Policy"], ["misc", "North Campus"], ["created_at", "2017-10-18 23:42:45.785832"], ["updated_at", "2017-10-18 23:42:45.785832"]]
+  [1m[35m (2.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Hildebrand"], ["misc", "North Campus"], ["created_at", "2017-10-18 23:42:45.790144"], ["updated_at", "2017-10-18 23:42:45.790144"]]
+  [1m[36m (2.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Hearst Mining"], ["misc", "North Campus"], ["created_at", "2017-10-18 23:42:45.794636"], ["updated_at", "2017-10-18 23:42:45.794636"]]
+  [1m[35m (1.9ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Haas Faculty Wing"], ["misc", "South Campus"], ["created_at", "2017-10-18 23:42:45.798761"], ["updated_at", "2017-10-18 23:42:45.798761"]]
+  [1m[36m (2.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Hearst Field Annex"], ["misc", "South Campus"], ["created_at", "2017-10-18 23:42:45.803078"], ["updated_at", "2017-10-18 23:42:45.803078"]]
+  [1m[35m (2.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Hearst Memorial Gymnasium"], ["misc", "South Campus"], ["created_at", "2017-10-18 23:42:45.808044"], ["updated_at", "2017-10-18 23:42:45.808044"]]
+  [1m[36m (2.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Kroeber Hall"], ["misc", "South Campus"], ["created_at", "2017-10-18 23:42:45.812760"], ["updated_at", "2017-10-18 23:42:45.812760"]]
+  [1m[35m (2.0ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Wurster Hall"], ["misc", "South Campus"], ["created_at", "2017-10-18 23:42:45.817105"], ["updated_at", "2017-10-18 23:42:45.817105"]]
+  [1m[36m (2.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Barker Hall"], ["misc", "West Campus"], ["created_at", "2017-10-18 23:42:45.821663"], ["updated_at", "2017-10-18 23:42:45.821663"]]
+  [1m[35m (2.1ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Giannini Hall"], ["misc", "West Campus"], ["created_at", "2017-10-18 23:42:45.826106"], ["updated_at", "2017-10-18 23:42:45.826106"]]
+  [1m[36m (3.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Genetics & Plant Biology"], ["misc", "West Campus"], ["created_at", "2017-10-18 23:42:45.831621"], ["updated_at", "2017-10-18 23:42:45.831621"]]
+  [1m[35m (1.9ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Haviland"], ["misc", "West Campus"], ["created_at", "2017-10-18 23:42:45.835883"], ["updated_at", "2017-10-18 23:42:45.835883"]]
+  [1m[36m (2.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Li Ka Shing"], ["misc", "West Campus"], ["created_at", "2017-10-18 23:42:45.839903"], ["updated_at", "2017-10-18 23:42:45.839903"]]
+  [1m[35m (4.8ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["name", "Morgan"], ["misc", "West Campus"], ["created_at", "2017-10-18 23:42:45.846926"], ["updated_at", "2017-10-18 23:42:45.846926"]]
+  [1m[36m (2.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "buildings" ("name", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Mulford"], ["misc", "West Campus"], ["created_at", "2017-10-18 23:42:45.851272"], ["updated_at", "2017-10-18 23:42:45.851272"]]
+  [1m[35m (2.0ms)[0m  COMMIT
+  [1m[36m (0.5ms)[0m  [1mSELECT COUNT(*) FROM "buildings"[0m
+  [1m[35mBuilding Load (0.7ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Haas Faculty Wing')
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.9ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["building_id", 16], ["number", "295"], ["capacity", 299], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Assistive Listening Device, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-DVD Player, AV-Document Camera, AV-Microphones, AV-Podium Microphone, AV-Screen-Powered, AV-VHS player, Board-Chalk Only, Window-None"], ["misc", "Lecture Hall"], ["created_at", "2017-10-18 23:42:45.874989"], ["updated_at", "2017-10-18 23:42:45.874989"]]
+  [1m[36m (3.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.3ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Hearst Field Annex')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["building_id", 17], ["number", "A1"], ["capacity", 222], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Assistive Listening Device, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-Connection-XLR, AV-DVD Player, AV-Document Camera, AV-Microphones, AV-Screen-Manual Projector, AV-VHS player, Board-Chalk Only, Board-White Only, Window-None"], ["misc", "Lecture Hall"], ["created_at", "2017-10-18 23:42:45.882578"], ["updated_at", "2017-10-18 23:42:45.882578"]]
+  [1m[36m (2.1ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.4ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Hearst Field Annex')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["building_id", 17], ["number", "B1"], ["capacity", 36], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Blu-ray Player, AV-Computer Data Display, AV-Computer Data Display HD, AV-Connection-Aux, AV-Connection-HDMI, AV-Connection-VGA, AV-DVD Player, AV-Screen-Manual Projector, Board-Front 95plus sq ft, Board-White Only, Seating-Movable, Window"], ["misc", "Classroom"], ["created_at", "2017-10-18 23:42:45.888668"], ["updated_at", "2017-10-18 23:42:45.888668"]]
+  [1m[36m (1.9ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.4ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Hearst Field Annex')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["building_id", 17], ["number", "B5"], ["capacity", 46], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-DVD Player, AV-Screen-Manual Projector, AV-VHS player, Board-Front 95plus sq ft, Board-White Only, Seating-Movable, Seating-Tables/Chairs, Seating-Tables/Chairs Movable, Window"], ["misc", "Classroom"], ["created_at", "2017-10-18 23:42:45.894277"], ["updated_at", "2017-10-18 23:42:45.894277"]]
+  [1m[36m (3.3ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.3ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Hearst Memorial Gymnasium')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["building_id", 18], ["number", "242"], ["capacity", 36], ["facilities", "AV-Blu-ray Player, AV-Computer Data Display, AV-Computer Data Display HD, AV-Connection-HDMI, AV-Connection-VGA, AV-DVD Player, AV-Screen-Manual Projector, Board-Front 95plus sq ft, Board-White Only, Seating-Movable, Window"], ["misc", "Classroom"], ["created_at", "2017-10-18 23:42:45.901634"], ["updated_at", "2017-10-18 23:42:45.901634"]]
+  [1m[36m (2.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.4ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Hearst Memorial Gymnasium')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["building_id", 18], ["number", "245"], ["capacity", 28], ["facilities", "AV-Blu-ray Player, AV-Computer Data Display, AV-Computer Data Display HD, AV-Connection-Aux, AV-Connection-HDMI, AV-Connection-VGA, AV-DVD Player, AV-Screen-Manual Projector, Board-White Only, Seating-Movable, Window"], ["misc", "Classroom"], ["created_at", "2017-10-18 23:42:45.907470"], ["updated_at", "2017-10-18 23:42:45.907470"]]
+  [1m[36m (4.5ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.4ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Kroeber Hall')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["building_id", 19], ["number", "115"], ["capacity", 25], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Computer Data Display, AV-Connection-VGA, AV-DVD Player, Board-Front 150plus sq ft, Board-Front 95plus sq ft, Board-White Only, Seating-Movable, Window"], ["misc", "Seminar Room"], ["created_at", "2017-10-18 23:42:45.916542"], ["updated_at", "2017-10-18 23:42:45.916542"]]
+  [1m[36m (2.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.5ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Kroeber Hall')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["building_id", 19], ["number", "155"], ["capacity", 61], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Assistive Listening Device, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-Connection-XLR, AV-Course Capture, AV-DVD Player, AV-Document Camera, AV-Microphones, AV-Screen-Powered, AV-VHS player, Board-Chalk Only, Board-Front 150plus sq ft, Board-Front 95plus sq ft, Window"], ["misc", "Lecture Hall"], ["created_at", "2017-10-18 23:42:45.922730"], ["updated_at", "2017-10-18 23:42:45.922730"]]
+  [1m[36m (2.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.5ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Kroeber Hall')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["building_id", 19], ["number", "160"], ["capacity", 138], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Assistive Listening Device, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-Connection-XLR, AV-DVD Player, AV-Document Camera, AV-Microphones, AV-Screen-Powered, AV-VHS player, Board-Chalk Only, Board-Front 150plus sq ft, Board-Front 95plus sq ft, Stage, Window-None"], ["misc", "Lecture Hall"], ["created_at", "2017-10-18 23:42:45.929258"], ["updated_at", "2017-10-18 23:42:45.929258"]]
+  [1m[36m (3.5ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.4ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Kroeber Hall')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["building_id", 19], ["number", "238"], ["capacity", 30], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Blu-ray Player, AV-Computer Data Display, AV-Computer Data Display HD, AV-Connection-Aux, AV-Connection-HDMI, AV-Connection-VGA, AV-DVD Player, AV-Screen-Manual Projector, Board-Chalk Only, Seating-Movable, Window"], ["misc", "Classroom"], ["created_at", "2017-10-18 23:42:45.938008"], ["updated_at", "2017-10-18 23:42:45.938008"]]
+  [1m[36m (3.5ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.5ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Wurster Hall')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["building_id", 20], ["number", "101"], ["capacity", 48], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Assistive Listening Device, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-Connection-XLR, AV-DVD Player, AV-Screen-Manual Projector, AV-VHS player, Board-White Only, Seating-Movable, Window-None"], ["misc", "Classroom"], ["created_at", "2017-10-18 23:42:45.945813"], ["updated_at", "2017-10-18 23:42:45.945813"]]
+  [1m[36m (2.9ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.5ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Wurster Hall')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["building_id", 20], ["number", "102"], ["capacity", 61], ["facilities", "ADA-Student Accessible, AV-Assistive Listening Device, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-Connection-XLR, AV-Course Capture, AV-DVD Player, AV-Microphones, AV-Screen-Manual Projector, AV-VHS player, Board-White Only, Window-None"], ["misc", "Lecture Hall"], ["created_at", "2017-10-18 23:42:45.953099"], ["updated_at", "2017-10-18 23:42:45.953099"]]
+  [1m[36m (2.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  SELECT COUNT(*) FROM "rooms"
+  [1m[36m (12.9ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL) [0m
+  [1m[35m (6.8ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateBuildings (20171018021754)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (11.0ms)[0m  [1mCREATE TABLE "buildings" ("id" serial primary key, "name" character varying, "misc" text) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20171018021754"]]
+  [1m[36m (5.1ms)[0m  [1mCOMMIT[0m
+Migrating to CreateRooms (20171018021949)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (9.4ms)[0m  [1mCREATE TABLE "rooms" ("id" serial primary key, "number" character varying, "capacity" integer, "building_id" integer, "facilities" text, "misc" text) [0m
+  [1m[35m (4.7ms)[0m  CREATE  INDEX  "index_rooms_on_building_id" ON "rooms"  ("building_id")
+  [1m[36m (2.1ms)[0m  [1mALTER TABLE "rooms" ADD CONSTRAINT "fk_rails_a3957b23a8"
+FOREIGN KEY ("building_id")
+  REFERENCES "buildings" ("id")
+[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20171018021949"]]
+  [1m[36m (4.7ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (3.6ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'buildings'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.0ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'rooms'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Barrows"], ["misc", "Central"]]
+  [1m[35m (9.1ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Dwinelle"], ["misc", "Central"]]
+  [1m[36m (5.7ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Life Sciences Addition"], ["misc", "Central"]]
+  [1m[35m (9.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Moffit"], ["misc", "Central"]]
+  [1m[36m (3.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "VLSB"], ["misc", "Central"]]
+  [1m[35m (2.1ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Wheeler"], ["misc", "Central"]]
+  [1m[36m (2.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Birge"], ["misc", "North Campus"]]
+  [1m[35m (2.0ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Cory"], ["misc", "North Campus"]]
+  [1m[36m (1.8ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Davis"], ["misc", "North Campus"]]
+  [1m[35m (3.0ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Donner Laboratory"], ["misc", "North Campus"]]
+  [1m[36m (1.9ms)[0m  [1mCOMMIT[0m
+  [1m[35m (4.0ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Etcheverry"], ["misc", "North Campus"]]
+  [1m[35m (2.5ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Evans"], ["misc", "North Campus"]]
+  [1m[36m (2.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Goldman School of Public Policy"], ["misc", "North Campus"]]
+  [1m[35m (2.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Hildebrand"], ["misc", "North Campus"]]
+  [1m[36m (1.7ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Hearst Mining"], ["misc", "North Campus"]]
+  [1m[35m (1.8ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Haas Faculty Wing"], ["misc", "South Campus"]]
+  [1m[36m (0.7ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Hearst Field Annex"], ["misc", "South Campus"]]
+  [1m[35m (1.7ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Hearst Memorial Gymnasium"], ["misc", "South Campus"]]
+  [1m[36m (1.7ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Kroeber Hall"], ["misc", "South Campus"]]
+  [1m[35m (0.8ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Wurster Hall"], ["misc", "South Campus"]]
+  [1m[36m (1.8ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Barker Hall"], ["misc", "West Campus"]]
+  [1m[35m (3.5ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Giannini Hall"], ["misc", "West Campus"]]
+  [1m[36m (1.9ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Genetics & Plant Biology"], ["misc", "West Campus"]]
+  [1m[35m (2.0ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Haviland"], ["misc", "West Campus"]]
+  [1m[36m (1.8ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Li Ka Shing"], ["misc", "West Campus"]]
+  [1m[35m (1.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Morgan"], ["misc", "West Campus"]]
+  [1m[36m (2.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Mulford"], ["misc", "West Campus"]]
+  [1m[35m (10.0ms)[0m  COMMIT
+  [1m[36m (0.4ms)[0m  [1mSELECT COUNT(*) FROM "buildings"[0m
+  [1m[35mBuilding Load (0.6ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Haas Faculty Wing')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 16], ["number", "295"], ["capacity", 299], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Assistive Listening Device, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-DVD Player, AV-Document Camera, AV-Microphones, AV-Podium Microphone, AV-Screen-Powered, AV-VHS player, Board-Chalk Only, Window-None"], ["misc", "Lecture Hall"]]
+  [1m[36m (2.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.3ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Hearst Field Annex')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 17], ["number", "A1"], ["capacity", 222], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Assistive Listening Device, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-Connection-XLR, AV-DVD Player, AV-Document Camera, AV-Microphones, AV-Screen-Manual Projector, AV-VHS player, Board-Chalk Only, Board-White Only, Window-None"], ["misc", "Lecture Hall"]]
+  [1m[36m (3.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.3ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Hearst Field Annex')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 17], ["number", "B1"], ["capacity", 36], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Blu-ray Player, AV-Computer Data Display, AV-Computer Data Display HD, AV-Connection-Aux, AV-Connection-HDMI, AV-Connection-VGA, AV-DVD Player, AV-Screen-Manual Projector, Board-Front 95plus sq ft, Board-White Only, Seating-Movable, Window"], ["misc", "Classroom"]]
+  [1m[36m (2.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.3ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Hearst Field Annex')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 17], ["number", "B5"], ["capacity", 46], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-DVD Player, AV-Screen-Manual Projector, AV-VHS player, Board-Front 95plus sq ft, Board-White Only, Seating-Movable, Seating-Tables/Chairs, Seating-Tables/Chairs Movable, Window"], ["misc", "Classroom"]]
+  [1m[36m (2.6ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.4ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Hearst Memorial Gymnasium')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 18], ["number", "242"], ["capacity", 36], ["facilities", "AV-Blu-ray Player, AV-Computer Data Display, AV-Computer Data Display HD, AV-Connection-HDMI, AV-Connection-VGA, AV-DVD Player, AV-Screen-Manual Projector, Board-Front 95plus sq ft, Board-White Only, Seating-Movable, Window"], ["misc", "Classroom"]]
+  [1m[36m (2.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.2ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Hearst Memorial Gymnasium')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 18], ["number", "245"], ["capacity", 28], ["facilities", "AV-Blu-ray Player, AV-Computer Data Display, AV-Computer Data Display HD, AV-Connection-Aux, AV-Connection-HDMI, AV-Connection-VGA, AV-DVD Player, AV-Screen-Manual Projector, Board-White Only, Seating-Movable, Window"], ["misc", "Classroom"]]
+  [1m[36m (1.9ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.3ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Kroeber Hall')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 19], ["number", "115"], ["capacity", 25], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Computer Data Display, AV-Connection-VGA, AV-DVD Player, Board-Front 150plus sq ft, Board-Front 95plus sq ft, Board-White Only, Seating-Movable, Window"], ["misc", "Seminar Room"]]
+  [1m[36m (2.1ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.3ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Kroeber Hall')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 19], ["number", "155"], ["capacity", 61], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Assistive Listening Device, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-Connection-XLR, AV-Course Capture, AV-DVD Player, AV-Document Camera, AV-Microphones, AV-Screen-Powered, AV-VHS player, Board-Chalk Only, Board-Front 150plus sq ft, Board-Front 95plus sq ft, Window"], ["misc", "Lecture Hall"]]
+  [1m[36m (2.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.3ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Kroeber Hall')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 19], ["number", "160"], ["capacity", 138], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Assistive Listening Device, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-Connection-XLR, AV-DVD Player, AV-Document Camera, AV-Microphones, AV-Screen-Powered, AV-VHS player, Board-Chalk Only, Board-Front 150plus sq ft, Board-Front 95plus sq ft, Stage, Window-None"], ["misc", "Lecture Hall"]]
+  [1m[36m (2.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.3ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Kroeber Hall')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 19], ["number", "238"], ["capacity", 30], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Blu-ray Player, AV-Computer Data Display, AV-Computer Data Display HD, AV-Connection-Aux, AV-Connection-HDMI, AV-Connection-VGA, AV-DVD Player, AV-Screen-Manual Projector, Board-Chalk Only, Seating-Movable, Window"], ["misc", "Classroom"]]
+  [1m[36m (2.3ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.3ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Wurster Hall')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 20], ["number", "101"], ["capacity", 48], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Assistive Listening Device, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-Connection-XLR, AV-DVD Player, AV-Screen-Manual Projector, AV-VHS player, Board-White Only, Seating-Movable, Window-None"], ["misc", "Classroom"]]
+  [1m[36m (4.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.4ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Wurster Hall')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 20], ["number", "102"], ["capacity", 61], ["facilities", "ADA-Student Accessible, AV-Assistive Listening Device, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-Connection-XLR, AV-Course Capture, AV-DVD Player, AV-Microphones, AV-Screen-Manual Projector, AV-VHS player, Board-White Only, Window-None"], ["misc", "Lecture Hall"]]
+  [1m[36m (2.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "rooms"
+  [1m[36m (12.3ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL) [0m
+  [1m[35m (7.2ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateBuildings (20171018021754)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (11.4ms)[0m  [1mCREATE TABLE "buildings" ("id" serial primary key, "name" character varying, "misc" text) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20171018021754"]]
+  [1m[36m (4.1ms)[0m  [1mCOMMIT[0m
+Migrating to CreateRooms (20171018021949)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (10.5ms)[0m  [1mCREATE TABLE "rooms" ("id" serial primary key, "number" character varying, "capacity" integer, "building_id" integer, "facilities" text, "misc" text) [0m
+  [1m[35m (6.5ms)[0m  CREATE  INDEX  "index_rooms_on_building_id" ON "rooms"  ("building_id")
+  [1m[36m (2.2ms)[0m  [1mALTER TABLE "rooms" ADD CONSTRAINT "fk_rails_a3957b23a8"
+FOREIGN KEY ("building_id")
+  REFERENCES "buildings" ("id")
+[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20171018021949"]]
+  [1m[36m (8.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (4.3ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'buildings'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (2.0ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'rooms'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Barrows"], ["misc", "Central"]]
+  [1m[35m (2.5ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Dwinelle"], ["misc", "Central"]]
+  [1m[36m (2.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Life Sciences Addition"], ["misc", "Central"]]
+  [1m[35m (1.0ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Moffit"], ["misc", "Central"]]
+  [1m[36m (2.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "VLSB"], ["misc", "Central"]]
+  [1m[35m (2.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Wheeler"], ["misc", "Central"]]
+  [1m[36m (2.7ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Birge"], ["misc", "North Campus"]]
+  [1m[35m (2.1ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Cory"], ["misc", "North Campus"]]
+  [1m[36m (2.6ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Davis"], ["misc", "North Campus"]]
+  [1m[35m (2.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Donner Laboratory"], ["misc", "North Campus"]]
+  [1m[36m (1.8ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Etcheverry"], ["misc", "North Campus"]]
+  [1m[35m (2.0ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Evans"], ["misc", "North Campus"]]
+  [1m[36m (3.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Goldman School of Public Policy"], ["misc", "North Campus"]]
+  [1m[35m (2.7ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Hildebrand"], ["misc", "North Campus"]]
+  [1m[36m (4.6ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Hearst Mining"], ["misc", "North Campus"]]
+  [1m[35m (3.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Haas Faculty Wing"], ["misc", "South Campus"]]
+  [1m[36m (2.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Hearst Field Annex"], ["misc", "South Campus"]]
+  [1m[35m (2.0ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Hearst Memorial Gymnasium"], ["misc", "South Campus"]]
+  [1m[36m (2.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Kroeber Hall"], ["misc", "South Campus"]]
+  [1m[35m (2.0ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Wurster Hall"], ["misc", "South Campus"]]
+  [1m[36m (2.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Barker Hall"], ["misc", "West Campus"]]
+  [1m[35m (2.1ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Giannini Hall"], ["misc", "West Campus"]]
+  [1m[36m (2.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Genetics & Plant Biology"], ["misc", "West Campus"]]
+  [1m[35m (2.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Haviland"], ["misc", "West Campus"]]
+  [1m[36m (1.9ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Li Ka Shing"], ["misc", "West Campus"]]
+  [1m[35m (2.0ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Morgan"], ["misc", "West Campus"]]
+  [1m[36m (2.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Mulford"], ["misc", "West Campus"]]
+  [1m[35m (2.1ms)[0m  COMMIT
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "buildings"[0m
+  [1m[35mBuilding Load (0.5ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Haas Faculty Wing')
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 16], ["number", "295"], ["capacity", 299], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Assistive Listening Device, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-DVD Player, AV-Document Camera, AV-Microphones, AV-Podium Microphone, AV-Screen-Powered, AV-VHS player, Board-Chalk Only, Window-None"], ["misc", "Lecture Hall"]]
+  [1m[36m (2.6ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.4ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Hearst Field Annex')
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 17], ["number", "A1"], ["capacity", 222], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Assistive Listening Device, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-Connection-XLR, AV-DVD Player, AV-Document Camera, AV-Microphones, AV-Screen-Manual Projector, AV-VHS player, Board-Chalk Only, Board-White Only, Window-None"], ["misc", "Lecture Hall"]]
+  [1m[36m (2.3ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.4ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Hearst Field Annex')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 17], ["number", "B1"], ["capacity", 36], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Blu-ray Player, AV-Computer Data Display, AV-Computer Data Display HD, AV-Connection-Aux, AV-Connection-HDMI, AV-Connection-VGA, AV-DVD Player, AV-Screen-Manual Projector, Board-Front 95plus sq ft, Board-White Only, Seating-Movable, Window"], ["misc", "Classroom"]]
+  [1m[36m (3.8ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.3ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Hearst Field Annex')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 17], ["number", "B5"], ["capacity", 46], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-DVD Player, AV-Screen-Manual Projector, AV-VHS player, Board-Front 95plus sq ft, Board-White Only, Seating-Movable, Seating-Tables/Chairs, Seating-Tables/Chairs Movable, Window"], ["misc", "Classroom"]]
+  [1m[36m (1.9ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.3ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Hearst Memorial Gymnasium')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 18], ["number", "242"], ["capacity", 36], ["facilities", "AV-Blu-ray Player, AV-Computer Data Display, AV-Computer Data Display HD, AV-Connection-HDMI, AV-Connection-VGA, AV-DVD Player, AV-Screen-Manual Projector, Board-Front 95plus sq ft, Board-White Only, Seating-Movable, Window"], ["misc", "Classroom"]]
+  [1m[36m (2.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.2ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Hearst Memorial Gymnasium')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 18], ["number", "245"], ["capacity", 28], ["facilities", "AV-Blu-ray Player, AV-Computer Data Display, AV-Computer Data Display HD, AV-Connection-Aux, AV-Connection-HDMI, AV-Connection-VGA, AV-DVD Player, AV-Screen-Manual Projector, Board-White Only, Seating-Movable, Window"], ["misc", "Classroom"]]
+  [1m[36m (2.1ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.3ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Kroeber Hall')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 19], ["number", "115"], ["capacity", 25], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Computer Data Display, AV-Connection-VGA, AV-DVD Player, Board-Front 150plus sq ft, Board-Front 95plus sq ft, Board-White Only, Seating-Movable, Window"], ["misc", "Seminar Room"]]
+  [1m[36m (1.9ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.3ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Kroeber Hall')
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 19], ["number", "155"], ["capacity", 61], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Assistive Listening Device, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-Connection-XLR, AV-Course Capture, AV-DVD Player, AV-Document Camera, AV-Microphones, AV-Screen-Powered, AV-VHS player, Board-Chalk Only, Board-Front 150plus sq ft, Board-Front 95plus sq ft, Window"], ["misc", "Lecture Hall"]]
+  [1m[36m (2.9ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.3ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Kroeber Hall')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 19], ["number", "160"], ["capacity", 138], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Assistive Listening Device, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-Connection-XLR, AV-DVD Player, AV-Document Camera, AV-Microphones, AV-Screen-Powered, AV-VHS player, Board-Chalk Only, Board-Front 150plus sq ft, Board-Front 95plus sq ft, Stage, Window-None"], ["misc", "Lecture Hall"]]
+  [1m[36m (2.1ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.3ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Kroeber Hall')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 19], ["number", "238"], ["capacity", 30], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Blu-ray Player, AV-Computer Data Display, AV-Computer Data Display HD, AV-Connection-Aux, AV-Connection-HDMI, AV-Connection-VGA, AV-DVD Player, AV-Screen-Manual Projector, Board-Chalk Only, Seating-Movable, Window"], ["misc", "Classroom"]]
+  [1m[36m (3.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.3ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Wurster Hall')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 20], ["number", "101"], ["capacity", 48], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Assistive Listening Device, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-Connection-XLR, AV-DVD Player, AV-Screen-Manual Projector, AV-VHS player, Board-White Only, Seating-Movable, Window-None"], ["misc", "Classroom"]]
+  [1m[36m (2.1ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.3ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Wurster Hall')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 20], ["number", "102"], ["capacity", 61], ["facilities", "ADA-Student Accessible, AV-Assistive Listening Device, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-Connection-XLR, AV-Course Capture, AV-DVD Player, AV-Microphones, AV-Screen-Manual Projector, AV-VHS player, Board-White Only, Window-None"], ["misc", "Lecture Hall"]]
+  [1m[36m (2.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "rooms"
+  [1m[36mBuilding Load (0.4ms)[0m  [1mSELECT "buildings".* FROM "buildings" WHERE (name = 'Barker Hall ')[0m
+  [1m[36m (11.7ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL) [0m
+  [1m[35m (5.8ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateBuildings (20171018021754)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (9.2ms)[0m  [1mCREATE TABLE "buildings" ("id" serial primary key, "name" character varying, "misc" text) [0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20171018021754"]]
+  [1m[36m (4.3ms)[0m  [1mCOMMIT[0m
+Migrating to CreateRooms (20171018021949)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (7.8ms)[0m  [1mCREATE TABLE "rooms" ("id" serial primary key, "number" character varying, "capacity" integer, "building_id" integer, "facilities" text, "misc" text) [0m
+  [1m[35m (4.4ms)[0m  CREATE  INDEX  "index_rooms_on_building_id" ON "rooms"  ("building_id")
+  [1m[36m (1.5ms)[0m  [1mALTER TABLE "rooms" ADD CONSTRAINT "fk_rails_a3957b23a8"
+FOREIGN KEY ("building_id")
+  REFERENCES "buildings" ("id")
+[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20171018021949"]]
+  [1m[36m (4.7ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (2.3ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'buildings'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.9ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'rooms'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Barrows"], ["misc", "Central"]]
+  [1m[35m (2.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Dwinelle"], ["misc", "Central"]]
+  [1m[36m (2.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Life Sciences Addition"], ["misc", "Central"]]
+  [1m[35m (0.9ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Moffit"], ["misc", "Central"]]
+  [1m[36m (2.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "VLSB"], ["misc", "Central"]]
+  [1m[35m (1.7ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Wheeler"], ["misc", "Central"]]
+  [1m[36m (0.8ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Birge"], ["misc", "North Campus"]]
+  [1m[35m (1.9ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Cory"], ["misc", "North Campus"]]
+  [1m[36m (1.8ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Davis"], ["misc", "North Campus"]]
+  [1m[35m (0.9ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Donner Laboratory"], ["misc", "North Campus"]]
+  [1m[36m (1.8ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Etcheverry"], ["misc", "North Campus"]]
+  [1m[35m (1.9ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Evans"], ["misc", "North Campus"]]
+  [1m[36m (0.8ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Goldman School of Public Policy"], ["misc", "North Campus"]]
+  [1m[35m (1.6ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Hildebrand"], ["misc", "North Campus"]]
+  [1m[36m (2.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Hearst Mining"], ["misc", "North Campus"]]
+  [1m[35m (1.9ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Haas Faculty Wing"], ["misc", "South Campus"]]
+  [1m[36m (0.9ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Hearst Field Annex"], ["misc", "South Campus"]]
+  [1m[35m (2.1ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Hearst Memorial Gymnasium"], ["misc", "South Campus"]]
+  [1m[36m (1.9ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Kroeber Hall"], ["misc", "South Campus"]]
+  [1m[35m (1.9ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Wurster Hall"], ["misc", "South Campus"]]
+  [1m[36m (0.9ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Barker Hall"], ["misc", "West Campus"]]
+  [1m[35m (2.0ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Giannini Hall"], ["misc", "West Campus"]]
+  [1m[36m (1.9ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Genetics & Plant Biology"], ["misc", "West Campus"]]
+  [1m[35m (1.9ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Haviland"], ["misc", "West Campus"]]
+  [1m[36m (0.8ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Li Ka Shing"], ["misc", "West Campus"]]
+  [1m[35m (4.7ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Morgan"], ["misc", "West Campus"]]
+  [1m[36m (1.9ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Mulford"], ["misc", "West Campus"]]
+  [1m[35m (0.8ms)[0m  COMMIT
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "buildings"[0m
+  [1m[35mBuilding Load (0.4ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Haas Faculty Wing')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 16], ["number", "295"], ["capacity", 299], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Assistive Listening Device, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-DVD Player, AV-Document Camera, AV-Microphones, AV-Podium Microphone, AV-Screen-Powered, AV-VHS player, Board-Chalk Only, Window-None"], ["misc", "Lecture Hall"]]
+  [1m[36m (2.5ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.3ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Hearst Field Annex')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 17], ["number", "A1"], ["capacity", 222], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Assistive Listening Device, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-Connection-XLR, AV-DVD Player, AV-Document Camera, AV-Microphones, AV-Screen-Manual Projector, AV-VHS player, Board-Chalk Only, Board-White Only, Window-None"], ["misc", "Lecture Hall"]]
+  [1m[36m (1.9ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.2ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Hearst Field Annex')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 17], ["number", "B1"], ["capacity", 36], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Blu-ray Player, AV-Computer Data Display, AV-Computer Data Display HD, AV-Connection-Aux, AV-Connection-HDMI, AV-Connection-VGA, AV-DVD Player, AV-Screen-Manual Projector, Board-Front 95plus sq ft, Board-White Only, Seating-Movable, Window"], ["misc", "Classroom"]]
+  [1m[36m (2.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.8ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Hearst Field Annex')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 17], ["number", "B5"], ["capacity", 46], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-DVD Player, AV-Screen-Manual Projector, AV-VHS player, Board-Front 95plus sq ft, Board-White Only, Seating-Movable, Seating-Tables/Chairs, Seating-Tables/Chairs Movable, Window"], ["misc", "Classroom"]]
+  [1m[36m (2.1ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.2ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Hearst Memorial Gymnasium')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 18], ["number", "242"], ["capacity", 36], ["facilities", "AV-Blu-ray Player, AV-Computer Data Display, AV-Computer Data Display HD, AV-Connection-HDMI, AV-Connection-VGA, AV-DVD Player, AV-Screen-Manual Projector, Board-Front 95plus sq ft, Board-White Only, Seating-Movable, Window"], ["misc", "Classroom"]]
+  [1m[36m (2.1ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.4ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Hearst Memorial Gymnasium')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 18], ["number", "245"], ["capacity", 28], ["facilities", "AV-Blu-ray Player, AV-Computer Data Display, AV-Computer Data Display HD, AV-Connection-Aux, AV-Connection-HDMI, AV-Connection-VGA, AV-DVD Player, AV-Screen-Manual Projector, Board-White Only, Seating-Movable, Window"], ["misc", "Classroom"]]
+  [1m[36m (1.9ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.2ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Kroeber Hall')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 19], ["number", "115"], ["capacity", 25], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Computer Data Display, AV-Connection-VGA, AV-DVD Player, Board-Front 150plus sq ft, Board-Front 95plus sq ft, Board-White Only, Seating-Movable, Window"], ["misc", "Seminar Room"]]
+  [1m[36m (1.9ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.2ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Kroeber Hall')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 19], ["number", "155"], ["capacity", 61], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Assistive Listening Device, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-Connection-XLR, AV-Course Capture, AV-DVD Player, AV-Document Camera, AV-Microphones, AV-Screen-Powered, AV-VHS player, Board-Chalk Only, Board-Front 150plus sq ft, Board-Front 95plus sq ft, Window"], ["misc", "Lecture Hall"]]
+  [1m[36m (3.3ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.3ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Kroeber Hall')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 19], ["number", "160"], ["capacity", 138], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Assistive Listening Device, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-Connection-XLR, AV-DVD Player, AV-Document Camera, AV-Microphones, AV-Screen-Powered, AV-VHS player, Board-Chalk Only, Board-Front 150plus sq ft, Board-Front 95plus sq ft, Stage, Window-None"], ["misc", "Lecture Hall"]]
+  [1m[36m (1.8ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.3ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Kroeber Hall')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 19], ["number", "238"], ["capacity", 30], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Blu-ray Player, AV-Computer Data Display, AV-Computer Data Display HD, AV-Connection-Aux, AV-Connection-HDMI, AV-Connection-VGA, AV-DVD Player, AV-Screen-Manual Projector, Board-Chalk Only, Seating-Movable, Window"], ["misc", "Classroom"]]
+  [1m[36m (2.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.2ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Wurster Hall')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 20], ["number", "101"], ["capacity", 48], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Assistive Listening Device, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-Connection-XLR, AV-DVD Player, AV-Screen-Manual Projector, AV-VHS player, Board-White Only, Seating-Movable, Window-None"], ["misc", "Classroom"]]
+  [1m[36m (2.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.2ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Wurster Hall')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 20], ["number", "102"], ["capacity", 61], ["facilities", "ADA-Student Accessible, AV-Assistive Listening Device, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-Connection-XLR, AV-Course Capture, AV-DVD Player, AV-Microphones, AV-Screen-Manual Projector, AV-VHS player, Board-White Only, Window-None"], ["misc", "Lecture Hall"]]
+  [1m[36m (4.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "rooms"
+  [1m[36mBuilding Load (0.2ms)[0m  [1mSELECT "buildings".* FROM "buildings" WHERE (name = 'Barker Hall ')[0m
+  [1m[36m (11.5ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL) [0m
+  [1m[35m (3.8ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateBuildings (20171018021754)
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (9.5ms)[0m  [1mCREATE TABLE "buildings" ("id" serial primary key, "name" character varying, "misc" text) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20171018021754"]]
+  [1m[36m (3.1ms)[0m  [1mCOMMIT[0m
+Migrating to CreateRooms (20171018021949)
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (7.5ms)[0m  [1mCREATE TABLE "rooms" ("id" serial primary key, "number" character varying, "capacity" integer, "building_id" integer, "facilities" text, "misc" text) [0m
+  [1m[35m (7.9ms)[0m  CREATE  INDEX  "index_rooms_on_building_id" ON "rooms"  ("building_id")
+  [1m[36m (1.4ms)[0m  [1mALTER TABLE "rooms" ADD CONSTRAINT "fk_rails_a3957b23a8"
+FOREIGN KEY ("building_id")
+  REFERENCES "buildings" ("id")
+[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20171018021949"]]
+  [1m[36m (3.5ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (2.3ms)[0m  [1mSELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'buildings'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+[0m
+  [1m[35m (1.8ms)[0m  SELECT t2.oid::regclass::text AS to_table, a1.attname AS column, a2.attname AS primary_key, c.conname AS name, c.confupdtype AS on_update, c.confdeltype AS on_delete
+FROM pg_constraint c
+JOIN pg_class t1 ON c.conrelid = t1.oid
+JOIN pg_class t2 ON c.confrelid = t2.oid
+JOIN pg_attribute a1 ON a1.attnum = c.conkey[1] AND a1.attrelid = t1.oid
+JOIN pg_attribute a2 ON a2.attnum = c.confkey[1] AND a2.attrelid = t2.oid
+JOIN pg_namespace t3 ON c.connamespace = t3.oid
+WHERE c.contype = 'f'
+  AND t1.relname = 'rooms'
+  AND t3.nspname = ANY (current_schemas(false))
+ORDER BY c.conname
+
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Barrows"], ["misc", "Central"]]
+  [1m[35m (2.4ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Dwinelle"], ["misc", "Central"]]
+  [1m[36m (1.9ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Life Sciences Addition"], ["misc", "Central"]]
+  [1m[35m (2.0ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Moffit"], ["misc", "Central"]]
+  [1m[36m (2.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "VLSB"], ["misc", "Central"]]
+  [1m[35m (2.1ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Wheeler"], ["misc", "Central"]]
+  [1m[36m (3.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Birge"], ["misc", "North Campus"]]
+  [1m[35m (1.8ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Cory"], ["misc", "North Campus"]]
+  [1m[36m (1.8ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Davis"], ["misc", "North Campus"]]
+  [1m[35m (0.8ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Donner Laboratory"], ["misc", "North Campus"]]
+  [1m[36m (1.9ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Etcheverry"], ["misc", "North Campus"]]
+  [1m[35m (0.8ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Evans"], ["misc", "North Campus"]]
+  [1m[36m (2.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Goldman School of Public Policy"], ["misc", "North Campus"]]
+  [1m[35m (1.8ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Hildebrand"], ["misc", "North Campus"]]
+  [1m[36m (0.8ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Hearst Mining"], ["misc", "North Campus"]]
+  [1m[35m (1.9ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Haas Faculty Wing"], ["misc", "South Campus"]]
+  [1m[36m (1.9ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Hearst Field Annex"], ["misc", "South Campus"]]
+  [1m[35m (0.9ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Hearst Memorial Gymnasium"], ["misc", "South Campus"]]
+  [1m[36m (2.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Kroeber"], ["misc", "South Campus"]]
+  [1m[35m (2.0ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Wurster"], ["misc", "South Campus"]]
+  [1m[36m (2.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Barker"], ["misc", "West Campus"]]
+  [1m[35m (0.8ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Giannini"], ["misc", "West Campus"]]
+  [1m[36m (2.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Genetics & Plant Biology"], ["misc", "West Campus"]]
+  [1m[35m (1.9ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Haviland"], ["misc", "West Campus"]]
+  [1m[36m (2.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Li Ka Shing"], ["misc", "West Campus"]]
+  [1m[35m (1.9ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"  [["name", "Morgan"], ["misc", "West Campus"]]
+  [1m[36m (2.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "buildings" ("name", "misc") VALUES ($1, $2) RETURNING "id"[0m  [["name", "Mulford"], ["misc", "West Campus"]]
+  [1m[35m (2.1ms)[0m  COMMIT
+  [1m[36m (0.4ms)[0m  [1mSELECT COUNT(*) FROM "buildings"[0m
+  [1m[35mBuilding Load (0.6ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Haas Faculty Wing')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 16], ["number", "295"], ["capacity", 299], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Assistive Listening Device, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-DVD Player, AV-Document Camera, AV-Microphones, AV-Podium Microphone, AV-Screen-Powered, AV-VHS player, Board-Chalk Only, Window-None"], ["misc", "Lecture Hall"]]
+  [1m[36m (2.4ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.3ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Hearst Field Annex')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 17], ["number", "A1"], ["capacity", 222], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Assistive Listening Device, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-Connection-XLR, AV-DVD Player, AV-Document Camera, AV-Microphones, AV-Screen-Manual Projector, AV-VHS player, Board-Chalk Only, Board-White Only, Window-None"], ["misc", "Lecture Hall"]]
+  [1m[36m (2.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.2ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Hearst Field Annex')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 17], ["number", "B1"], ["capacity", 36], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Blu-ray Player, AV-Computer Data Display, AV-Computer Data Display HD, AV-Connection-Aux, AV-Connection-HDMI, AV-Connection-VGA, AV-DVD Player, AV-Screen-Manual Projector, Board-Front 95plus sq ft, Board-White Only, Seating-Movable, Window"], ["misc", "Classroom"]]
+  [1m[36m (2.1ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.2ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Hearst Field Annex')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 17], ["number", "B5"], ["capacity", 46], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-DVD Player, AV-Screen-Manual Projector, AV-VHS player, Board-Front 95plus sq ft, Board-White Only, Seating-Movable, Seating-Tables/Chairs, Seating-Tables/Chairs Movable, Window"], ["misc", "Classroom"]]
+  [1m[36m (2.1ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.3ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Hearst Memorial Gymnasium')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 18], ["number", "242"], ["capacity", 36], ["facilities", "AV-Blu-ray Player, AV-Computer Data Display, AV-Computer Data Display HD, AV-Connection-HDMI, AV-Connection-VGA, AV-DVD Player, AV-Screen-Manual Projector, Board-Front 95plus sq ft, Board-White Only, Seating-Movable, Window"], ["misc", "Classroom"]]
+  [1m[36m (1.8ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.2ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Hearst Memorial Gymnasium')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 18], ["number", "245"], ["capacity", 28], ["facilities", "AV-Blu-ray Player, AV-Computer Data Display, AV-Computer Data Display HD, AV-Connection-Aux, AV-Connection-HDMI, AV-Connection-VGA, AV-DVD Player, AV-Screen-Manual Projector, Board-White Only, Seating-Movable, Window"], ["misc", "Classroom"]]
+  [1m[36m (4.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.2ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Kroeber')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 19], ["number", "115"], ["capacity", 25], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Computer Data Display, AV-Connection-VGA, AV-DVD Player, Board-Front 150plus sq ft, Board-Front 95plus sq ft, Board-White Only, Seating-Movable, Window"], ["misc", "Seminar Room"]]
+  [1m[36m (2.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.2ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Kroeber')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 19], ["number", "155"], ["capacity", 61], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Assistive Listening Device, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-Connection-XLR, AV-Course Capture, AV-DVD Player, AV-Document Camera, AV-Microphones, AV-Screen-Powered, AV-VHS player, Board-Chalk Only, Board-Front 150plus sq ft, Board-Front 95plus sq ft, Window"], ["misc", "Lecture Hall"]]
+  [1m[36m (2.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.3ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Kroeber')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 19], ["number", "160"], ["capacity", 138], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Assistive Listening Device, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-Connection-XLR, AV-DVD Player, AV-Document Camera, AV-Microphones, AV-Screen-Powered, AV-VHS player, Board-Chalk Only, Board-Front 150plus sq ft, Board-Front 95plus sq ft, Stage, Window-None"], ["misc", "Lecture Hall"]]
+  [1m[36m (2.0ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.2ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Kroeber')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 19], ["number", "238"], ["capacity", 30], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Blu-ray Player, AV-Computer Data Display, AV-Computer Data Display HD, AV-Connection-Aux, AV-Connection-HDMI, AV-Connection-VGA, AV-DVD Player, AV-Screen-Manual Projector, Board-Chalk Only, Seating-Movable, Window"], ["misc", "Classroom"]]
+  [1m[36m (2.1ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.2ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Wurster')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 20], ["number", "101"], ["capacity", 48], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Assistive Listening Device, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-Connection-XLR, AV-DVD Player, AV-Screen-Manual Projector, AV-VHS player, Board-White Only, Seating-Movable, Window-None"], ["misc", "Classroom"]]
+  [1m[36m (2.2ms)[0m  [1mCOMMIT[0m
+  [1m[35mBuilding Load (0.2ms)[0m  SELECT "buildings".* FROM "buildings" WHERE (name = 'Wurster')
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"  [["building_id", 20], ["number", "102"], ["capacity", 61], ["facilities", "ADA-Student Accessible, AV-Assistive Listening Device, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-Connection-XLR, AV-Course Capture, AV-DVD Player, AV-Microphones, AV-Screen-Manual Projector, AV-VHS player, Board-White Only, Window-None"], ["misc", "Lecture Hall"]]
+  [1m[36m (2.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "rooms"
+  [1m[36mBuilding Load (0.2ms)[0m  [1mSELECT "buildings".* FROM "buildings" WHERE (name = 'Barker')[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["building_id", 21], ["number", "101"], ["capacity", 110], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Assistive Listening Device, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-Connection-XLR, AV-Course Capture, AV-DVD Player, AV-Document Camera, AV-Microphones, AV-Screen-Powered, AV-VHS player, Board-Chalk Only, Window-None"], ["misc", "Lecture Hall"]]
+  [1m[35m (2.1ms)[0m  COMMIT
+  [1m[36mBuilding Load (0.2ms)[0m  [1mSELECT "buildings".* FROM "buildings" WHERE (name = 'Barker')[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["building_id", 21], ["number", "110"], ["capacity", 30], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Assistive Listening Device, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-Connection-XLR, AV-Course Capture, AV-DVD Player, AV-Document Camera, AV-Microphones, AV-Screen-Powered, AV-VHS player, Board-Chalk Only, Window-None"], ["misc", "Class Room"]]
+  [1m[35m (2.0ms)[0m  COMMIT
+  [1m[36mBuilding Load (0.3ms)[0m  [1mSELECT "buildings".* FROM "buildings" WHERE (name = 'Giannini')[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["building_id", 22], ["number", "141"], ["capacity", 50], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Assistive Listening Device, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-Connection-XLR, AV-Course Capture, AV-DVD Player, AV-Document Camera, AV-Microphones, AV-Screen-Manual Projector, AV-VHS player, Board-Front 95plus sq ft, Board-White Only, Seating-Movable, Window"], ["misc", "Classroom"]]
+  [1m[35m (1.9ms)[0m  COMMIT
+  [1m[36mBuilding Load (0.2ms)[0m  [1mSELECT "buildings".* FROM "buildings" WHERE (name = 'Giannini')[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["building_id", 22], ["number", "201"], ["capacity", 24], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-DVD Player, AV-Screen-Manual Projector, AV-VHS player, Board-Front 95plus sq ft, Board-White Only, Seating-Movable, Seating-Seminar, Seating-Tables/Chairs, Seating-Tables/Chairs Movable, Window"], ["misc", "Seminar Room"]]
+  [1m[35m (2.0ms)[0m  COMMIT
+  [1m[36mBuilding Load (0.2ms)[0m  [1mSELECT "buildings".* FROM "buildings" WHERE (name = 'Giannini')[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["building_id", 22], ["number", "332"], ["capacity", 16], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-DVD Player, AV-Screen-Manual Projector, AV-VHS player, Board-Front 95plus sq ft, Board-White Only, Seating-Movable, Seating-Seminar, Seating-Tables/Chairs, Seating-Tables/Chairs Movable, Window"], ["misc", "Seminar Room"]]
+  [1m[35m (2.0ms)[0m  COMMIT
+  [1m[36mBuilding Load (0.2ms)[0m  [1mSELECT "buildings".* FROM "buildings" WHERE (name = 'Genetics & Plant Biology')[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["building_id", 23], ["number", "100"], ["capacity", 206], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Assistive Listening Device, AV-Blu-ray Player, AV-Computer Data Display, AV-Computer Data Display HD, AV-Connection-Aux, AV-Connection-HDMI, AV-Connection-VGA, AV-Connection-XLR, AV-Course Capture, AV-DVD Player, AV-Document Camera, AV-Microphones, AV-Screen-Manual Projector, Board-Chalk Only, Board-Front 150plus sq ft, Board-Front 95plus sq ft, Stage, Window-None"], ["misc", "HD Classroom, Lecture Hall"]]
+  [1m[35m (3.1ms)[0m  COMMIT
+  [1m[36mBuilding Load (0.2ms)[0m  [1mSELECT "buildings".* FROM "buildings" WHERE (name = 'Genetics & Plant Biology')[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["building_id", 23], ["number", "103"], ["capacity", 45], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-DVD Player, AV-Screen-Manual Projector, AV-VHS player, Board-Chalk Only, Board-Front 150plus sq ft, Board-Front 95plus sq ft, Seating-Movable, Window"], ["misc", "Classroom"]]
+  [1m[35m (2.0ms)[0m  COMMIT
+  [1m[36mBuilding Load (0.2ms)[0m  [1mSELECT "buildings".* FROM "buildings" WHERE (name = 'Genetics & Plant Biology')[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["building_id", 23], ["number", "104"], ["capacity", 16], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-DVD Player, AV-Screen-LCD, AV-VHS player, Board-White Only, Seating-Movable, Window"], ["misc", "Seminar Room"]]
+  [1m[35m (1.9ms)[0m  COMMIT
+  [1m[36mBuilding Load (0.2ms)[0m  [1mSELECT "buildings".* FROM "buildings" WHERE (name = 'Genetics & Plant Biology')[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["building_id", 23], ["number", "107"], ["capacity", 45], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-DVD Player, AV-Screen-LCD, AV-VHS player, Board-White Only, Seating-Movable, Window"], ["misc", "Classroom"]]
+  [1m[35m (2.1ms)[0m  COMMIT
+  [1m[36mBuilding Load (0.2ms)[0m  [1mSELECT "buildings".* FROM "buildings" WHERE (name = 'Haviland')[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["building_id", 24], ["number", "12"], ["capacity", 54], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-DVD Player, AV-Screen-Manual Projector, Board-White Only, Seating-Movable, Window"], ["misc", "Classroom"]]
+  [1m[35m (2.2ms)[0m  COMMIT
+  [1m[36mBuilding Load (0.2ms)[0m  [1mSELECT "buildings".* FROM "buildings" WHERE (name = 'Haviland')[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["building_id", 24], ["number", "214"], ["capacity", 18], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-DVD Player, AV-Screen-LCD, AV-VHS player, Board-Front 95plus sq ft, Board-White Only, Seating-Movable, Window"], ["misc", "Seminar Room"]]
+  [1m[35m (2.2ms)[0m  COMMIT
+  [1m[36mBuilding Load (0.2ms)[0m  [1mSELECT "buildings".* FROM "buildings" WHERE (name = 'Haviland')[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["building_id", 24], ["number", "321"], ["capacity", 28], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, Board-Chalk Only, Seating-Seminar, Window"], ["misc", "Classroom"]]
+  [1m[35m (1.9ms)[0m  COMMIT
+  [1m[36mBuilding Load (0.2ms)[0m  [1mSELECT "buildings".* FROM "buildings" WHERE (name = 'Li Ka Shing')[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["building_id", 25], ["number", "245"], ["capacity", 297], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Assistive Listening Device, AV-Blu-ray Player, AV-Computer Data Display, AV-Computer Data Display HD, AV-Connection-Aux, AV-Connection-HDMI, AV-Connection-VGA, AV-Connection-XLR, AV-Course Capture, AV-Course Capture Video, AV-DVD Player, AV-Document Camera, AV-Dual Input-Dual Display, AV-Microphones, AV-Podium Microphone, AV-Screen-Powered, AV-Single Input-Dual Display, Board-Front 150plus sq ft, Board-Front 95plus sq ft, Board-White Only, Window-None"], ["misc", "HD Classroom, Lecture Hall"]]
+  [1m[35m (2.1ms)[0m  COMMIT
+  [1m[36mBuilding Load (0.2ms)[0m  [1mSELECT "buildings".* FROM "buildings" WHERE (name = 'Morgan')[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["building_id", 26], ["number", "101"], ["capacity", 142], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Assistive Listening Device, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-Connection-XLR, AV-Course Capture, AV-DVD Player, AV-Document Camera, AV-Microphones, AV-Screen-Powered, AV-VHS player, Board-Chalk Only, Board-Front 150plus sq ft, Board-Front 95plus sq ft, Window-None"], ["misc", "Lecture Hall"]]
+  [1m[35m (2.2ms)[0m  COMMIT
+  [1m[36mBuilding Load (0.3ms)[0m  [1mSELECT "buildings".* FROM "buildings" WHERE (name = 'Morgan')[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["building_id", 26], ["number", "138"], ["capacity", 32], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Blu-ray Player, AV-Computer Data Display, AV-Computer Data Display HD, AV-Connection-Aux, AV-Connection-HDMI, AV-Connection-VGA, AV-DVD Player, AV-Screen-Manual Projector, Board-Chalk Only, Seating-Movable, Window"], ["misc", "Classroom, HD Classroom"]]
+  [1m[35m (1.9ms)[0m  COMMIT
+  [1m[36mBuilding Load (0.4ms)[0m  [1mSELECT "buildings".* FROM "buildings" WHERE (name = 'Mulford')[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["building_id", 27], ["number", "106"], ["capacity", 13], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Blu-ray Player, AV-Computer Data Display, AV-Computer Data Display HD, AV-Connection-Aux, AV-Connection-HDMI, AV-Connection-VGA, AV-DVD Player, AV-Screen-Manual Projector, AV-VHS player, Board-Front 95plus sq ft, Board-White Only, Seating-Movable, Seating-Seminar, Seating-Tables/Chairs, Seating-Tables/Chairs Movable, Window"], ["misc", "HD Classroom, Seminar Hall"]]
+  [1m[35m (2.0ms)[0m  COMMIT
+  [1m[36mBuilding Load (0.2ms)[0m  [1mSELECT "buildings".* FROM "buildings" WHERE (name = 'Mulford')[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["building_id", 27], ["number", "107"], ["capacity", 16], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-DVD Player, AV-Screen-LCD, AV-Single Input-Dual Display, AV-VHS player, Board-White Only, Seating-Movable, Window"], ["misc", "Seminar Room"]]
+  [1m[35m (2.0ms)[0m  COMMIT
+  [1m[36mBuilding Load (0.3ms)[0m  [1mSELECT "buildings".* FROM "buildings" WHERE (name = 'Mulford')[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["building_id", 27], ["number", "159"], ["capacity", 141], ["facilities", "ADA-Student Accessible, AV-Assistive Listening Device, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-Connection-XLR, AV-Course Capture, AV-DVD Player, AV-Document Camera, AV-Microphones, AV-Screen-Powered, AV-VHS player, Board-Chalk Only, Board-Front 95plus sq ft, Window"], ["misc", "Lecture Hall"]]
+  [1m[35m (2.1ms)[0m  COMMIT
+  [1m[36mBuilding Load (0.2ms)[0m  [1mSELECT "buildings".* FROM "buildings" WHERE (name = 'Mulford')[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["building_id", 27], ["number", "230"], ["capacity", 30], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Assistive Listening Device, AV-Blu-ray Player, AV-Computer Data Display, AV-Computer Data Display HD, AV-Connection-Aux, AV-Connection-HDMI, AV-Connection-VGA, AV-Connection-XLR, AV-DVD Player, AV-Microphones, AV-Screen-LCD, AV-Screen-Manual Projector, AV-Workstation-Display, Board-Front 95plus sq ft, Board-White Only, Seating-Movable, Seating-Tables/Chairs, Seating-Tables/Chairs Movable, Window"], ["misc", "Active Learning Classroom, Classroom, HD Classroom"]]
+  [1m[35m (3.1ms)[0m  COMMIT
+  [1m[36mBuilding Load (0.2ms)[0m  [1mSELECT "buildings".* FROM "buildings" WHERE (name = 'Mulford')[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "rooms" ("building_id", "number", "capacity", "facilities", "misc") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["building_id", 27], ["number", "240"], ["capacity", 50], ["facilities", "ADA-Instructor Accessible, ADA-Student Accessible, AV-Assistive Listening Device, AV-Computer Data Display, AV-Connection-Aux, AV-Connection-VGA, AV-Connection-XLR, AV-Course Capture, AV-DVD Player, AV-Microphones, AV-Screen-Manual Projector, AV-VHS player, Board-Front 95plus sq ft, Board-White Only, Seating-Movable, Window"], ["misc", "Classroom"]]
+  [1m[35m (2.0ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "rooms"[0m
