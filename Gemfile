@@ -41,6 +41,7 @@ group :test do
   gem 'cucumber-rails-training-wheels'
   gem 'autotest-rails'
   gem 'database_cleaner'
+  gem 'selenium-webdriver'
 end
 
 group :development, :test do
