@@ -1,0 +1,25 @@
+#map {
+  height: 500px;
+  width: 80%;
+  margin: 0 auto;
+  border-radius: 20px;
+}
+
+#legend {
+  position:fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px;
+  padding-top: 5px;
+  top: 100px; 
+  background-color: rgba(65,105,225,0.8);
+  border-radius: 10px;
+  z-index: 2; 
+  overflow: hidden;
+  visibility: hidden;
+  text-align: center;
+}
+
+#buildingName {
+  margin: 0px;
+}
