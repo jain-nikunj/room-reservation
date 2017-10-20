@@ -4,3 +4,4 @@ coverage/
 *.log
 *.byebug_history
 *.tmp
+*.env
