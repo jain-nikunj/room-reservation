@@ -37,12 +37,11 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 group :test do
   gem 'simplecov', :require => false
-  gem 'cucumber-rails'
+  gem 'cucumber-rails', :require => false
   gem 'cucumber-rails-training-wheels'
   gem 'autotest-rails'
   gem 'database_cleaner'
   gem 'selenium-webdriver'
-  gem 'codeclimate-test-reporter', "~> 1.0.0"
 end
 
 group :development, :test do
