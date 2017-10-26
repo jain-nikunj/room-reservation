@@ -42,6 +42,7 @@ group :test do
   gem 'autotest-rails'
   gem 'database_cleaner'
   gem 'selenium-webdriver'
+  gem 'codeclimate-test-reporter', "~> 1.0.0"
 end
 
 group :development, :test do

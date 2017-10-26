@@ -15,6 +15,7 @@ Background: rooms have been added to database
   | 214        | 18         | 1            |            |      |
  
   And  I am on the RoomReservation home page
+  And  I am logged in as "john.doe@berkeley.edu", "John Doe"
 
 Scenario: display rooms in Haviland Hall building
     And I click on "Haviland Hall" building
