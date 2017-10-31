@@ -26,24 +26,29 @@ Scenario: show filters on homepage
     And I should see "Capacity"
     And I should see "Room Type"
     And I should see "AV"
+    And I should see "Show"
     
 Scenario: limit by Student Accessible
     When I check "Student Accessible"
+    And I click "Show"
     Then I should see room "F295"
     And I should not see room "F269"
  
 Scenario: limit by Whiteboard
     When I check "Whiteboard"
+    And I click "Show"
     Then I should see room "F269"
     And I should not see room "F295"
 
 Scenario: limit by Room Type
     When I select "Room Type" to be "Lecture Hall"
+    And I click "Show"
     Then I should see room "F295"
     And I should not see room "F269"
     
-Scenario: limit by AV-*
-    When I check "AV-*"
+Scenario: limit by AV
+    When I check "AV"
+    And I click "Show"
     Then I should see room "F110"
     And I should not see room "F295"
     And I should not see room "F269"

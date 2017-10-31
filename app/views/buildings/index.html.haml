@@ -1,5 +1,32 @@
 %h1 Welcome to UC Berkeley Room Reservation
 
+I want a room with
+= form_tag buildings_path, :method => :get, :id => 'filters_form' do
+  = check_box_tag "StudentAccessible", true, params[:StudentAccessible], class: "filter_box"
+  = label_tag "StudentAccessible", "ADA-Student Accessible", class: "filter_label"
+  = check_box_tag "Whiteboard", true, params[:Whiteboard], class: "filter_box"
+  = label_tag "Whiteboard", nil, class: "filter_label"
+  = check_box_tag "AV", true, params[:AV], class: "filter_box"
+  = label_tag "AV", "AV Devices", class: "filter_label"
+  Room Type:
+  %select{:name => "room_type", :id => "filter_drop", :onchange => "update_capacity()"}
+    %option{:value => "Any", :selected => params[:room_type] == "Any"}= "Any"
+    %option{:value => "Classroom", :selected => params[:room_type] == "Classroom"}= "Classroom"
+    %option{:value => "Lecture Hall", :selected => params[:room_type] == "Lecture Hall"}= "Lecture Hall"
+    %option{:value => "Auditorium", :selected => params[:room_type] == "Auditorium"}= "Auditorium"
+    %option{:value => "Seminar Room", :selected => params[:room_type] == "Seminar Room"}= "Seminar Room"
+  %select{:name => "capacity", :id => "capacity_drop"}
+    %option{:value => 0}= "<20"
+    %option{:value => 1}= "20 - 39"
+    %option{:value => 2}= "40 - 59"
+    %option{:value => 3}= "60 - 79"
+    %option{:value => 4}= "80 - 99"
+    %option{:value => 5}= "100 - 199"
+    %option{:value => 10}= "200 - 299"
+    %option{:value => 15}= "300 - 399"
+    %option{:value => 20}= "400 - 499"
+  = submit_tag "Show", :id => "filters_submit"
+  
 - @api = ENV['GOOGLE_API_KEY']
 
 #legend{:align => "center"}
