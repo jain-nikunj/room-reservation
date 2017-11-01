@@ -28,7 +28,20 @@ function initMap() {
   });
   
   map.data.addListener('click', function(event) {
-    window.location.href = '/buildings/' + event.feature.getId();
+    var studentAccessible = document.getElementById("StudentAccessible").checked;
+    var whiteboard = document.getElementById("Whiteboard").checked;
+    var AV = document.getElementById("AV").checked;
+    var typeDrop = document.getElementById("type_drop");
+    var roomType = typeDrop.options[typeDrop.selectedIndex].value;
+    var capacityDrop = document.getElementById("capacity_drop");
+    var capacity = capacityDrop.options[capacityDrop.selectedIndex].value;
+    var paramsString = "?utf8=✓";
+    paramsString += studentAccessible ? "&StudentAccessible=true" : "";
+    paramsString += whiteboard ? "&Whiteboard=true" : "";
+    paramsString += AV ? "&AV=true" : "";
+    paramsString += "&room_type=" + roomType;
+    paramsString += "&capacity=" + capacity;
+    window.location.href = '/buildings/' + event.feature.getId() + paramsString;
   });
   
   map.data.addListener('mouseover', function(event) {

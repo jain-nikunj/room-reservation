@@ -1,11 +1,11 @@
 %div
   %br
-    = link_to 'Home Page', buildings_path, :class => "home_page_btn"
+    = link_to 'Home Page', buildings_path(request.query_parameters), :class => "home_page_btn"
 
 %div{:id => "filter_div"}
   %span{:class => "filter_text"}
     I want a room with
-  = form_tag building_path, :method => :get, :id => 'filters_form', :params => request.query_parameters do
+  = form_tag building_path, :method => :get, :id => 'filters_form' do
     = check_box_tag "StudentAccessible", true, params[:StudentAccessible], class: "filter_box"
     = label_tag "StudentAccessible", "ADA-Student Accessible", class: "filter_label"
     = check_box_tag "Whiteboard", true, params[:Whiteboard], class: "filter_box"

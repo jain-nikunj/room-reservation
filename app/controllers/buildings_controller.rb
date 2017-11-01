@@ -1,9 +1,12 @@
 class BuildingsController < ApplicationController
+  helper_method :filter_rooms
 
   def index
     file = File.read(Rails.public_path + "building_geo.json")
     geo_data = JSON.parse(file)
+    
     filter_rooms
+    
     building_ids = Set.new
     @rooms.select(:building_id).group(:building_id).each do |data|
       building_ids.add(data.building_id)
@@ -26,7 +29,7 @@ class BuildingsController < ApplicationController
   
   def show
     filter_rooms
-    
+
     building_id = params[:id] 
     @building = Building.find_by_id(building_id)
     
@@ -42,7 +45,7 @@ class BuildingsController < ApplicationController
     end
   end
   
-  def filter_rooms()
+  def filter_rooms
     @rooms = Room.all
     if params[:StudentAccessible]
       @rooms = @rooms.where("facilities LIKE '%ADA-Student Accessible%'")
