@@ -3,7 +3,7 @@
 %div{:id => "filter_div"}
   %span{:class => "filter_text"}
     I want a room with
-  = form_tag buildings_path, :method => :get, :id => 'filters_form' do
+  = form_tag buildings_path, :id => 'filters_form', :onsubmit => 'filterMarkers(event)' do
     = check_box_tag "StudentAccessible", true, params[:StudentAccessible], class: "filter_box"
     = label_tag "StudentAccessible", "ADA-Student Accessible", class: "filter_label"
     = check_box_tag "Whiteboard", true, params[:Whiteboard], class: "filter_box"
@@ -36,11 +36,6 @@
   
 - @api = ENV['GOOGLE_API_KEY']
 
-#legend{:align => "center"}
-  %p#buildingName
 #map
-:javascript
-  var map;
-  var legend = document.getElementById('buildingName');
 
 %script{:async => "", :defer => "defer", :src => "https://maps.googleapis.com/maps/api/js?key=#{@api}&callback=initMap"}
