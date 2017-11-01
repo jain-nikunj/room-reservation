@@ -5,7 +5,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   {
       
       hd: 'berkeley.edu',
-      :client_options => {:ssl => {:verify => false}}
+      :client_options => {:ssl => {:ca_file => 'lib/assests/cacert.pem'}}
   }
   
 end
