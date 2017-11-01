@@ -15,8 +15,8 @@ body {
   margin-top:200px;
   padding: 5px;
   padding-top: 5px;
-  top: 100px; 
   background-color: #ffffff;
+  top: 160px; 
   border-radius: 10px;
   z-index: 2; 
   overflow: hidden;
@@ -28,10 +28,10 @@ body {
   margin: 0px;
 }
 
-<<<<<<< HEAD
 h1 {
   text-align: center;
-=======
+}
+
 #filters_form {
   display: inline-block;
   text-align: center;
@@ -81,5 +81,4 @@ input[type="checkbox"] {
 /* Room type dorpdown list style. */
 #type_drop {
   /* TODO */
->>>>>>> added homepage filters, fixed map labels, added map navigating boundaries
 }
