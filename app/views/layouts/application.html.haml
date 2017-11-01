@@ -7,15 +7,14 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
-  
-    %div
+    %br
+    %div{style: "float:right;"}
       - if current_user
-        Signed in as
-        = succeed "!" do
-          %strong= current_user.name
-        = link_to "Sign out", signout_path, id: "sign_out"
+        = link_to "Sign out", signout_path, id: "sign_out", :class => "home_page_btn"
+        -#= succeed "" do
+        -#  %p{style: "font-size: 20px;"} Signed in as #{current_user.name}
       - else
-        = link_to "Sign in with Google", "/auth/google_oauth2", id: "sign_in"
+        = link_to 'CalNet Login', "/auth/google_oauth2",id: "sign_in", :class => "home_page_btn"
     %div
     
     #main

@@ -1,8 +1,6 @@
-%br
 = link_to 'Home Page', buildings_path, :class => "home_page_btn"
   
 %h1 Rooms in #{@building.name} Hall
-.search_box{:alt => "Search"}
 - @rooms.each do |room|
   %button.accordion #{@building.name} #{room.number}
   .panel

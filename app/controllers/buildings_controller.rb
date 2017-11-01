@@ -9,6 +9,11 @@ class BuildingsController < ApplicationController
   end
   
   def show
+    if session[:user_id] == nil
+      flash[:notice] = "Plase log in bro."
+      redirect_to root_path
+    end
+    
     building_id = params[:id] 
     @building = Building.find_by_id(building_id)
     
