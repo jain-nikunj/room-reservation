@@ -2,29 +2,20 @@ class BuildingsController < ApplicationController
   helper_method :filter_rooms
 
   def index
-    file = File.read(Rails.public_path + "building_geo.json")
-    geo_data = JSON.parse(file)
-    
-    filter_rooms
-    
-    building_ids = Set.new
-    @rooms.select(:building_id).group(:building_id).each do |data|
-      building_ids.add(data.building_id)
-    end
-    puts building_ids
-    update_features = []
-    geo_data["features"].each do |building|
-      if building_ids.include? building["id"]
-        update_features.push building
-      end
-    end
-    geo_data["features"] = update_features
-    File.open(Rails.public_path + "updated_building_geo.json","w") do |f|
-      f.write(geo_data.to_json)
-    end 
 
   end
 
+  def filter
+    filter_rooms
+    
+    ret = []
+    @rooms.select(:building_id).group(:building_id).each do |data|
+      building_name = Building.find_by_id(data.building_id).name
+      ret << ({id: data.building_id, name: building_name})
+    end
+    render json: ret 
+  end
+  
   def search
   end
   
