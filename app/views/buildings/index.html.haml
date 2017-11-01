@@ -3,7 +3,7 @@
 %div{:id => "filter_div"}
   %span{:class => "filter_text"}
     I want a room with
-  = form_tag buildings_path, :method => :get, :id => 'filters_form' do
+  = form_tag buildings_path, :method => :get, :id => 'filters_form', :params => request.query_parameters do
     = check_box_tag "StudentAccessible", true, params[:StudentAccessible], class: "filter_box"
     = label_tag "StudentAccessible", "ADA-Student Accessible", class: "filter_label"
     = check_box_tag "Whiteboard", true, params[:Whiteboard], class: "filter_box"
