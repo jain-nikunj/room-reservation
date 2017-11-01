@@ -36,6 +36,7 @@ class BuildingsController < ApplicationController
       return
     end
     
+    filter_rooms
     building_id = params[:id] 
     @building = Building.find_by_id(building_id)
     
