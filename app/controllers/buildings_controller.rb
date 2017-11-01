@@ -10,7 +10,7 @@ class BuildingsController < ApplicationController
   
   def show
     if session[:user_id] == nil
-      flash[:notice] = "Plase log in bro."
+      flash[:notice] = "Plase log in."
       redirect_to root_path
     end
     
