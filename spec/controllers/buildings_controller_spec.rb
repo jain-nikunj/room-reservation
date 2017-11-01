@@ -5,7 +5,9 @@ RSpec.describe BuildingsController, type: :controller do
   describe "shows the details page for the building" do
     before :each do 
       @id = "42"
+      @user_id = "512"
       @fake_building = double('Fake Building')
+      allow_any_instance_of(BuildingsController).to receive(:session_helper_user_id).and_return(@user_id)
       allow(Building).to receive(:find_by_id).with(@id).and_return(@fake_building)
       allow(@fake_building).to receive(:blank?).and_return(false)
       @room1  = double('Room1')
@@ -49,6 +51,24 @@ RSpec.describe BuildingsController, type: :controller do
       expect(@room1).to receive(:facilities=)
       get :show, {:id => @id}
     end
+  end
+  
+  describe "checks for user login status" do
+    before :each do
+      @id = "42"
+    end  
+      
+    it 'uses the helper function to check login status' do
+      expect_any_instance_of(BuildingsController).to receive(:session_helper_user_id).and_return(@id)
+      get :show, {:id => @id}
+    end
+    
+    it 'redirects to home page with error message when not logged in' do
+      get :show, {:id => @id}
+      expect(flash[:notice]).to be_present
+      expect(response).to redirect_to(buildings_path)
+    end  
+      
   end
 
 end
