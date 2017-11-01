@@ -1,6 +1,15 @@
 Rails.application.routes.draw do
   
-  
+  get 'auth/:provider/callback', to: 'sessions#create'
+  get 'auth/failure', to: redirect('/')
+  get 'signout', to: 'sessions#destroy', as: 'signout'
+
+  resources :sessions, only: [:create, :destroy]
+
+  get 'sessions/create'
+
+  get 'sessions/destroy'
+
   resources :buildings, :except => [:new, :edit, :create]
   root :to => redirect('/buildings')
   get "*path", to: redirect('/')  # Redirect invalid routes to home page.
