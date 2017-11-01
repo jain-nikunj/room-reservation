@@ -33,9 +33,24 @@ body {
   text-align: center;
 }
 
+/* Style for the whole filter area. */
+#filter_div {
+  padding-top: 30px;
+}
+
 /* Removes the box of checkbox. */
 input[type="checkbox"] {
   display:none;
+}
+
+/* Style for text in filter area. */
+.filter_text {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 24px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+	line-height: 26.4px;
 }
 
 /* Filter checkbox labels style. */
@@ -60,6 +75,6 @@ input[type="checkbox"] {
 }
 
 /* Room type dorpdown list style. */
-#filter_drop {
+#type_drop {
   /* TODO */
 }

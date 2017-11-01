@@ -3,21 +3,7 @@ class BuildingsController < ApplicationController
   def index
     file = File.read(Rails.public_path + "building_geo.json")
     geo_data = JSON.parse(file)
-    @rooms = Room.all
-    if params[:StudentAccessible]
-      @rooms = @rooms.where("facilities LIKE '%ADA-Student Accessible%'")
-    end
-    if params[:Whiteboard]
-      @rooms = @rooms.where("facilities LIKE '%Board-White%' OR facilities LIKE '%Board-Front%'")
-    end
-    if params[:AV]
-      @rooms = @rooms.where("facilities LIKE '%AV%'")
-    end
-    if params.key?(:room_type)
-      if params[:room_type] != "Any"
-        @rooms = @rooms.where(:misc => params[:room_type])
-      end
-    end
+    filter_rooms
     building_ids = Set.new
     @rooms.select(:building_id).group(:building_id).each do |data|
       building_ids.add(data.building_id)
@@ -39,6 +25,8 @@ class BuildingsController < ApplicationController
   end
   
   def show
+    filter_rooms
+    
     building_id = params[:id] 
     @building = Building.find_by_id(building_id)
     
@@ -47,10 +35,35 @@ class BuildingsController < ApplicationController
       redirect_to buildings_path
     end
     
-    @rooms = Room.where(:building_id => building_id)
+    @rooms = @rooms.where(:building_id => building_id)
     @rooms.each do |room|
       if room.misc == nil then room.misc = "N/A" end
       if room.facilities == nil then room.facilities = "N/A" end
+    end
+  end
+  
+  def filter_rooms()
+    @rooms = Room.all
+    if params[:StudentAccessible]
+      @rooms = @rooms.where("facilities LIKE '%ADA-Student Accessible%'")
+    end
+    if params[:Whiteboard]
+      @rooms = @rooms.where("facilities LIKE '%Board-White%' OR facilities LIKE '%Board-Front%'")
+    end
+    if params[:AV]
+      @rooms = @rooms.where("facilities LIKE '%AV%'")
+    end
+    if params.key?(:room_type)
+      if params[:room_type] != "Any"
+        @rooms = @rooms.where(:misc => params[:room_type])
+      end
+    end
+    if params.key?(:capacity) and params[:capacity] != "Any"
+      low, high = params[:capacity].split(",")
+      @rooms = @rooms.where("capacity >= ?", low.to_i)
+      if high != "-"
+        @rooms = @rooms.where("capacity <= ?", high.to_i)
+      end
     end
   end
   
