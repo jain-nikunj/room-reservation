@@ -38,7 +38,7 @@ class BuildingsController < ApplicationController
       flash[:notice] = "This building does not exist."
       redirect_to buildings_path
     end
-    
+
     @rooms = @rooms.where(:building_id => building_id)
     @rooms.each do |room|
       if room.misc == nil then room.misc = "N/A" end
