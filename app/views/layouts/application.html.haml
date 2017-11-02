@@ -7,6 +7,15 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
+    %br
+    %div{style: "float:right;"}
+      - if current_user
+        = link_to "Sign out", signout_path, id: "sign_out", :class => "home_page_btn"
+        -#= succeed "" do
+        -#  %p{style: "font-size: 20px;"} Signed in as #{current_user.name}
+      - else
+        = link_to 'CalNet Login', "/auth/google_oauth2",id: "sign_in", :class => "home_page_btn"
+    %div
     
     #main
       - if flash[:notice]

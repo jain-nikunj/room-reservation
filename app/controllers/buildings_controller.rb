@@ -2,13 +2,22 @@ class BuildingsController < ApplicationController
   
   
   def index
-    
   end
 
   def search
   end
   
+  def session_helper_user_id
+      session[:user_id]
+  end
+  
   def show
+    if session_helper_user_id == nil
+      flash[:notice] = "Please log in."
+      redirect_to buildings_path
+      return
+    end
+    
     building_id = params[:id] 
     @building = Building.find_by_id(building_id)
     

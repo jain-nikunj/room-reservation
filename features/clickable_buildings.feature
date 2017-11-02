@@ -17,10 +17,12 @@ Background: rooms have been added to database
   And  I am on the RoomReservation home page
   And  I am logged in as "john.doe@berkeley.edu", "John Doe"
 
+@wip
 Scenario: display rooms in Haviland Hall building
     And I click on "Haviland Hall" building
     Then I should see "Available rooms in Haviland Hall"
-    
+
+@wip    
 Scenario: display number of rooms in Haviland Hall
     When I click on "Haviland Hall" building
     Then I should see "Number of rooms available"
