@@ -22,7 +22,7 @@ Scenario: display rooms in Haviland Hall building
     And I click on "Haviland Hall" building
     Then I should see "Available rooms in Haviland Hall"
 
-@wip    
+@wip
 Scenario: display number of rooms in Haviland Hall
     When I click on "Haviland Hall" building
     Then I should see "Number of rooms available"

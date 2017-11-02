@@ -8,50 +8,50 @@ Background: rooms have been added to database
 
   Given the following buildings exist:
   | name                   | misc |
-  | Haas Faculty Wing      |      |
+  | Test Building 1        |      |
+  | Test Building 2        |      |
+  | Test Building 3        |      |
 
   And the following rooms exist:
-  | number     | capacity   | building_id  | facilities                           | misc                    |
+  | number     | capacity   | building_id  | facilities                        | misc                    |
   | F295       | 299        | 1            | ADA-Student Accessible            | Lecture Hall            |
-  | F269       | 100        | 1            | Whiteboard, Chalkboard               | Classroom, Seminar Hall |
-  | F110       | 50         | 1            | AV-Connection-Aux                 | Lecture Hall            |  
+  | F269       | 100        | 2            | Board-White, Board-Chalk          | Classroom, Seminar Hall |
+  | F110       | 50         | 3            | AV-Connection-Aux                 | Lecture Hall            |  
 
   And  I am on the RoomReservation home page
-  And  I am logged in as "john.doe@berkeley.edu", "John Doe"
 
 @wip
 Scenario: show filters on homepage
-    Then I should see "Filters"
-    And I should see "Student Accessible"
+    Then I should see "ADA-Student Accessible"
     And I should see "Whiteboard"
+    And I should see "AV Devices"
     And I should see "Capacity"
     And I should see "Room Type"
-    And I should see "AV"
-    And I should see "Show"
+    And I should see a submit button "Show"
     
 Scenario: limit by Student Accessible
-    When I check "Student Accessible"
-    And I click "Show"
-    Then I should see room "F295"
-    And I should not see room "F269"
+    When I check "ADA-Student Accessible"
+    And I press "Show"
+    Then I should see "Test Building 1"
+    And I should not see "Test Building 2"
  
 @wip
 Scenario: limit by Whiteboard
     When I check "Whiteboard"
-    And I click "Show"
-    Then I should see room "F269"
-    And I should not see room "F295"
+    And I press "Show"
+    Then I should see "Test Building 2"
+    And I should not see "Test Building 1"
 
 @wip
 Scenario: limit by Room Type
-    When I select "Room Type" to be "Lecture Hall"
-    And I click "Show"
-    Then I should see room "F295"
-    And I should not see room "F269"
+    When I select "Lecture Hall" from "room_type"
+    And I press "Show"
+    Then I should see "Test Building 1"
+    And I should not see "Test Building 2"
     
 Scenario: limit by AV
     When I check "AV"
-    And I click "Show"
-    Then I should see room "F110"
-    And I should not see room "F295"
-    And I should not see room "F269"
+    And I press "Show"
+    Then I should see "Test Building 3"
+    And I should not see "Test Building 1"
+    And I should not see "Test Building 2"
