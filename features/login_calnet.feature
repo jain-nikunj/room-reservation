@@ -20,20 +20,23 @@ Background: rooms have been added to database
   
 Scenario: Access needed when clicking buildings on the homepage map when not logged in
     When I click on building "Haas Faculty Wing"
-    Then I should see the login page
+    Then I should see the homepage with "Please log in."
     And I should not see room "F269"
 
+@wip
 Scenario: Access not needed when toggling options on the filter bar without filtering without logged in
     When I check the "Seminar Hall" checkbox
     Then I should not see the login page
     And I should be on the RoomReservation home page
-    
+
+@wip    
 Scenario: Access needed when trying to use the filter bar when logged in
     Given I check the "Seminar Hall" checkbox
     And I click "Filter" button
     Then I should see the login page
     And I should not be on the RoomReservation home page
-    
+
+@wip    
 Scenario: Allowed to filter if already logged in
     Given I am logged in as "john.doe@berkeley.edu", "John Doe"
     And I check the "Seminar Hall" checkbox
