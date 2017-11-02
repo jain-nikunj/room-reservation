@@ -43,7 +43,7 @@ class BuildingsController < ApplicationController
       @rooms = @rooms.where("facilities LIKE '%ADA-Student Accessible%'")
     end
     if params[:Whiteboard]
-      @rooms = @rooms.where("facilities LIKE '%Board-White%' OR facilities LIKE '%Board-Front%'")
+      @rooms = @rooms.where("facilities LIKE '%Board-White%' OR facilities LIKE '%Board-Front%' OR facilities LIKE '%Board-Chalk%'")
     end
     if params[:AV]
       @rooms = @rooms.where("facilities LIKE '%AV%'")
