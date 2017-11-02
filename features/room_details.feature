@@ -16,6 +16,7 @@ Background: rooms have been added to database
   | F269       | 100        | 1            | Whiteboard, Chalkboard               | Classroom, Seminar Hall |
 
   And  I am on the RoomReservation home page
+  And  I am logged in as "john.doe@berkeley.edu", "John Doe"
   
 Scenario: show existing rooms when I choose the building 
     When I click on building "Haas Faculty Wing"
