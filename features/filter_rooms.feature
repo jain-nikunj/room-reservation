@@ -21,34 +21,42 @@ Background: rooms have been added to database
   And  I am on the RoomReservation home page
 
 Scenario: show filters on homepage
-    Then I should see "ADA-Student Accessible"
-    And I should see "Whiteboard"
-    And I should see "AV Devices"
-    And I should see "Capacity"
-    And I should see "Room Type"
-    And I should see a submit button "Show"
+  Then I should see "ADA-Student Accessible"
+  And I should see "Whiteboard"
+  And I should see "AV Devices"
+  And I should see "Capacity"
+  And I should see "Room Type"
+  And I should see a submit button "Show"
     
 Scenario: limit by Student Accessible
-    When I check "ADA-Student Accessible"
-    And I press "Show"
-    Then I should see "Test Building 1"
-    And I should not see "Test Building 2"
+  When I check "ADA-Student Accessible"
+  And I press "Show"
+  Then I should see "Test Building 1"
+  And I should not see "Test Building 2"
 
 Scenario: limit by Whiteboard
-    When I check "Whiteboard"
-    And I press "Show"
-    Then I should see "Test Building 2"
-    And I should not see "Test Building 1"
+  When I check "Whiteboard"
+  And I press "Show"
+  Then I should see "Test Building 2"
+  And I should not see "Test Building 1"
 
 Scenario: limit by Room Type
-    When I select "Lecture Hall" from "room_type"
-    And I press "Show"
-    Then I should see "Test Building 1"
-    And I should not see "Test Building 2"
-    
+  When I select "Lecture Hall" from "room_type"
+  And I press "Show"
+  Then I should see "Test Building 1"
+  And I should not see "Test Building 2"
+  
 Scenario: limit by AV
-    When I check "AV"
-    And I press "Show"
-    Then I should see "Test Building 3"
-    And I should not see "Test Building 1"
-    And I should not see "Test Building 2"
+  When I check "AV"
+  And I press "Show"
+  Then I should see "Test Building 3"
+  And I should not see "Test Building 1"
+  And I should not see "Test Building 2"
+    
+Scenario: limit by Capacity
+  When I select "200 - 299" from "capacity"
+  And I press "Show"
+  Then I should see "Test Building 1"
+  And I should not see "Test Building 2"
+  And I should not see "Test Building 3"
+  
