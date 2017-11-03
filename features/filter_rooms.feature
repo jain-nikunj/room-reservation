@@ -20,7 +20,6 @@ Background: rooms have been added to database
 
   And  I am on the RoomReservation home page
 
-@wip
 Scenario: show filters on homepage
     Then I should see "ADA-Student Accessible"
     And I should see "Whiteboard"
@@ -34,15 +33,13 @@ Scenario: limit by Student Accessible
     And I press "Show"
     Then I should see "Test Building 1"
     And I should not see "Test Building 2"
- 
-@wip
+
 Scenario: limit by Whiteboard
     When I check "Whiteboard"
     And I press "Show"
     Then I should see "Test Building 2"
     And I should not see "Test Building 1"
 
-@wip
 Scenario: limit by Room Type
     When I select "Lecture Hall" from "room_type"
     And I press "Show"
