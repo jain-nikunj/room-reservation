@@ -9,12 +9,11 @@ button.accordion {
   text-align: center;
   outline: none;
   font-size: 18px;
-}
-      
-button.accordion.active, button.accordion:hover {
+  &.active, &:hover {
     background-color: #003262;
+  }
 }
-      
+
 div.panel {
   padding: 0 18px;
   background-color: #FDB515;
@@ -22,7 +21,7 @@ div.panel {
   overflow: hidden;
   transition: max-height 0.25s ease-out;
 }
-      
+
 h1 {
   color: #000000;
   text-align: center;
