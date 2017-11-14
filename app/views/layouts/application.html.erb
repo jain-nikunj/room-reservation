@@ -32,7 +32,7 @@
            <% if current_user %>
              <ul class="nav navbar-nav navbar-right">
               <li><a><span class="glyphicon glyphicon-user"></span> Welcome, <%= current_user.name %></a></li>
-              <li><a href="signout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+              <li><a href="/signout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
              </ul>
            <% else %>
              <ul class="nav navbar-nav navbar-right">
@@ -45,7 +45,7 @@
     </div>
     <div id="main">
       <% if flash[:alert] %>
-        <div class="alert alert-danger alert-dismissible" id="alert">
+        <div class="alert alert-danger alert" id="alert">
           <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <p style="font-size: 20px"><strong>Error:</strong> <%= flash[:alert]%>
           </p>
