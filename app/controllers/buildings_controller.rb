@@ -25,7 +25,7 @@ class BuildingsController < ApplicationController
   
   def show
     if session_helper_user_id == nil
-      flash[:notice] = "Please log in."
+      flash[:alert] = "Please log in."
       redirect_to buildings_path
       return
     end

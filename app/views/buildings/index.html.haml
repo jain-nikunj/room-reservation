@@ -1,11 +1,10 @@
-%div
-  %br
-    = link_to 'Home Page', buildings_path(request.query_parameters), :class => "home_page_btn"
+%br
+%h1 Welcome to UC Berkeley Room Reservation
 
 %div{:id => "filter_div"}
   %span{:class => "filter_text"}
     I want a room with
-  = form_tag building_path, :method => :get, :id => 'filters_form' do
+  = form_tag filter_path, :method => 'GET', :id => 'filters_form', :onsubmit => 'filterMarkers(event)' do
     = check_box_tag "StudentAccessible", true, params[:StudentAccessible], class: "filter_box"
     = label_tag "StudentAccessible", "ADA-Student Accessible", class: "filter_label"
     = check_box_tag "Whiteboard", true, params[:Whiteboard], class: "filter_box"
@@ -36,26 +35,8 @@
       %option{:value => "500,-", :selected => params[:capacity] == "500,-"}= ">500"
     = submit_tag "Show", :id => "filters_submit"
   
-%h1 Rooms in #{@building.name} Hall
-- @rooms.each do |room|
-  %button.accordion #{@building.name} #{room.number}
-  .panel
-    %p Capacity: #{room.capacity}
-    %p Room Type: #{room.misc}
-    %p Features: #{room.facilities}
+- @api = ENV['GOOGLE_API_KEY']
 
-:javascript
-  var acc = document.getElementsByClassName("accordion");
-  var i;
-  
-  for (i = 0; i < acc.length; i++) {
-    acc[i].onclick = function() {
-      this.classList.toggle("active");
-      var panel = this.nextElementSibling;
-      if (panel.style.maxHeight){
-        panel.style.maxHeight = null;
-      } else {
-        panel.style.maxHeight = panel.scrollHeight + "px";
-      } 
-    }
-  }
+#map
+
+%script{:async => "", :defer => "defer", :src => "https://maps.googleapis.com/maps/api/js?key=#{@api}&callback=initMap"}

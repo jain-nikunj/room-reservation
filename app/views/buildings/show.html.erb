@@ -1,0 +1,41 @@
+<div class="page-container">
+      
+    <div class="container">
+      <div class="row row-offcanvas row-offcanvas-left">
+        
+        <!-- sidebar -->
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+            <ul class="nav">
+              <% @rooms.each do |room| %>
+                <li><a href="#<%=room.number %>"> <%=@building.name %> <%=room.number %> </a></li>
+              <% end %>
+            </ul>
+        </div>
+  	
+        <!-- main area -->
+        <% @rooms.each do |room| %>
+                <div id="<%=room.number %>" class="tab-content" style="display:none"> 
+                  <h2> <%=@building.name %> <%=room.number %> </h2>
+                  <p>Capacity: <%=room.capacity %></p>
+                  <p>Room Type: <%=room.misc %></p>
+                  <p>Features: <%=room.facilities %></p>
+                </div>
+        <% end %>
+
+    </div><!--/.row-->
+  </div><!--/.container-->
+</div><!--/.page-container-->
+
+<script>
+$(document).ready(function () {
+$('.tab-content:not()').hide();
+$('.col-xs-6.col-sm-3.sidebar-offcanvas ul li a').click(function (event) {
+  event.preventDefault();
+  var content = $(this).attr('href');
+  $(this).parent().addClass('active');
+  $(this).parent().siblings().removeClass('active');
+  $(content).show();
+  $(content).siblings('.tab-content').hide();
+  });
+});
+</script>
