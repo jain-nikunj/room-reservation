@@ -29,25 +29,37 @@ function initMap() {
   updateMarkers();
 }
 
+// Get the parameter string based on the selected filters.
+function getParamsString() {
+  var studentAccessible = document.getElementById("StudentAccessible").checked;
+  var board = document.getElementById("Board").checked;
+  var AV = document.getElementById("AV").checked;
+  var classroom = document.getElementById("Classroom").checked;
+  var lectureHall = document.getElementById("LectureHall").checked;
+  var auditorium = document.getElementById("Auditorium").checked;
+  var seminarRoom = document.getElementById("SeminarRoom").checked;
+  var capacityLower = document.getElementById("capacityLower").value;
+  var capacityUpper = document.getElementById("capacityUpper").value;
+  var paramsString = "?utf8=✓";
+  paramsString += studentAccessible ? "&StudentAccessible=true" : "";
+  paramsString += board ? "&Board=true" : "";
+  paramsString += AV ? "&AV=true" : "";
+  paramsString += classroom ? "&Classroom=true" : "";
+  paramsString += lectureHall ? "&LectureHall=true" : "";
+  paramsString += seminarRoom ? "&SeminarRoom=true" : "";
+  paramsString += auditorium ? "&Auditorium=true" : "";
+  paramsString += capacityLower ? "&capacityLower=" + capacityLower : "";
+  paramsString += capacityUpper ? "&capacityUpper=" + capacityUpper : "";
+  return paramsString;
+}
+
 function filterMarkers(e) {
   e.preventDefault();
   updateMarkers();
 }
 
 function updateMarkers() {
-  var studentAccessible = document.getElementById("StudentAccessible").checked;
-  var whiteboard = document.getElementById("Whiteboard").checked;
-  var AV = document.getElementById("AV").checked;
-  var typeDrop = document.getElementById("type_drop");
-  var roomType = typeDrop.options[typeDrop.selectedIndex].value;
-  var capacityDrop = document.getElementById("capacity_drop");
-  var capacity = capacityDrop.options[capacityDrop.selectedIndex].value;
-  var paramsString = "?utf8=✓";
-  paramsString += studentAccessible ? "&StudentAccessible=true" : "";
-  paramsString += whiteboard ? "&Whiteboard=true" : "";
-  paramsString += AV ? "&AV=true" : "";
-  paramsString += "&room_type=" + roomType;
-  paramsString += "&capacity=" + capacity;
+  paramsString = getParamsString();
   
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
@@ -89,23 +101,11 @@ function addMarker(name, id) {
         });
         markers.push(marker);
         google.maps.event.addListener(marker, 'click', function() {
-          var studentAccessible = document.getElementById("StudentAccessible").checked;
-          var whiteboard = document.getElementById("Whiteboard").checked;
-          var AV = document.getElementById("AV").checked;
-          var typeDrop = document.getElementById("type_drop");
-          var roomType = typeDrop.options[typeDrop.selectedIndex].value;
-          var capacityDrop = document.getElementById("capacity_drop");
-          var capacity = capacityDrop.options[capacityDrop.selectedIndex].value;
-          var paramsString = "?utf8=✓";
-          paramsString += studentAccessible ? "&StudentAccessible=true" : "";
-          paramsString += whiteboard ? "&Whiteboard=true" : "";
-          paramsString += AV ? "&AV=true" : "";
-          paramsString += "&room_type=" + roomType;
-          paramsString += "&capacity=" + capacity;
+          paramsString = getParamsString();
           window.location.href = '/buildings/' + marker.id + paramsString;
         });
       }
     };
-    xhttp.open("GET", "https://maps.googleapis.com/maps/api/geocode/json?address=" + name + "%20Hall%20Berkeley", true);
+    xhttp.open("GET", `https://maps.googleapis.com/maps/api/geocode/json?address=${name}%20Hall%20Berkeley`, true);
     xhttp.send();
 }

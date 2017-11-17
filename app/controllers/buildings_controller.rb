@@ -49,25 +49,31 @@ class BuildingsController < ApplicationController
   def filter_rooms
     @rooms = Room.all
     if params[:StudentAccessible]
-      @rooms = @rooms.where("facilities LIKE '%ADA-Student Accessible%'")
+      @rooms = @rooms.where("UPPER(facilities) LIKE '%ADA-STUDENT%'")
     end
-    if params[:Whiteboard]
-      @rooms = @rooms.where("facilities LIKE '%Board-White%' OR facilities LIKE '%Board-Front%' OR facilities LIKE '%Board-Chalk%'")
+    if params[:Board]
+      @rooms = @rooms.where("UPPER(facilities) LIKE '%BOARD%'")
     end
     if params[:AV]
-      @rooms = @rooms.where("facilities LIKE '%AV%'")
+      @rooms = @rooms.where("UPPER(facilities) LIKE '%AV%'")
     end
-    if params.key?(:room_type)
-      if params[:room_type] != "Any"
-        @rooms = @rooms.where(:misc => params[:room_type])
-      end
+    if not params[:Classroom]
+      @rooms = @rooms.where("UPPER(misc) NOT LIKE '%CLASSROOM%'")
     end
-    if params.key?(:capacity) and params[:capacity] != "Any"
-      low, high = params[:capacity].split(",")
-      @rooms = @rooms.where("capacity >= ?", low.to_i)
-      if high != "-"
-        @rooms = @rooms.where("capacity <= ?", high.to_i)
-      end
+    if not params[:LectureHall]
+      @rooms = @rooms.where("UPPER(misc) NOT LIKE '%LECTURE HALL%'")
+    end
+    if not params[:Auditorium]
+      @rooms = @rooms.where("UPPER(misc) NOT LIKE '%AUDITORIUM%'")
+    end
+    if not params[:SeminarRoom]
+      @rooms = @rooms.where("UPPER(misc) NOT LIKE '%SEMINAR ROOM%'")
+    end
+    if params[:capacityLower]
+      @rooms = @rooms.where("capacity >= ?", params[:capacityLower].to_i)
+    end
+    if params[:capacityUpper]
+      @rooms = @rooms.where("capacity <= ?", params[:capacityUpper].to_i)
     end
   end
   
