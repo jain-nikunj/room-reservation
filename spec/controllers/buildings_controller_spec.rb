@@ -37,17 +37,23 @@ RSpec.describe BuildingsController, type: :controller do
     end
     
     it 'searches the database for rooms when valid search' do
+      allow_any_instance_of(BuildingsController).to receive(:filter_rooms)
+      controller.instance_variable_set(:@rooms, Room.all)
       expect_any_instance_of(Room::ActiveRecord_Relation).to receive(:where).with(:building_id => @id).and_return(@unordered_fake)
       get :show, {:id => @id}
     end  
     
     it 'sets the instance of rooms after a valid search' do
+      allow_any_instance_of(BuildingsController).to receive(:filter_rooms)
+      controller.instance_variable_set(:@rooms, Room.all)
       allow_any_instance_of(Room::ActiveRecord_Relation).to receive(:where).with(:building_id => @id).and_return(@unordered_fake)
       get :show, {:id => @id}
       expect(assigns[:rooms]).to eq(@fake_rooms)
     end
     
     it 'assigns correct text when missing attributes of rooms' do
+      allow_any_instance_of(BuildingsController).to receive(:filter_rooms)
+      controller.instance_variable_set(:@rooms, Room.all)
       allow_any_instance_of(Room::ActiveRecord_Relation).to receive(:where).with(:building_id => @id).and_return(@unordered_fake)
       allow(@room1).to receive(:misc).and_return(nil)
       allow(@room1).to receive(:facilities).and_return(nil)
