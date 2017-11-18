@@ -59,7 +59,7 @@ function filterMarkers(e) {
 }
 
 function updateMarkers() {
-  paramsString = getParamsString();
+  var paramsString = getParamsString();
   
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {

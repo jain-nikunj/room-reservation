@@ -24,11 +24,11 @@ class BuildingsController < ApplicationController
   end
   
   def show
-    if session_helper_user_id == nil
-      flash[:alert] = "Please log in."
-      redirect_to buildings_path
-      return
-    end
+    # if session_helper_user_id == nil
+    #   flash[:alert] = "Please log in."
+    #   redirect_to buildings_path
+    #   return
+    # end
     
     filter_rooms
     building_id = params[:id] 

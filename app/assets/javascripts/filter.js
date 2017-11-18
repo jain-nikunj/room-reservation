@@ -1,3 +1,8 @@
+function details_filter() {
+    var paramsString = getParamsString();
+    window.location.href = window.location.href.split('?')[0] + paramsString, true;
+}
+
 /*  Limit the value of capacity field to be greater than or equal to 0,
  *  and lower bound <= upper bound.
  */

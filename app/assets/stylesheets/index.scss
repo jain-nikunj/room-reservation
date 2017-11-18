@@ -1,3 +1,33 @@
+#filter_btn {
+  height: 40px;
+  width: 100%;
+  border: none;
+  background: none;
+  font-family: helvatica;
+  font-size: 20px;
+  padding-left: 100px;
+}
+
+.category_text {
+  font-family: helvatica;
+  font-size: 20px;
+  margin-left: 20px;
+}
+
+#to-text {
+  margin:20px;
+  margin-top: 5px;
+  float: left;
+}
+
+button:focus {
+  outline:0;
+}
+
+#filters-reset, #filters-submit {
+  margin-top: 20px;
+}
+
 #map {
   height: 700px;
   border-radius: 10px;
