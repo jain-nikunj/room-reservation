@@ -8,6 +8,7 @@
     </div>
     <div class="panel-collapse collapse" id="filters_collapse">
       <div class="row" id="filters_div">
+        <%= form_tag filter_path, :method => 'GET', :id => 'filters_form', :onsubmit => 'filterMarkers(event)' do %>
         <div class="col-sm-1"></div>
           <div class="col-sm-3" id="roomtype_column">
             <h3 class="category_text">Room Type</h3>
@@ -70,6 +71,7 @@
             <br/>
             
             <button class="btn" id="filters-submit" onclick="details_filter()">Show</button>
+          </div>
           </div>
         <% end %>
       </div>
