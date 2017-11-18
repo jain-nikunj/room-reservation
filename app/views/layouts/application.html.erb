@@ -28,7 +28,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/buildings">Room Reservation</a>
+          <%= link_to 'Room Reservation', buildings_path(request.query_parameters), :class => "navbar-brand" %>
           <% if current_user %>
             <ul class="nav navbar-nav navbar-right">
               <li><a><span class="glyphicon glyphicon-user"></span> Welcome, <%= current_user.name %></a></li>

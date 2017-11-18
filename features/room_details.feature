@@ -13,7 +13,7 @@ Background: rooms have been added to database
   And the following rooms exist:
   | number     | capacity   | building_id  | facilities                           | misc                    |
   | F295       | 299        | 1            | ADA-Instructor Accessible            | Lecture Hall            |
-  | F269       | 100        | 1            | Whiteboard, Chalkboard               | Classroom, Seminar Hall |
+  | F269       | 100        | 1            | Whiteboard, Chalkboard               | Classroom, Seminar Room |
 
   And  I am on the RoomReservation home page
   And  I am logged in as "john.doe@berkeley.edu", "John Doe"
