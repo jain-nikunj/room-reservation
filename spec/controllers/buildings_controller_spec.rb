@@ -80,5 +80,31 @@ RSpec.describe BuildingsController, type: :controller do
     end  
       
   end
+  
+  describe 'filters as needed' do
+    before :each do 
+      @room1 = double('Room1')
+      @id = "42"
+      @fake_rooms = [@room1]
+      @placeholder_for_where = double('Fake rooms')
+      
+      allow(Room).to receive(:all).and_return(@placeholder_for_where)
+      allow(@placeholder_for_where).to receive(:where).and_return(@placeholder_for_where)
+      allow(@placeholder_for_where).to receive(:select).and_return(@placeholder_for_where)
+      allow(@placeholder_for_where).to receive(:group).and_return(@fake_rooms)
+      allow(@room1).to receive(:building_id).and_return(@id)
+    end
+    
+    it 'calls out to Building for name' do
+      @fake_building = double("Building")
+      @fake_name = "Hearst Memorial Mining Building"
+      allow(@fake_building).to receive(:name).and_return(@fake_name)
+      expect(Building).to receive(:find_by_id).with(@id).and_return(@fake_building)
+      get :filter, {:StudentAccessible => true, :Board => true, :AV => true,
+                    :Classroom => false, :LectureHall => false, :Auditorium => false,
+                    :SeminarRoom => false, :capacityLower => "0", :capacityUpper => "100"}
+      
+    end
+  end
 
 end

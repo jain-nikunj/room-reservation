@@ -18,18 +18,21 @@ Background: rooms have been added to database
   And  I am on the RoomReservation home page
   And  I am logged in as "john.doe@berkeley.edu", "John Doe"
   
+@wip
 Scenario: show existing rooms when I choose the building 
     When I click on building "Haas Faculty Wing"
     Then I should see room "F295"
     And I should see room "F269"
     And I should not see room "42"
- 
+
+@wip 
 Scenario: show "Capacity" and "Facilities" under room details page
     When I click on building "Haas Faculty Wing"
     And I click on room "F269"
     Then I should see "Capacity" to be "100"
     And I should see "Chalkboard" under "Features"
 
+@wip
 Scenario: show "Room Type" under room details page
     When I click on building "Haas Faculty Wing"
     And I click on room "F295"

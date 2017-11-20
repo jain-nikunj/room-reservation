@@ -20,7 +20,6 @@ When /^I click on building "(.*)"$/ do |building|
 end
 
 Then /^I should see room "(.*)"$/ do |room|
-    puts page.html
     step "I should see \"#{room}\""
 end
 
