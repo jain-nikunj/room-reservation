@@ -25,7 +25,7 @@ class BuildingsController < ApplicationController
   
   def show
     if session_helper_user_id == nil
-      flash[:notice] = "Please log in."
+      flash[:alert] = "Please log in."
       redirect_to buildings_path
       return
     end
@@ -39,7 +39,7 @@ class BuildingsController < ApplicationController
       redirect_to buildings_path
     end
 
-    @rooms = @rooms.where(:building_id => building_id)
+    @rooms = @rooms.where(:building_id => building_id).order(:number)
     @rooms.each do |room|
       if room.misc == nil then room.misc = "N/A" end
       if room.facilities == nil then room.facilities = "N/A" end
@@ -49,25 +49,25 @@ class BuildingsController < ApplicationController
   def filter_rooms
     @rooms = Room.all
     if params[:StudentAccessible]
-      @rooms = @rooms.where("facilities LIKE '%ADA-Student Accessible%'")
+      @rooms = @rooms.where("UPPER(facilities) LIKE '%ADA-STUDENT%'")
     end
-    if params[:Whiteboard]
-      @rooms = @rooms.where("facilities LIKE '%Board-White%' OR facilities LIKE '%Board-Front%' OR facilities LIKE '%Board-Chalk%'")
+    if params[:Board]
+      @rooms = @rooms.where("UPPER(facilities) LIKE '%BOARD%'")
     end
     if params[:AV]
-      @rooms = @rooms.where("facilities LIKE '%AV%'")
+      @rooms = @rooms.where("UPPER(facilities) LIKE '%AV%'")
     end
-    if params.key?(:room_type)
-      if params[:room_type] != "Any"
-        @rooms = @rooms.where(:misc => params[:room_type])
-      end
+    
+    @rooms = @rooms.where("UPPER(misc) NOT LIKE '%CLASSROOM%'") unless params[:Classroom]
+    @rooms = @rooms.where("UPPER(misc) NOT LIKE '%LECTURE HALL%'") unless params[:LectureHall]
+    @rooms = @rooms.where("UPPER(misc) NOT LIKE '%AUDITORIUM%'") unless params[:Auditorium]
+    @rooms = @rooms.where("UPPER(misc) NOT LIKE '%SEMINAR ROOM%'") unless params[:SeminarRoom]
+    
+    if params[:capacityLower]
+      @rooms = @rooms.where("capacity >= ?", params[:capacityLower].to_i)
     end
-    if params.key?(:capacity) and params[:capacity] != "Any"
-      low, high = params[:capacity].split(",")
-      @rooms = @rooms.where("capacity >= ?", low.to_i)
-      if high != "-"
-        @rooms = @rooms.where("capacity <= ?", high.to_i)
-      end
+    if params[:capacityUpper]
+      @rooms = @rooms.where("capacity <= ?", params[:capacityUpper].to_i)
     end
   end
   

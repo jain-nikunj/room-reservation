@@ -19,42 +19,70 @@ Background: rooms have been added to database
   | F110       | 50         | 3            | AV-Connection-Aux                 | Lecture Hall            |  
 
   And  I am on the RoomReservation home page
+  
+Scenario: show filters as three groups
+  When I press "Filter"
+  Then I should see "Room Type"
+  And I should see "Features"
+  And I should see "Capacity"
 
 Scenario: show filters on homepage
+  When I press "Filter"
   Then I should see "ADA-Student Accessible"
-  And I should see "Whiteboard"
+  And I should see "Board"
   And I should see "AV Devices"
-  And I should see "Capacity"
-  And I should see "Room Type"
-  And I should see a submit button "Show"
+  And I should see "Classroom"
+  And I should see "Lecture Hall"
+  And I should see "Auditorium"
+  And I should see "Seminar Room"
+  And I should see a button "Show"
+  And I should see a button "Clear"
     
 Scenario: limit by Student Accessible
-  When I check "ADA-Student Accessible"
+  When I press "Filter"
+  And I check "ADA-Student Accessible"
   And I press "Show"
   Then I should see "Test Building 1"
   And I should not see "Test Building 2"
 
-Scenario: limit by Whiteboard
-  When I check "Whiteboard"
+Scenario: limit by Board
+  When I press "Filter"
+  And I check "Board"
   And I press "Show"
   Then I should see "Test Building 2"
   And I should not see "Test Building 1"
 
 Scenario: limit by Room Type
-  When I select "Lecture Hall" from "room_type"
+  When I press "Filter"
+  And I uncheck "Classroom"
+  And I uncheck "Auditorium"
+  And I uncheck "Seminar Room"
   And I press "Show"
   Then I should see "Test Building 1"
   And I should not see "Test Building 2"
   
+Scenario: uncheck all room types
+  When I press "Filter"
+  And I uncheck "Classroom"
+  And I uncheck "Lecture Hall"
+  And I uncheck "Auditorium"
+  And I uncheck "Seminar Room"
+  And I press "Show"
+  Then I should not see "Test Building 1"
+  And I should not see "Test Building 2"
+  
 Scenario: limit by AV
-  When I check "AV"
+  When I press "Filter"
+  And I check "AV"
   And I press "Show"
   Then I should see "Test Building 3"
   And I should not see "Test Building 1"
   And I should not see "Test Building 2"
     
 Scenario: limit by Capacity
-  When I select "200 - 299" from "capacity"
+  When I press "Filter"
+  And I fill in "capacityLower" with "200"
+  And I fill in "capacityUpper" with "299"
   And I press "Show"
   Then I should see "Test Building 1"
   And I should not see "Test Building 2"

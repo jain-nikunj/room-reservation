@@ -14,20 +14,15 @@ Background: rooms have been added to database
   | 12         | 54         | 1            |            |      |
   | 214        | 18         | 1            |            |      |
  
-  And  I am on the RoomReservation home page
-  And  I am logged in as "john.doe@berkeley.edu", "John Doe"
+  And I am on the RoomReservation home page
+  And I am not logged in
 
 @wip
 Scenario: display rooms in Haviland Hall building
     And I click on "Haviland Hall" building
-    Then I should see "Available rooms in Haviland Hall"
+    Then I should not see "Available rooms in Haviland Hall"
 
 @wip
 Scenario: display number of rooms in Haviland Hall
     When I click on "Haviland Hall" building
-    Then I should see "Number of rooms available"
-    
-@wip
-Scenario: click on building that's not exist
-    When I click on "Not Exist Hall" building
-    Then I should be on "buildings_path"
+    Then I should not see "Number of rooms available"
