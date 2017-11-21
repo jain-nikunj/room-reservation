@@ -57,18 +57,12 @@ class BuildingsController < ApplicationController
     if params[:AV]
       @rooms = @rooms.where("UPPER(facilities) LIKE '%AV%'")
     end
-    if not params[:Classroom]
-      @rooms = @rooms.where("UPPER(misc) NOT LIKE '%CLASSROOM%'")
-    end
-    if not params[:LectureHall]
-      @rooms = @rooms.where("UPPER(misc) NOT LIKE '%LECTURE HALL%'")
-    end
-    if not params[:Auditorium]
-      @rooms = @rooms.where("UPPER(misc) NOT LIKE '%AUDITORIUM%'")
-    end
-    if not params[:SeminarRoom]
-      @rooms = @rooms.where("UPPER(misc) NOT LIKE '%SEMINAR ROOM%'")
-    end
+    
+    @rooms = @rooms.where("UPPER(misc) NOT LIKE '%CLASSROOM%'") unless params[:Classroom]
+    @rooms = @rooms.where("UPPER(misc) NOT LIKE '%LECTURE HALL%'") unless params[:LectureHall]
+    @rooms = @rooms.where("UPPER(misc) NOT LIKE '%AUDITORIUM%'") unless params[:Auditorium]
+    @rooms = @rooms.where("UPPER(misc) NOT LIKE '%SEMINAR ROOM%'") unless params[:SeminarRoom]
+    
     if params[:capacityLower]
       @rooms = @rooms.where("capacity >= ?", params[:capacityLower].to_i)
     end
