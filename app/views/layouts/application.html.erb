@@ -14,6 +14,7 @@
     <%= favicon_link_tag %>
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/stylesheets/application.css" />
     <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/js/bootstrap.min.js"></script>
     <!-- library -->
     <%= yield :library %>
@@ -30,7 +31,7 @@
           </button>
           <%= link_to 'Room Reservation', buildings_path(request.query_parameters), :class => "navbar-brand" %>
           <% if current_user %>
-            <ul class="nav navbar-nav navbar-right">
+            <ul class="nav navbar-nav navbar-right" style="float: right">
               <li><a><span class="glyphicon glyphicon-user"></span> Welcome, <%= current_user.name %></a></li>
               <li><a href="/signout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>

@@ -15,3 +15,33 @@
  */
 
 @import "bootstrap";
+
+.container {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+    width: 100% !important;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+.navbar-header {
+    width: 100% !important;
+}
+
+.navbar-brand {
+    margin-left: 5% !important;
+}
+
+.nav.navbar-nav.navbar-right {
+    margin-right: 5% !important;
+}
+
+
+.navbar-fixed-top, .navbar-fixed-bottom {
+    position: absolute !important;
+}
+
+html {
+    overflow: hidden;
+    height: 100%;
+}

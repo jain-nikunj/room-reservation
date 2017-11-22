@@ -4,6 +4,10 @@ body {
 .text-center {
   padding-top: 20px;
 }
+p {
+  margin-left: 25% !important;
+  overflow-x: hidden;
+}
 
 .col-xs-12 {
   background-color: #fff;
@@ -14,7 +18,7 @@ body {
 #sidebar {
   height: 100%;
   padding-right: 0;
-  padding-top: 20px;
+  padding-top: 0px;
 }
 #sidebar .nav {
   width: 95%;

@@ -4,8 +4,8 @@
   border: none;
   background: none;
   font-family: helvatica;
-  font-size: 20px;
-  padding-left: 100px;
+  font-size: 16px;
+  margin-left: 5%;
 }
 
 .category_text {
@@ -30,8 +30,7 @@ button:focus {
 
 #map {
   height: 700px;
-  border-radius: 10px;
-  margin: 100px;
+  width: 100%;
 }
 
 #buildingName {
@@ -42,5 +41,14 @@ button:focus {
     white-space: nowrap;
     overflow: hidden;
     line-height: normal;
-    width: 75%;
+    width: 100%;
+}
+
+.panel {
+  margin-bottom: 0px !important;
+  width: 100% !important;
+}
+
+.panel-grout {
+  position: relative;
 }

@@ -85,14 +85,14 @@
         <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
             <ul class="nav">
               <% @rooms.each do |room| %>
-                <li><a href="#<%=room.number %>"> <%=@building.name %> <%=room.number %> </a></li>
+                <li style="text-align: center"><a href="#<%=room.number %>"> <%=@building.name %> <%=room.number %> </a></li>
               <% end %>
             </ul>
         </div>
   	
         <!-- main area -->
         <% @rooms.each do |room| %>
-                <div id="<%=room.number %>" class="tab-content" style="display:none"> 
+                <div id="<%=room.number %>" class="tab-content" style="display:none, width: 75% !important"> 
                   <h2> <%=@building.name %> <%=room.number %> </h2>
                   <p>Capacity: <%=room.capacity %></p>
                   <p>Room Type: <%=room.misc %></p>
