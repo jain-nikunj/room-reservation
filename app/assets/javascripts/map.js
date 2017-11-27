@@ -106,6 +106,6 @@ function addMarker(name, id) {
         });
       }
     };
-    xhttp.open("GET", 'https://maps.googleapis.com/maps/api/geocode/json?address=${name}%20Hall%20Berkeley', true);
+    xhttp.open("GET", "https://maps.googleapis.com/maps/api/geocode/json?address=" + name + "%20Hall%20Berkeley", true);
     xhttp.send();
 }
