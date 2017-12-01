@@ -4,8 +4,8 @@ body {
 .text-center {
   padding-top: 20px;
 }
-p {
-  margin-left: 25% !important;
+.tab-content p {
+  margin-left: 25%;
   overflow-x: hidden;
 }
 
