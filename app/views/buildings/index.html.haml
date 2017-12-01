@@ -1,8 +1,39 @@
 %div{:class => "panel-grout"}
   %div{:class => "panel panel-default"}
     %div{:class => "panel-heading"}
-      %button{:class => "text-left", :"data-toggle" => "collapse", :"data-target" => "#filters_collapse", :id => "filter_btn"}Filter
-      
+      %div
+        %span
+          %button{:class => "text-left", :"data-toggle" => "collapse", :"data-target" => "#filters_collapse", :id => "filter_btn"}
+            %i{:class => "glyphicon glyphicon-plus"}
+            Filter
+        %span{:class => "tag label label-info"}
+          %span Classroom
+          %a
+            %i{:class => "remove glyphicon glyphicon-remove glyphicon-white"}
+        %span{:class => "tag label label-info"}
+          %span Lecture Hall
+          %a
+            %i{:class => "remove glyphicon glyphicon-remove glyphicon-white"}
+        %span{:class => "tag label label-info"}
+          %span Auditorium
+          %a
+            %i{:class => "remove glyphicon glyphicon-remove glyphicon-white"}
+        %span{:class => "tag label label-info"}
+          %span Seminar Room
+          %a
+            %i{:class => "remove glyphicon glyphicon-remove glyphicon-white"}
+        %span{:class => "tag label label-info"}
+          %span ADA-Student Accessible
+          %a
+            %i{:class => "remove glyphicon glyphicon-remove glyphicon-white"}
+        %span{:class => "tag label label-info"}
+          %span Board
+          %a
+            %i{:class => "remove glyphicon glyphicon-remove glyphicon-white"}
+        %span{:class => "tag label label-info"}
+          %span AV Devices
+          %a
+            %i{:class => "remove glyphicon glyphicon-remove glyphicon-white"}
     %div{:id => "filters_collapse", :class => "panel-collapse collapse"}
       %div{:id => "filters_div", :class => "row"}
         = form_tag filter_path, :method => 'GET', :id => 'filters_form', :onsubmit => 'filterMarkers(event)' do
@@ -11,19 +42,19 @@
             %h3{:class => "category_text"}Room Type
             %div{:class => "checkbox"}
               %label
-                = check_box_tag "Classroom", true, params.fetch(:Classroom, true)
+                = check_box_tag "Classroom", true, params.fetch(:Classroom, false)
                 Classroom
             %div{:class => "checkbox"}
               %label
-                = check_box_tag "LectureHall", true, params.fetch(:LectureHall, true)
+                = check_box_tag "LectureHall", true, params.fetch(:LectureHall, false)
                 Lecture Hall
             %div{:class => "checkbox"}
               %label
-                = check_box_tag "Auditorium", true, params.fetch(:Auditorium, true)
+                = check_box_tag "Auditorium", true, params.fetch(:Auditorium, false)
                 Auditorium
             %div{:class => "checkbox"}
               %label
-                = check_box_tag "SeminarRoom", true, params.fetch(:SeminarRoom, true)
+                = check_box_tag "SeminarRoom", true, params.fetch(:SeminarRoom, false)
                 Seminar Room
                 
           %div{:id => "facilities_column", :class => "col-sm-3", :style => "margin-bottom: 40px"}

@@ -14,25 +14,25 @@
             <h3 class="category_text">Room Type</h3>
             <div class="checkbox">
               <label>
-                <%= check_box_tag "Classroom", true, params.fetch(:Classroom, true) %>
+                <%= check_box_tag "Classroom", true, params.fetch(:Classroom, false) %>
                 Classroom
               </label>
             </div>
             <div class="checkbox">
               <label>
-                <%= check_box_tag "LectureHall", true, params.fetch(:LectureHall, true) %>
+                <%= check_box_tag "LectureHall", true, params.fetch(:LectureHall, false) %>
                 Lecture Hall
               </label>
             </div>
             <div class="checkbox">
               <label>
-                <%= check_box_tag "Auditorium", true, params.fetch(:Auditorium, true) %>
+                <%= check_box_tag "Auditorium", true, params.fetch(:Auditorium, false) %>
                 Auditorium
               </label>
             </div>
             <div class="checkbox">
               <label>
-                <%= check_box_tag "SeminarRoom", true, params.fetch(:SeminarRoom, true) %>
+                <%= check_box_tag "SeminarRoom", true, params.fetch(:SeminarRoom, false) %>
                 Seminar Room
               </label>
             </div>
@@ -67,10 +67,10 @@
             <%= number_field_tag "capacityUpper", nil, min: 0, step: 1, class: "form-control", :style => "width: 100px; float: left", onchange: "limit()", value: params.fetch(:capacityUpper, 1000) %>
           </div>
           <div class="col-sm-2">
-            <button class="btn" id="filters-reset" onclick="clear_filters()">Clear</button>
+            <button class="btn btn-default" id="filters-reset" onclick="clear_filters()">Clear</button>
             <br/>
             
-            <button class="btn" id="filters-submit" onclick="details_filter()">Show</button>
+            <button class="btn btn-default" id="filters-submit" onclick="details_filter()">Show</button>
           </div>
           </div>
         <% end %>
