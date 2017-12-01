@@ -29,7 +29,7 @@ button:focus {
 }
 
 #map {
-  height: 700px;
+  height: calc(100vh - 112px);
   width: 100%;
 }
 
@@ -51,4 +51,14 @@ button:focus {
 
 .panel-grout {
   position: relative;
+}
+
+#tooltip {
+  border-radius: 5px;
+  width: 300px;
+  overflow: hidden;
+}
+
+#ttName, #ttCount, #ttCap {
+  text-align: center;
 }
