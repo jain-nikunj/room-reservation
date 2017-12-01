@@ -9,8 +9,11 @@ class BuildingsController < ApplicationController
     ret = []
     Building.all.includes(:room).each do |b|
       rooms = filter_rooms(b.room)
-      if not rooms.empty?
-        ret << ({id: b.id, name: b.name, count: rooms.count, max: rooms.maximum(:capacity)})
+      unless rooms.empty?
+        ret << ({id: b.id, name: b.name, 
+                 count: rooms.count, 
+                 max: rooms.maximum(:capacity)
+        })
       end
     end
     render json: ret 
@@ -47,7 +50,6 @@ class BuildingsController < ApplicationController
   end
   
   def filter_rooms(rooms = Room.all)
-    rooms
     if params[:StudentAccessible]
       rooms = rooms.where("UPPER(facilities) LIKE '%ADA-STUDENT%'")
     end
@@ -58,10 +60,21 @@ class BuildingsController < ApplicationController
       rooms = rooms.where("UPPER(facilities) LIKE '%AV%'")
     end
     
-    rooms = rooms.where("UPPER(misc) NOT LIKE '%CLASSROOM%'") unless params[:Classroom]
-    rooms = rooms.where("UPPER(misc) NOT LIKE '%LECTURE HALL%'") unless params[:LectureHall]
-    rooms = rooms.where("UPPER(misc) NOT LIKE '%AUDITORIUM%'") unless params[:Auditorium]
-    rooms = rooms.where("UPPER(misc) NOT LIKE '%SEMINAR ROOM%'") unless params[:SeminarRoom]
+    unless params[:Classroom]
+      rooms = rooms.where("UPPER(misc) NOT LIKE '%CLASSROOM%'")
+    end
+    
+    unless params[:LectureHall]
+      rooms = rooms.where("UPPER(misc) NOT LIKE '%LECTURE HALL%'")
+    end
+    
+    unless params[:Auditorium]
+      rooms = rooms.where("UPPER(misc) NOT LIKE '%AUDITORIUM%'")
+    end
+    
+    unless params[:SeminarRoom]
+      rooms = rooms.where("UPPER(misc) NOT LIKE '%SEMINAR ROOM%'") 
+    end
     
     if params[:capacityLower]
       rooms = rooms.where("capacity >= ?", params[:capacityLower].to_i)
