@@ -49,9 +49,9 @@
             = number_field_tag "capacityUpper", nil, min: 0, step: 1, class: "form-control", :style => "width: 100px; float: left", onchange: "limit()", value: params.fetch(:capacityUpper, 1000)
             
           %div{:class => "col-sm-2"}
-            %button{:id => "filters-reset", :class => "btn", :onclick => "clear_filters()"}Clear
+            %button{:id => "filters-reset", :class => "btn btn-default", :onclick => "clear_filters()"}Reset
             %br
-            %button{:id => "filters-submit", :class => "btn", :onclick => "filterMarkers(event)"}Show
+            %button{:id => "filters-submit", :class => "btn btn-default", :onclick => "filterMarkers(event)"}Show
 
 #map
 
