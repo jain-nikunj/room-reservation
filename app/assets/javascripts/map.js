@@ -82,11 +82,11 @@ function postMarkers(data) {
   // for each new building, query for geolocation and create a new marker
   length = data.length;
   for (var i = 0; i < length; i++) {
-    addMarker(data[i]['name'], data[i]['id'])
+    addMarker(data[i]['name'], data[i]['id'], data[i]['count'], data[i]['max'])
   }
 }
 
-function addMarker(name, id) {
+function addMarker(name, id, roomCount, maxCap) {
   var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
@@ -96,10 +96,22 @@ function addMarker(name, id) {
         var marker = new google.maps.Marker({
           position: geo,
           map: map,
-          title: name,
           id: id,
         });
         markers.push(marker);
+        var infoWindow = new google.maps.InfoWindow({
+          content: "<div id='tooltip'>" +
+          "<h3 id='ttName'>" + name + "</h3>" +
+          "<p id='ttCount'>Room Count: " + roomCount + "</p>" + 
+          "<p id='ttCap'>Maximum Capacity: " + maxCap + "</p>" +
+          "</div>"
+        });
+        google.maps.event.addListener(marker, 'mouseover', function() {
+          infoWindow.open(map, marker);
+        });
+        google.maps.event.addListener(marker, 'mouseout', function() {
+          infoWindow.close();
+        })
         google.maps.event.addListener(marker, 'click', function() {
           paramsString = getParamsString();
           window.location.href = '/buildings/' + marker.id + paramsString;
