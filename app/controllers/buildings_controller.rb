@@ -24,17 +24,17 @@ class BuildingsController < ApplicationController
   end
   
   def show
-    # if session_helper_user_id == nil
-    #   flash[:alert] = "Please log in."
-    #   redirect_to buildings_path
-    #   return
-    # end
+    if session_helper_user_id == nil
+      flash[:alert] = "Please log in."
+      redirect_to buildings_path
+      return
+    end
     
     @rooms = filter_rooms
     building_id = params[:id] 
-    @building = Building.find_by_id(building_id)
+    building = Building.find_by_id(building_id)
     
-    if @building.blank?
+    if building.blank?
       flash[:notice] = "This building does not exist."
       redirect_to buildings_path
     end
