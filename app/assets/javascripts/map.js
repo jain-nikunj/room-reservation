@@ -10,6 +10,10 @@ function initMap() {
     fullscreenControl: false
   });
   
+  // Disable full screen in Panorama too
+  var panorama = map.getStreetView();
+  panorama.setOptions({fullscreenControl: false});
+  
   // Make sure user won't navigate the map out of the scope of Berkeley.
   var allowedBounds = new google.maps.LatLngBounds(
     new google.maps.LatLng(37.867911, -122.266229), 
