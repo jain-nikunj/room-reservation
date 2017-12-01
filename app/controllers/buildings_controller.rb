@@ -1,5 +1,6 @@
 class BuildingsController < ApplicationController
   helper_method :filter_rooms
+  helper_method :filter_by_capacity
 
   def index
 
@@ -9,12 +10,12 @@ class BuildingsController < ApplicationController
     ret = []
     Building.all.includes(:room).each do |b|
       rooms = filter_rooms(b.room)
-      unless rooms.empty?
-        ret << ({id: b.id, name: b.name, 
-                 count: rooms.count, 
-                 max: rooms.maximum(:capacity)
-        })
-      end
+      next if rooms.empty?
+      ret << ({
+        id: b.id, name: b.name, 
+        count: rooms.count, 
+        max: rooms.maximum(:capacity)
+      })
     end
     render json: ret 
   end
@@ -76,6 +77,10 @@ class BuildingsController < ApplicationController
       rooms = rooms.where("UPPER(misc) NOT LIKE '%SEMINAR ROOM%'") 
     end
     
+    filter_by_capacity(rooms)
+  end
+  
+  def filter_by_capacity(rooms)
     if params[:capacityLower]
       rooms = rooms.where("capacity >= ?", params[:capacityLower].to_i)
     end
@@ -84,5 +89,4 @@ class BuildingsController < ApplicationController
     end
     rooms
   end
-  
 end
