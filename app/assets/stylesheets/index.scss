@@ -29,7 +29,7 @@ button:focus {
 }
 
 #map {
-  height: 700px;
+  height: calc(100vh - 112px);
   width: 100%;
 }
 
