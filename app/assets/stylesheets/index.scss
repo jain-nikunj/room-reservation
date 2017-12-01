@@ -53,6 +53,10 @@ button:focus {
   position: relative;
 }
 
+.gm-style-iw + div {
+  display: none;
+}
+
 #tooltip {
   border-radius: 5px;
   width: 300px;
