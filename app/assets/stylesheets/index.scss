@@ -31,7 +31,7 @@ button:focus {
 }
 
 #map {
-  height: 700px;
+  height: calc(100vh - 112px);
   width: 100%;
 }
 
@@ -52,6 +52,7 @@ button:focus {
   position: relative;
 }
 
+<<<<<<< HEAD
 .tag {
   font-size: 14px;
   padding: .3em .4em .4em;
@@ -75,4 +76,18 @@ button:focus {
 .tag a .glyphicon-white {
   color: #fff;
   margin-bottom: 2px;
+=======
+.gm-style-iw + div {
+  display: none;
+}
+
+#tooltip {
+  border-radius: 5px;
+  width: 300px;
+  overflow: hidden;
+}
+
+#ttName, #ttCount, #ttCap {
+  text-align: center;
+>>>>>>> master
 }

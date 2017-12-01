@@ -10,6 +10,10 @@ function initMap() {
     fullscreenControl: false
   });
   
+  // Disable full screen in Panorama too
+  var panorama = map.getStreetView();
+  panorama.setOptions({fullscreenControl: false});
+  
   // Make sure user won't navigate the map out of the scope of Berkeley.
   var allowedBounds = new google.maps.LatLngBounds(
     new google.maps.LatLng(37.867911, -122.266229), 
@@ -82,30 +86,46 @@ function postMarkers(data) {
   // for each new building, query for geolocation and create a new marker
   length = data.length;
   for (var i = 0; i < length; i++) {
-    addMarker(data[i]['name'], data[i]['id'])
+    addMarker(data[i]['name'], data[i]['id'], data[i]['count'], data[i]['max'])
   }
 }
 
-function addMarker(name, id) {
+function addMarker(name, id, roomCount, maxCap) {
   var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        result = JSON.parse(this.responseText);
-        console.log(name);
-        geo = result['results'][0]['geometry']['location'];
-        var marker = new google.maps.Marker({
-          position: geo,
-          map: map,
-          title: name,
-          id: id,
-        });
-        markers.push(marker);
-        google.maps.event.addListener(marker, 'click', function() {
-          paramsString = getParamsString();
-          window.location.href = '/buildings/' + marker.id + paramsString;
-        });
-      }
-    };
-    xhttp.open("GET", "https://maps.googleapis.com/maps/api/geocode/json?address=" + name + "%20Hall%20Berkeley", true);
-    xhttp.send();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      result = JSON.parse(this.responseText);
+      console.log(name);
+      geo = result['results'][0]['geometry']['location'];
+      var marker = new google.maps.Marker({
+        position: geo,
+        map: map,
+        id: id,
+      });
+      markers.push(marker);
+      addMarkerCallbacks(marker, name, roomCount, maxCap);
+    }
+  };
+  xhttp.open("GET", "https://maps.googleapis.com/maps/api/geocode/json?address=" + name + "%20Hall%20Berkeley", true);
+  xhttp.send();
+}
+
+function addMarkerCallbacks(marker, name, roomCount, maxCap) {
+  var infoWindow = new google.maps.InfoWindow({
+    content: "<div id='tooltip'>" +
+    "<h3 id='ttName'>" + name + "</h3>" +
+    "<p id='ttCount'>Room Count: " + roomCount + "</p>" + 
+    "<p id='ttCap'>Maximum Capacity: " + maxCap + "</p>" +
+    "</div>"
+  });
+  google.maps.event.addListener(marker, 'mouseover', function() {
+    infoWindow.open(map, marker);
+  });
+  google.maps.event.addListener(marker, 'mouseout', function() {
+    infoWindow.close();
+  })
+  google.maps.event.addListener(marker, 'click', function() {
+    paramsString = getParamsString();
+    window.location.href = '/buildings/' + marker.id + paramsString;
+  });
 }
