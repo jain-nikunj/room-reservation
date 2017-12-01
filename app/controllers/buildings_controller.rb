@@ -32,9 +32,9 @@ class BuildingsController < ApplicationController
     
     @rooms = filter_rooms
     building_id = params[:id] 
-    building = Building.find_by_id(building_id)
+    @building = Building.find_by_id(building_id)
     
-    if building.blank?
+    if @building.blank?
       flash[:notice] = "This building does not exist."
       redirect_to buildings_path
     end
