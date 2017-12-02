@@ -6,34 +6,34 @@
           %button{:class => "text-left", :"data-toggle" => "collapse", :"data-target" => "#filters_collapse", :id => "filter_btn"}
             %i{:class => "glyphicon glyphicon-plus"}
             Filter
-        %span{:class => "tag label label-info"}
+        %span{:class => "tag label label-info", :id => "Classroom_tag", :style => "display: none"}
           %span Classroom
           %a
-            %i{:class => "remove glyphicon glyphicon-remove glyphicon-white"}
-        %span{:class => "tag label label-info"}
+            %i{:class => "remove glyphicon glyphicon-remove glyphicon-white", :onclick => "remove_tag('Classroom')"}
+        %span{:class => "tag label label-info", :id => "LectureHall_tag", :style => "display: none"}
           %span Lecture Hall
           %a
-            %i{:class => "remove glyphicon glyphicon-remove glyphicon-white"}
-        %span{:class => "tag label label-info"}
+            %i{:class => "remove glyphicon glyphicon-remove glyphicon-white", :onclick => "remove_tag('LectureHall')"}
+        %span{:class => "tag label label-info", :id => "Auditorium_tag", :style => "display: none"}
           %span Auditorium
           %a
-            %i{:class => "remove glyphicon glyphicon-remove glyphicon-white"}
-        %span{:class => "tag label label-info"}
+            %i{:class => "remove glyphicon glyphicon-remove glyphicon-white", :onclick => "remove_tag('Auditorium')"}
+        %span{:class => "tag label label-info", :id => "SeminarRoom_tag", :style => "display: none"}
           %span Seminar Room
           %a
-            %i{:class => "remove glyphicon glyphicon-remove glyphicon-white"}
-        %span{:class => "tag label label-info"}
+            %i{:class => "remove glyphicon glyphicon-remove glyphicon-white", :onclick => "remove_tag('SeminarRoom')"}
+        %span{:class => "tag label label-info", :id => "StudentAccessible_tag", :style => "display: none"}
           %span ADA-Student Accessible
           %a
-            %i{:class => "remove glyphicon glyphicon-remove glyphicon-white"}
-        %span{:class => "tag label label-info"}
+            %i{:class => "remove glyphicon glyphicon-remove glyphicon-white", :onclick => "remove_tag('StudentAccessible')"}
+        %span{:class => "tag label label-info", :id => "Board_tag", :style => "display: none"}
           %span Board
           %a
-            %i{:class => "remove glyphicon glyphicon-remove glyphicon-white"}
-        %span{:class => "tag label label-info"}
+            %i{:class => "remove glyphicon glyphicon-remove glyphicon-white", :onclick => "remove_tag('Board')"}
+        %span{:class => "tag label label-info", :id => "AV_tag", :style => "display: none"}
           %span AV Devices
           %a
-            %i{:class => "remove glyphicon glyphicon-remove glyphicon-white"}
+            %i{:class => "remove glyphicon glyphicon-remove glyphicon-white", :onclick => "remove_tag('AV')"}
     %div{:id => "filters_collapse", :class => "panel-collapse collapse"}
       %div{:id => "filters_div", :class => "row"}
         = form_tag filter_path, :method => 'GET', :id => 'filters_form', :onsubmit => 'filterMarkers(event)' do
@@ -82,7 +82,7 @@
           %div{:class => "col-sm-2"}
             %button{:id => "filters-reset", :class => "btn btn-default", :onclick => "clear_filters()"}Reset
             %br
-            %button{:id => "filters-submit", :class => "btn btn-default", :onclick => "filterMarkers(event)"}Show
+            %button{:id => "filters-submit", :class => "btn btn-default", :onclick => "filter_update(event)"}Show
 
 #map
 
