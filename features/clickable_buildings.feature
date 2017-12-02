@@ -6,8 +6,8 @@ Feature: display rooms in a specific building
 Background: rooms have been added to database
 
   Given the following buildings exist:
-  | name                   | misc |
-  | Haviland Hall          |      |
+  | name                   | misc | lat | lng |
+  | Haviland Hall          |      |     |     |
 
   And the following rooms exist:
   | number     | capacity   | building_id  | facilities | misc |
