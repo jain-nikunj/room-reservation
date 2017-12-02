@@ -4,7 +4,7 @@
 {<img src="https://travis-ci.org/jain-nikunj/room-reservation-app.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/jain-nikunj/room-reservation-app]
 {Pivotal Tracker}[https://www.pivotaltracker.com/projects/2118215]
 
-#IMPORTANT
+==== IMPORTANT
 The app will not work locally unless you add your specific redirect URL to Google API credentials (for log in) and also add Google Maps API credentials locally. 
 
 Room Reservation
