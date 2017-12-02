@@ -13,50 +13,50 @@
             <span class="tag label label-info" id="Classroom_tag" style="display: none">
               <span>Classroom</span>
               <a>
-                <i class="remove glyphicon glyphicon-remove glyphicon-white" onclick="remove_tag('Classroom')"></i>
+                <i class="remove glyphicon glyphicon-remove glyphicon-white" onclick="details_remove_tag('Classroom')"></i>
               </a>
             </span>
             <span class="tag label label-info" id="LectureHall_tag" style="display: none">
               <span>Lecture Hall</span>
               <a>
-                <i class="remove glyphicon glyphicon-remove glyphicon-white" onclick="remove_tag('LectureHall')"></i>
+                <i class="remove glyphicon glyphicon-remove glyphicon-white" onclick="details_remove_tag('LectureHall')"></i>
               </a>
             </span>
             <span class="tag label label-info" id="Auditorium_tag" style="display: none">
               <span>Auditorium</span>
               <a>
-                <i class="remove glyphicon glyphicon-remove glyphicon-white" onclick="remove_tag('Auditorium')"></i>
+                <i class="remove glyphicon glyphicon-remove glyphicon-white" onclick="details_remove_tag('Auditorium')"></i>
               </a>
             </span>
             <span class="tag label label-info" id="SeminarRoom_tag" style="display: none">
               <span>Seminar Room</span>
               <a>
-                <i class="remove glyphicon glyphicon-remove glyphicon-white" onclick="remove_tag('SeminarRoom')"></i>
+                <i class="remove glyphicon glyphicon-remove glyphicon-white" onclick="details_remove_tag('SeminarRoom')"></i>
               </a>
             </span>
             <span class="tag label label-info" id="StudentAccessible_tag" style="display: none">
               <span>ADA-Student Accessible</span>
               <a>
-                <i class="remove glyphicon glyphicon-remove glyphicon-white" onclick="remove_tag('StudentAccessible')"></i>
+                <i class="remove glyphicon glyphicon-remove glyphicon-white" onclick="details_remove_tag('StudentAccessible')"></i>
               </a>
             </span>
             <span class="tag label label-info" id="Board_tag" style="display: none">
               <span>Board</span>
               <a>
-                <i class="remove glyphicon glyphicon-remove glyphicon-white" onclick="remove_tag('Board')"></i>
+                <i class="remove glyphicon glyphicon-remove glyphicon-white" onclick="details_remove_tag('Board')"></i>
               </a>
             </span>
             <span class="tag label label-info" id="AV_tag" style="display: none">
               <span>AV Devices</span>
               <a>
-                <i class="remove glyphicon glyphicon-remove glyphicon-white" onclick="remove_tag('AV')"></i>
+                <i class="remove glyphicon glyphicon-remove glyphicon-white" onclick="details_remove_tag('AV')"></i>
               </a>
             </span>
           </div>
         </div>
         <div class="panel-collapse collapse" id="filters_collapse">
           <div class="row" id="filters_div">
-            <%= form_tag filter_path, :method => 'GET', :id => 'filters_form', :onsubmit => 'filter_update(event)' do %>
+            <%= form_tag filter_path, :method => 'GET', :id => 'filters_form', :onsubmit => 'filterMarkers(event)' do %>
               <div class="col-sm-1"></div>
               <div class="col-sm-3" id="roomtype_column">
                 <h3 class="category_text">Room Type</h3>
@@ -115,9 +115,9 @@
                 <%= number_field_tag "capacityUpper", nil, min: 0, step: 1, class: "form-control", :style => "width: 100px; float: left", onchange: "limit()", value: params.fetch(:capacityUpper, 1000) %>
               </div>
               <div class="col-sm-2">
-                <button class="btn btn-default" id="filters-reset" onclick="clear_filters()">Reset</button>
+                <button class="btn btn-default" id="filters-reset" onclick="reset_filters()">Reset</button>
                 <br/>
-                <button class="btn btn-default" id="filters-submit" onclick="filter_update(event)">Show</button>
+                <button class="btn btn-default" id="filters-submit" onclick="details_filter()">Show</button>
               </div>
             <% end %>
           </div>

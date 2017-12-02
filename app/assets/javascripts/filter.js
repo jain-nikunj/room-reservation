@@ -1,9 +1,11 @@
+var initialLoad = true;
+
 function details_filter() {
     var paramsString = getParamsString();
     window.location.href = window.location.href.split('?')[0] + paramsString, true;
 }
 
-function clear_filters() {
+function reset_filters() {
     var roomType = document.getElementById('roomtype_column');
     var inputs = roomType.getElementsByTagName('input');
     for (var i = 0; i < inputs.length; i++) {
@@ -29,7 +31,8 @@ function limit() {
 	capacityUpper.value = Math.max(capacityLower.value, capacityUpper.value);
 }
 
-function filter_update(e) {
+// Update tags based on checkboxes.
+function update_tags() {
     var classroom = document.getElementById("Classroom").checked;
     var lectureHall = document.getElementById("LectureHall").checked;
     var auditorium = document.getElementById("Auditorium").checked;
@@ -44,14 +47,38 @@ function filter_update(e) {
     studentAccessible ? $('#StudentAccessible_tag').show() : $('#StudentAccessible_tag').hide();
     board ? $('#Board_tag').show() : $('#Board_tag').hide();
     AV ? $('#AV_tag').show() : $('#AV_tag').hide();
-    
+}
+
+// When click 'show', update tags and the update the map.
+function filter_update(e) {
+    update_tags();
     filterMarkers(e);
 }
 
 function remove_tag(tag_name) {
     checkbox = document.getElementById(tag_name);
     checkbox.checked = false;
-    updateMarkers()
+    updateMarkers();
     tag = document.getElementById(tag_name + "_tag");
-    $(tag).hide()
+    $(tag).hide();
+}
+
+function details_remove_tag(tag_name) {
+    remove_tag(tag_name);
+    details_filter();
+    updateMarkers()
+}
+
+$(document).ready(function () {
+    update_tags();
+});
+
+window.onload = function () {
+    if (localStorage.getItem("hasCodeRunBefore") === null) {
+        document.getElementById("Classroom").checked = true;
+        document.getElementById("LectureHall").checked = true;
+        document.getElementById("Auditorium").checked = true;
+        document.getElementById("SeminarRoom").checked = true;
+        localStorage.setItem("hasCodeRunBefore", true);
+    }
 }
