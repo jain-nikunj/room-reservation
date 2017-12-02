@@ -36,7 +36,7 @@
             %i{:class => "remove glyphicon glyphicon-remove glyphicon-white", :onclick => "remove_tag('AV')"}
     %div{:id => "filters_collapse", :class => "panel-collapse collapse"}
       %div{:id => "filters_div", :class => "row"}
-        = form_tag filter_path, :method => 'GET', :id => 'filters_form', :onsubmit => 'filterMarkers(event)' do
+        = form_tag filter_path, :method => 'GET', :id => 'filters_form', :onsubmit => 'filter_update(event)' do
           %div{:class => "col-sm-1"}
           %div{:id => "roomtype_column", :class => "col-sm-3"}
             %h3{:class => "category_text"}Room Type
