@@ -14,6 +14,8 @@ csv.each do |row|
   t = Building.new
   t.name = row['Building']
   t.misc = row['Misc']
+  t.lng = row['Longitude']
+  t.lat = row['Latitude']
   t.save
 end
 
