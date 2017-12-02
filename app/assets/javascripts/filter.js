@@ -40,6 +40,8 @@ function update_tags() {
     var studentAccessible = document.getElementById("StudentAccessible").checked;
     var board = document.getElementById("Board").checked;
     var AV = document.getElementById("AV").checked;
+    console.log(classroom);
+    console.log($('#Classroom_tag'))
     classroom ? $('#Classroom_tag').show() : $('#Classroom_tag').hide();
     lectureHall ? $('#LectureHall_tag').show() : $('#LectureHall_tag').hide();
     auditorium ? $('#Auditorium_tag').show() : $('#Auditorium_tag').hide();
@@ -69,16 +71,15 @@ function details_remove_tag(tag_name) {
     updateMarkers()
 }
 
-$(document).ready(function () {
-    update_tags();
-});
-
 window.onload = function () {
-    if (localStorage.getItem("hasCodeRunBefore") === null) {
+    var url = window.location.href;
+    if(url.indexOf('?') == -1) {
         document.getElementById("Classroom").checked = true;
         document.getElementById("LectureHall").checked = true;
         document.getElementById("Auditorium").checked = true;
         document.getElementById("SeminarRoom").checked = true;
-        localStorage.setItem("hasCodeRunBefore", true);
+        updateMarkers()
     }
+    console.log(url)
+    update_tags();
 }
