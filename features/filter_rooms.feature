@@ -7,10 +7,10 @@ Feature: Filter rooms with criteria using checkboxes
 Background: rooms have been added to database
 
   Given the following buildings exist:
-  | name                   | misc |
-  | Test Building 1        |      |
-  | Test Building 2        |      |
-  | Test Building 3        |      |
+  | name                   | misc | lat | lng |
+  | Test Building 1        |      |     |     |
+  | Test Building 2        |      |     |     |
+  | Test Building 3        |      |     |     |
 
   And the following rooms exist:
   | number     | capacity   | building_id  | facilities                        | misc                    |

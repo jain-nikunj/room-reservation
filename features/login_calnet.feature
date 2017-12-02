@@ -7,8 +7,8 @@ Feature: Login credentials via Google Auth and CalNet
 Background: rooms have been added to database
 
   Given the following buildings exist:
-  | name                   | misc |
-  | Haas Faculty Wing      |      |
+  | name                   | misc | lat | lng |
+  | Haas Faculty Wing      |      |     |     |
 
   And the following rooms exist:
   | number     | capacity   | building_id  | facilities                           | misc                    |

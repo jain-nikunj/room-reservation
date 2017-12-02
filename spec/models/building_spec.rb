@@ -14,12 +14,8 @@ RSpec.describe Building, type: :model do
     
     it 'query coords if it does not exist in database' do
       fake_building = Building.new
-      lat = 123.456
-      lng = 789.101
       allow(fake_building).to receive(:lat).and_return(nil)
-      payload = {status: 'OK', results: [geometry: {location: {lat: lat, lng: lng}}]}
-      res = double(:body => payload.to_json)
-      expect_any_instance_of(Net::HTTP).to receive(:request).and_return(res)
+      expect(fake_building).to receive(:query_gmap)
       fake_building.geo
     end
     
