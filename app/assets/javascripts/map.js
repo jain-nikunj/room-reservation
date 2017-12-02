@@ -2,6 +2,8 @@ var map;
 var markers = [];
 
 function initMap() {
+  var minZoomLevel = 15;
+  var maxZoomLevel = 18;
   var mapCenter = {lat: 37.8719402, lng: -122.2622687};
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 16,
@@ -29,6 +31,12 @@ function initMap() {
     // not valid anymore => return to last valid position
     map.panTo(lastValidCenter);
   });
+  
+  // Limit the zoom level
+   google.maps.event.addListener(map, 'zoom_changed', function() {
+     if (map.getZoom() < minZoomLevel) map.setZoom(minZoomLevel);
+     if (map.getZoom() > maxZoomLevel) map.setZoom(maxZoomLevel);
+   });
   
   updateMarkers();
 }
