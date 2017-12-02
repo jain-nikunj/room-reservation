@@ -86,28 +86,20 @@ function postMarkers(data) {
   // for each new building, query for geolocation and create a new marker
   length = data.length;
   for (var i = 0; i < length; i++) {
-    addMarker(data[i]['name'], data[i]['id'], data[i]['count'], data[i]['max'])
+    addMarker(data[i])
   }
 }
 
-function addMarker(name, id, roomCount, maxCap) {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      result = JSON.parse(this.responseText);
-      console.log(name);
-      geo = result['results'][0]['geometry']['location'];
-      var marker = new google.maps.Marker({
-        position: geo,
-        map: map,
-        id: id,
-      });
-      markers.push(marker);
-      addMarkerCallbacks(marker, name, roomCount, maxCap);
-    }
-  };
-  xhttp.open("GET", "https://maps.googleapis.com/maps/api/geocode/json?address=" + name + "%20Hall%20Berkeley", true);
-  xhttp.send();
+function addMarker(data) {
+  if (data['geo'] === "Error")
+    return;
+  var marker = new google.maps.Marker({
+    position: data['geo'],
+    map: map,
+    id: data['id'],
+  });
+  markers.push(marker);
+  addMarkerCallbacks(marker, data['name'], data['roomCount'], data['max']);
 }
 
 function addMarkerCallbacks(marker, name, roomCount, maxCap) {

@@ -12,9 +12,10 @@ class BuildingsController < ApplicationController
       rooms = filter_rooms(b.room)
       next if rooms.empty?
       ret << ({
-        id: b.id, name: b.name, 
+        id: b.id, name: b.name,
+        geo: b.geo, #{lat: b.lat, lng: b.lng}
         count: rooms.count, 
-        max: rooms.maximum(:capacity)
+        max: rooms.maximum(:capacity),
       })
     end
     render json: ret 
