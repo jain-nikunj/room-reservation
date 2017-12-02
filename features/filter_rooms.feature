@@ -36,7 +36,7 @@ Scenario: show filters on homepage
   And I should see "Auditorium"
   And I should see "Seminar Room"
   And I should see a button "Show"
-  And I should see a button "Clear"
+  And I should see a button "Reset"
     
 Scenario: limit by Student Accessible
   When I press "Filter"

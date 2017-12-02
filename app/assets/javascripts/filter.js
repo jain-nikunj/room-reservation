@@ -1,5 +1,3 @@
-var initialLoad = true;
-
 function details_filter() {
     var paramsString = getParamsString();
     window.location.href = window.location.href.split('?')[0] + paramsString, true;
@@ -17,6 +15,9 @@ function reset_filters() {
     for (var i = 0; i < inputs.length; i++) {
         inputs[i].checked = false;
     }
+    
+    document.getElementById('capacityLower').value = 0;
+    document.getElementById('capacityUpper').value = 1000;
     
     document.getElementById('filters-submit').click();
 }
@@ -40,8 +41,6 @@ function update_tags() {
     var studentAccessible = document.getElementById("StudentAccessible").checked;
     var board = document.getElementById("Board").checked;
     var AV = document.getElementById("AV").checked;
-    console.log(classroom);
-    console.log($('#Classroom_tag'))
     classroom ? $('#Classroom_tag').show() : $('#Classroom_tag').hide();
     lectureHall ? $('#LectureHall_tag').show() : $('#LectureHall_tag').hide();
     auditorium ? $('#Auditorium_tag').show() : $('#Auditorium_tag').hide();
@@ -80,6 +79,5 @@ window.onload = function () {
         document.getElementById("SeminarRoom").checked = true;
         updateMarkers()
     }
-    console.log(url)
     update_tags();
 }
