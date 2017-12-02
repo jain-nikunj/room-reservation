@@ -99,7 +99,7 @@ function addMarker(data) {
     id: data['id'],
   });
   markers.push(marker);
-  addMarkerCallbacks(marker, data['name'], data['roomCount'], data['max']);
+  addMarkerCallbacks(marker, data['name'], data['count'], data['max']);
 }
 
 function addMarkerCallbacks(marker, name, roomCount, maxCap) {
