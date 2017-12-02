@@ -18,11 +18,14 @@ Background: rooms have been added to database
   And  I am on the RoomReservation home page
   And  I am not logged in    
 
-@wip
 Scenario: Access needed when clicking buildings on the homepage map when not logged in
     When I click on building "Haas Faculty Wing"
     Then I should see the homepage with "Please log in."
     And I should not see room "F269"
+    
+Scenario: Login redirects to homepage
+    Given I am logged in as "john.doe@berkeley.edu", "John Doe"
+    Then I should be on the RoomReservation home page
 
 @wip
 Scenario: Access not needed when toggling options on the filter bar without filtering without logged in
