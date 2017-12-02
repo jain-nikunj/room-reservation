@@ -81,3 +81,7 @@ window.onload = function () {
     }
     update_tags();
 }
+
+$(document).on('turbolinks:load', function() {
+    update_tags();
+});
