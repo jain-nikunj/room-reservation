@@ -11,19 +11,19 @@ class Building < ActiveRecord::Base
 
     query_gmap name
   end
-  
+
   private
-  
+
   def query_gmap(name)
     url = URI.parse("http://maps.googleapis.com/maps/api/geocode/json?\
                      key=#{ENV['GOOGLE_API_KEY']}&
                      address=${name}%20Hall%20Berkeley")
     req = Net::HTTP::Get.new(url.to_s)
 
-    success = false
+    success = nil
     data = nil
 
-    (1..5).each do
+    3.times.each do
       res = Net::HTTP.start(url.host, url.port) do |http|
         http.request(req)
       end
@@ -33,11 +33,11 @@ class Building < ActiveRecord::Base
         break
       end
     end
-    
+
     if success
       data['results'][0]['geometry']['location']
     else
-      "Error"
+      'Error'
     end
   end
 end
