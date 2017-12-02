@@ -53,6 +53,7 @@ function update_tags() {
 // When click 'show', update tags and the update the map.
 function filter_update(e) {
     update_tags();
+    $('.collapse').collapse("hide")
     filterMarkers(e);
 }
 
