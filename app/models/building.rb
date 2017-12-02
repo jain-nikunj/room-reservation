@@ -9,12 +9,12 @@ class Building < ActiveRecord::Base
       return { lat: lat, lng: lng }
     end
 
-    query_gmap name
+    query_gmap
   end
 
   private
 
-  def query_gmap(name)
+  def query_gmap
     url = URI.parse("http://maps.googleapis.com/maps/api/geocode/json?\
                      key=#{ENV['GOOGLE_API_KEY']}&
                      address=${name}%20Hall%20Berkeley")
