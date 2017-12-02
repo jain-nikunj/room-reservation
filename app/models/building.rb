@@ -9,22 +9,6 @@ class Building < ActiveRecord::Base
       return { lat: lat, lng: lng }
     end
 
-    url = URI.parse("http://maps.googleapis.com/maps/api/geocode/json?\
-                     key=#{ENV['GOOGLE_API_KEY']}&
-                     address=${name}%20Hall%20Berkeley")
-    req = Net::HTTP::Get.new(url.to_s)
-
-    (1..5).each do
-      res = Net::HTTP.start(url.host, url.port) do |http|
-        http.request(req)
-      end
-      data = JSON.parse res.body
-      if data['status'] == 'OK'
-        success = true
-        break
-      end
-    end
-
     query_gmap name
   end
   
