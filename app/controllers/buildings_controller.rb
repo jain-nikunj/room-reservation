@@ -1,6 +1,7 @@
 class BuildingsController < ApplicationController
   helper_method :filter_rooms
   helper_method :filter_by_capacity
+  helper_method :filter_by_roomtype
 
   def index
 
