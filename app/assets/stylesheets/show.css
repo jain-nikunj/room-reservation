@@ -12,17 +12,26 @@ body {
 .col-xs-12 {
   background-color: #fff;
 }
+
 .active {
   font-weight: bold;
 }
+.features {
+  margin-left: 25% !important;
+}
+
 #sidebar {
   height: 100%;
   padding-right: 0;
   padding-top: 0px;
+  overflow-y: auto !important;
 }
 #sidebar .nav {
+  height: 50%;
+  overflow-y: scroll !important;
   width: 95%;
 }
+
 #sidebar li {
   border:0 #f2f2f2 solid;
   border-bottom-width:1px;
