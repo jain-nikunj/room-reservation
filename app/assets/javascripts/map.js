@@ -1,5 +1,6 @@
 var map;
 var markers = [];
+var lastValidCenter
 
 function initMap() {
   var mapCenter = {lat: 37.8719402, lng: -122.2622687};
@@ -14,12 +15,24 @@ function initMap() {
   var panorama = map.getStreetView();
   panorama.setOptions({fullscreenControl: false});
   
+  
+  
+  initMapLimits();
+
+  updateMarkers();
+}
+
+function initMapLimits() {
+  var minZoomLevel = 15;
+  var maxZoomLevel = 18;
+  
   // Make sure user won't navigate the map out of the scope of Berkeley.
   var allowedBounds = new google.maps.LatLngBounds(
     new google.maps.LatLng(37.867911, -122.266229), 
     new google.maps.LatLng(37.875455, -122.253570)
   );
-  var lastValidCenter = map.getCenter();
+  
+  lastValidCenter = map.getCenter();
   google.maps.event.addListener(map, 'center_changed', function() {
     if (allowedBounds.contains(map.getCenter())) {
       // still within valid bounds, so save the last valid position
@@ -30,7 +43,11 @@ function initMap() {
     map.panTo(lastValidCenter);
   });
   
-  updateMarkers();
+  // Limit the zoom level
+  google.maps.event.addListener(map, 'zoom_changed', function() {
+   if (map.getZoom() < minZoomLevel) map.setZoom(minZoomLevel);
+   if (map.getZoom() > maxZoomLevel) map.setZoom(maxZoomLevel);
+  });
 }
 
 // Get the parameter string based on the selected filters.
@@ -42,6 +59,7 @@ function getParamsString() {
   var lectureHall = document.getElementById("LectureHall").checked;
   var auditorium = document.getElementById("Auditorium").checked;
   var seminarRoom = document.getElementById("SeminarRoom").checked;
+  var otherRooms = document.getElementById("OtherRooms").checked;
   var capacityLower = document.getElementById("capacityLower").value;
   var capacityUpper = document.getElementById("capacityUpper").value;
   var paramsString = "?utf8=✓";
@@ -50,8 +68,9 @@ function getParamsString() {
   paramsString += AV ? "&AV=true" : "";
   paramsString += classroom ? "&Classroom=true" : "";
   paramsString += lectureHall ? "&LectureHall=true" : "";
-  paramsString += seminarRoom ? "&SeminarRoom=true" : "";
   paramsString += auditorium ? "&Auditorium=true" : "";
+  paramsString += seminarRoom ? "&SeminarRoom=true" : "";
+  paramsString += otherRooms ? "&OtherRooms=true" : "";
   paramsString += capacityLower ? "&capacityLower=" + capacityLower : "";
   paramsString += capacityUpper ? "&capacityUpper=" + capacityUpper : "";
   return paramsString;
@@ -64,7 +83,7 @@ function filterMarkers(e) {
 
 function updateMarkers() {
   var paramsString = getParamsString();
-  
+
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
