@@ -1,6 +1,10 @@
 body {
   padding-top: 51px;  
 }
+
+html {
+  height: 100%;
+}
 .text-center {
   padding-top: 20px;
 }
@@ -12,52 +16,40 @@ body {
 .col-xs-12 {
   background-color: #fff;
 }
+
 .active {
   font-weight: bold;
 }
+.features {
+  margin-left: 25% !important;
+}
+
 #sidebar {
-  height: 100%;
-  padding-right: 0;
+  position: absolute;
+  height: 83.5%;
+  overflow-y: scroll;
   padding-top: 0px;
+  padding-right: 0px;
+  border-right-style: double;
+  border-right-color: black;
+  background-color: #eee;
 }
 #sidebar .nav {
-  width: 95%;
+  height: 50%;
+  width: 100%;
 }
+
 #sidebar li {
   border:0 #f2f2f2 solid;
   border-bottom-width:1px;
 }
-
-/* collapsed sidebar styles */
-@media screen and (max-width: 767px) {
-  .row-offcanvas {
-    position: relative;
-    -webkit-transition: all 0.25s ease-out;
-    -moz-transition: all 0.25s ease-out;
-    transition: all 0.25s ease-out;
-  }
-  .row-offcanvas-right
-  .sidebar-offcanvas {
-    right: -41.6%;
-  }
-
-  .row-offcanvas-left
-  .sidebar-offcanvas {
-    left: -41.6%;
-  }
-  .row-offcanvas-right.active {
-    right: 41.6%;
-  }
-  .row-offcanvas-left.active {
-    left: 41.6%;
-  }
-  .sidebar-offcanvas {
-    position: absolute;
-    top: 0;
-    width: 41.6%;
-  }
-  #sidebar {
-    padding-top:0;
-  }
+h2 {
+  margin-left: 25%;
+  font-family: courier !important;
+  font-size: 50px !important;
 }
-
+.tab-content {
+  padding-left: 50px;
+  font-family: consolas !important;
+  font-size: 18px !important;
+}

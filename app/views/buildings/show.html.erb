@@ -96,7 +96,13 @@
                   <h2> <%=@building.name %> <%=room.number %> </h2>
                   <p>Capacity: <%=room.capacity %></p>
                   <p>Room Type: <%=room.misc %></p>
-                  <p>Features: <%=room.facilities %></p>
+                  <p>Features: 
+                      <ul class='features'>
+                        <%room.facilities.split(',').each do |item| %>
+                          <li> <%=item %></li>
+                        <% end %>
+                      </ul>
+                  </p>
                 </div>
         <% end %>
 
