@@ -2,6 +2,8 @@ var map;
 var markers = [];
 
 function initMap() {
+  var minZoomLevel = 15;
+  var maxZoomLevel = 18;
   var mapCenter = {lat: 37.8719402, lng: -122.2622687};
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 16,
@@ -30,6 +32,12 @@ function initMap() {
     map.panTo(lastValidCenter);
   });
   
+  // Limit the zoom level
+   google.maps.event.addListener(map, 'zoom_changed', function() {
+     if (map.getZoom() < minZoomLevel) map.setZoom(minZoomLevel);
+     if (map.getZoom() > maxZoomLevel) map.setZoom(maxZoomLevel);
+   });
+  
   updateMarkers();
 }
 
@@ -42,6 +50,7 @@ function getParamsString() {
   var lectureHall = document.getElementById("LectureHall").checked;
   var auditorium = document.getElementById("Auditorium").checked;
   var seminarRoom = document.getElementById("SeminarRoom").checked;
+  var otherRooms = document.getElementById("OtherRooms").checked;
   var capacityLower = document.getElementById("capacityLower").value;
   var capacityUpper = document.getElementById("capacityUpper").value;
   var paramsString = "?utf8=✓";
@@ -50,8 +59,9 @@ function getParamsString() {
   paramsString += AV ? "&AV=true" : "";
   paramsString += classroom ? "&Classroom=true" : "";
   paramsString += lectureHall ? "&LectureHall=true" : "";
-  paramsString += seminarRoom ? "&SeminarRoom=true" : "";
   paramsString += auditorium ? "&Auditorium=true" : "";
+  paramsString += seminarRoom ? "&SeminarRoom=true" : "";
+  paramsString += otherRooms ? "&OtherRooms=true" : "";
   paramsString += capacityLower ? "&capacityLower=" + capacityLower : "";
   paramsString += capacityUpper ? "&capacityUpper=" + capacityUpper : "";
   return paramsString;
@@ -64,7 +74,7 @@ function filterMarkers(e) {
 
 function updateMarkers() {
   var paramsString = getParamsString();
-  
+
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {

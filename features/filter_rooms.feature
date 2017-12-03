@@ -19,6 +19,10 @@ Background: rooms have been added to database
   | F110       | 50         | 3            | AV-Connection-Aux                 | Lecture Hall            |  
 
   And  I am on the RoomReservation home page
+  And I check "Classroom"
+  And I check "Lecture Hall"
+  And I check "Auditorium"
+  And I check "Seminar Room"
   
 Scenario: show filters as three groups
   When I press "Filter"
@@ -36,7 +40,7 @@ Scenario: show filters on homepage
   And I should see "Auditorium"
   And I should see "Seminar Room"
   And I should see a button "Show"
-  And I should see a button "Clear"
+  And I should see a button "Reset"
     
 Scenario: limit by Student Accessible
   When I press "Filter"
@@ -47,6 +51,7 @@ Scenario: limit by Student Accessible
 
 Scenario: limit by Board
   When I press "Filter"
+  And I uncheck "ADA-Student Accessible"
   And I check "Board"
   And I press "Show"
   Then I should see "Test Building 2"
