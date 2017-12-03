@@ -1,9 +1,8 @@
 var map;
 var markers = [];
+var lastValidCenter
 
 function initMap() {
-  var minZoomLevel = 15;
-  var maxZoomLevel = 18;
   var mapCenter = {lat: 37.8719402, lng: -122.2622687};
   map = new google.maps.Map(document.getElementById('map'), {
     zoom: 16,
@@ -16,12 +15,24 @@ function initMap() {
   var panorama = map.getStreetView();
   panorama.setOptions({fullscreenControl: false});
   
+  
+  
+  initMapLimits();
+
+  updateMarkers();
+}
+
+function initMapLimits() {
+  var minZoomLevel = 15;
+  var maxZoomLevel = 18;
+  
   // Make sure user won't navigate the map out of the scope of Berkeley.
   var allowedBounds = new google.maps.LatLngBounds(
     new google.maps.LatLng(37.867911, -122.266229), 
     new google.maps.LatLng(37.875455, -122.253570)
   );
-  var lastValidCenter = map.getCenter();
+  
+  lastValidCenter = map.getCenter();
   google.maps.event.addListener(map, 'center_changed', function() {
     if (allowedBounds.contains(map.getCenter())) {
       // still within valid bounds, so save the last valid position
@@ -33,12 +44,10 @@ function initMap() {
   });
   
   // Limit the zoom level
-   google.maps.event.addListener(map, 'zoom_changed', function() {
-     if (map.getZoom() < minZoomLevel) map.setZoom(minZoomLevel);
-     if (map.getZoom() > maxZoomLevel) map.setZoom(maxZoomLevel);
-   });
-  
-  updateMarkers();
+  google.maps.event.addListener(map, 'zoom_changed', function() {
+   if (map.getZoom() < minZoomLevel) map.setZoom(minZoomLevel);
+   if (map.getZoom() > maxZoomLevel) map.setZoom(maxZoomLevel);
+  });
 }
 
 // Get the parameter string based on the selected filters.

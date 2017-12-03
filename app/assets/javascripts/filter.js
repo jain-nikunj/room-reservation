@@ -50,6 +50,21 @@ function update_tags() {
     studentAccessible ? $('#StudentAccessible_tag').show() : $('#StudentAccessible_tag').hide();
     board ? $('#Board_tag').show() : $('#Board_tag').hide();
     AV ? $('#AV_tag').show() : $('#AV_tag').hide();
+    if (studentAccessible) {
+        $('#StudentAccessible_tag').show();
+    } else {
+        $('#StudentAccessible_tag').hide();
+    }
+    if (board) {
+        $('#Board_tag').show();
+    } else {
+        $('#Board_tag').hide();
+    }
+    if (AV) {
+        $('#AV_tag').show();
+    } else {
+        $('#AV_tag').hide();
+    }
 }
 
 // When click 'show', update tags and the update the map.
