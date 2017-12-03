@@ -50,6 +50,7 @@ function getParamsString() {
   var lectureHall = document.getElementById("LectureHall").checked;
   var auditorium = document.getElementById("Auditorium").checked;
   var seminarRoom = document.getElementById("SeminarRoom").checked;
+  var otherRooms = document.getElementById("OtherRooms").checked;
   var capacityLower = document.getElementById("capacityLower").value;
   var capacityUpper = document.getElementById("capacityUpper").value;
   var paramsString = "?utf8=✓";
@@ -58,8 +59,9 @@ function getParamsString() {
   paramsString += AV ? "&AV=true" : "";
   paramsString += classroom ? "&Classroom=true" : "";
   paramsString += lectureHall ? "&LectureHall=true" : "";
-  paramsString += seminarRoom ? "&SeminarRoom=true" : "";
   paramsString += auditorium ? "&Auditorium=true" : "";
+  paramsString += seminarRoom ? "&SeminarRoom=true" : "";
+  paramsString += otherRooms ? "&OtherRooms=true" : "";
   paramsString += capacityLower ? "&capacityLower=" + capacityLower : "";
   paramsString += capacityUpper ? "&capacityUpper=" + capacityUpper : "";
   return paramsString;

@@ -22,6 +22,10 @@
           %span Seminar Room
           %a
             %i{:class => "remove glyphicon glyphicon-remove glyphicon-white", :onclick => "remove_tag('SeminarRoom')"}
+        %span{:class => "tag label label-info", :id => "OtherRooms_tag", :style => "display: none"}
+          %span Other Rooms
+          %a
+            %i{:class => "remove glyphicon glyphicon-remove glyphicon-white", :onclick => "remove_tag('OtherRooms')"}
         %span{:class => "tag label label-info", :id => "StudentAccessible_tag", :style => "display: none"}
           %span ADA-Student Accessible
           %a
@@ -56,6 +60,10 @@
               %label
                 = check_box_tag "SeminarRoom", true, params.fetch(:SeminarRoom, false)
                 Seminar Room
+            %div{:class => "checkbox"}
+              %label
+                = check_box_tag "OtherRooms", true, params.fetch(:OtherRooms, false)
+                Other Rooms
                 
           %div{:id => "facilities_column", :class => "col-sm-3", :style => "margin-bottom: 40px"}
             %h3{:class => "category_text"}Features

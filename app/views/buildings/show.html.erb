@@ -34,6 +34,12 @@
                 <i class="remove glyphicon glyphicon-remove glyphicon-white" onclick="details_remove_tag('SeminarRoom')"></i>
               </a>
             </span>
+            <span class="tag label label-info" id="OtherRooms_tag" style="display: none">
+              <span>Other Rooms</span>
+              <a>
+                <i class="remove glyphicon glyphicon-remove glyphicon-white" onclick="details_remove_tag('OtherRooms')"></i>
+              </a>
+            </span>
             <span class="tag label label-info" id="StudentAccessible_tag" style="display: none">
               <span>ADA-Student Accessible</span>
               <a>
@@ -82,6 +88,12 @@
                   <label>
                     <%= check_box_tag "SeminarRoom", true, params.fetch(:SeminarRoom, false) %>
                     Seminar Room
+                  </label>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <%= check_box_tag "OtherRooms", true, params.fetch(:OtherRooms, false) %>
+                    Other Rooms
                   </label>
                 </div>
               </div>

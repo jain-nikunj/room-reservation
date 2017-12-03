@@ -38,6 +38,7 @@ function update_tags() {
     var lectureHall = document.getElementById("LectureHall").checked;
     var auditorium = document.getElementById("Auditorium").checked;
     var seminarRoom = document.getElementById("SeminarRoom").checked;
+    var otherRooms = document.getElementById("OtherRooms").checked;
     var studentAccessible = document.getElementById("StudentAccessible").checked;
     var board = document.getElementById("Board").checked;
     var AV = document.getElementById("AV").checked;
@@ -45,6 +46,7 @@ function update_tags() {
     lectureHall ? $('#LectureHall_tag').show() : $('#LectureHall_tag').hide();
     auditorium ? $('#Auditorium_tag').show() : $('#Auditorium_tag').hide();
     seminarRoom ? $('#SeminarRoom_tag').show() : $('#SeminarRoom_tag').hide();
+    otherRooms ? $('#OtherRooms_tag').show() : $('#OtherRooms_tag').hide();
     studentAccessible ? $('#StudentAccessible_tag').show() : $('#StudentAccessible_tag').hide();
     board ? $('#Board_tag').show() : $('#Board_tag').hide();
     AV ? $('#AV_tag').show() : $('#AV_tag').hide();
@@ -78,6 +80,7 @@ window.onload = function () {
         document.getElementById("LectureHall").checked = true;
         document.getElementById("Auditorium").checked = true;
         document.getElementById("SeminarRoom").checked = true;
+        document.getElementById("OtherRooms").checked = true;
         updateMarkers()
     }
     update_tags();
