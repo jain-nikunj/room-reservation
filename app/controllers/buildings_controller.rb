@@ -62,6 +62,12 @@ class BuildingsController < ApplicationController
       rooms = rooms.where("UPPER(facilities) LIKE '%AV%'")
     end
     
+    rooms = filter_by_roomtype(rooms)
+    
+    filter_by_capacity(rooms)
+  end
+  
+  def filter_by_roomtype(rooms)
     unless params[:Classroom]
       rooms = rooms.where("UPPER(misc) NOT LIKE '%CLASSROOM%'")
     end
@@ -79,13 +85,10 @@ class BuildingsController < ApplicationController
     end
     
     unless params[:OtherRooms]
-      rooms = rooms.where("UPPER(misc) LIKE '%CLASSROOM%'
-        OR UPPER(misc) LIKE '%LECTURE HALL%'
-        OR UPPER(misc) LIKE '%AUDITORIUM%'
-        OR UPPER(misc) LIKE '%SEMINAR ROOM%'")
+      rooms = rooms.where("UPPER(misc) LIKE '%CLASSROOM%' OR UPPER(misc) LIKE '%LECTURE HALL%'
+        OR UPPER(misc) LIKE '%AUDITORIUM%' OR UPPER(misc) LIKE '%SEMINAR ROOM%'")
     end
-    
-    filter_by_capacity(rooms)
+    rooms
   end
   
   def filter_by_capacity(rooms)

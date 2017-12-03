@@ -34,37 +34,30 @@ function limit() {
 
 // Update tags based on checkboxes.
 function update_tags() {
+    update_room_tags();
+    update_feature_tags();
+}
+
+function update_room_tags() {
     var classroom = document.getElementById("Classroom").checked;
     var lectureHall = document.getElementById("LectureHall").checked;
     var auditorium = document.getElementById("Auditorium").checked;
     var seminarRoom = document.getElementById("SeminarRoom").checked;
     var otherRooms = document.getElementById("OtherRooms").checked;
-    var studentAccessible = document.getElementById("StudentAccessible").checked;
-    var board = document.getElementById("Board").checked;
-    var AV = document.getElementById("AV").checked;
     classroom ? $('#Classroom_tag').show() : $('#Classroom_tag').hide();
     lectureHall ? $('#LectureHall_tag').show() : $('#LectureHall_tag').hide();
     auditorium ? $('#Auditorium_tag').show() : $('#Auditorium_tag').hide();
     seminarRoom ? $('#SeminarRoom_tag').show() : $('#SeminarRoom_tag').hide();
     otherRooms ? $('#OtherRooms_tag').show() : $('#OtherRooms_tag').hide();
+}
+
+function update_feature_tags() {
+    var studentAccessible = document.getElementById("StudentAccessible").checked;
+    var board = document.getElementById("Board").checked;
+    var AV = document.getElementById("AV").checked;
     studentAccessible ? $('#StudentAccessible_tag').show() : $('#StudentAccessible_tag').hide();
     board ? $('#Board_tag').show() : $('#Board_tag').hide();
     AV ? $('#AV_tag').show() : $('#AV_tag').hide();
-    if (studentAccessible) {
-        $('#StudentAccessible_tag').show();
-    } else {
-        $('#StudentAccessible_tag').hide();
-    }
-    if (board) {
-        $('#Board_tag').show();
-    } else {
-        $('#Board_tag').hide();
-    }
-    if (AV) {
-        $('#AV_tag').show();
-    } else {
-        $('#AV_tag').hide();
-    }
 }
 
 // When click 'show', update tags and the update the map.
