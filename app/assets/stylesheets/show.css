@@ -3,7 +3,6 @@ body {
 }
 
 html {
-  overflow-y: hidden;
   height: 100%;
 }
 .text-center {
@@ -26,11 +25,14 @@ html {
 }
 
 #sidebar {
-  position: fixed;
-  height: 100%;
+  position: absolute;
+  height: 83.5%;
   overflow-y: scroll;
   padding-top: 0px;
   padding-right: 0px;
+  border-right-style: double;
+  border-right-color: black;
+  background-color: #eee;
 }
 #sidebar .nav {
   height: 50%;
@@ -43,7 +45,11 @@ html {
 }
 h2 {
   margin-left: 25%;
+  font-family: courier !important;
+  font-size: 50px !important;
 }
 .tab-content {
   padding-left: 50px;
+  font-family: consolas !important;
+  font-size: 18px !important;
 }
