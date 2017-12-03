@@ -1,7 +1,9 @@
 class BuildingsController < ApplicationController
   helper_method :filter_rooms
   helper_method :filter_by_capacity
-  helper_method :filter_by_roomtype
+  helper_method :filter_by_roomtype_1
+  helper_method :filter_by_roomtype_2
+  helper_method :filter_by_roomtype_3
 
   def index
 
@@ -65,6 +67,7 @@ class BuildingsController < ApplicationController
     
     rooms = filter_by_roomtype_1(rooms)
     rooms = filter_by_roomtype_2(rooms)
+    rooms = filter_by_roomtype_3(rooms)
     
     filter_by_capacity(rooms)
   end
@@ -78,17 +81,22 @@ class BuildingsController < ApplicationController
       rooms = rooms.where("UPPER(misc) NOT LIKE '%LECTURE%'")
     end
     
-    unless params[:Auditorium]
-      rooms = rooms.where("UPPER(misc) NOT LIKE '%AUDITORIUM%'")
-    end
     rooms
   end
   
   def filter_by_roomtype_2(rooms)
+    unless params[:Auditorium]
+      rooms = rooms.where("UPPER(misc) NOT LIKE '%AUDITORIUM%'")
+    end
+    
     unless params[:SeminarRoom]
       rooms = rooms.where("UPPER(misc) NOT LIKE '%SEMINAR%'") 
     end
     
+    rooms
+  end
+  
+  def filter_by_roomtype_3(rooms)
     unless params[:OtherRooms]
       rooms = rooms.where("UPPER(misc) LIKE '%CLASSROOM%'
         OR UPPER(misc) LIKE '%LECTURE HALL%'
