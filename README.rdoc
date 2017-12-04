@@ -18,6 +18,7 @@ In our website, we will be displaying the features of all the rooms, and search 
 * Technologies (projector, television, computer, speakers).
 * Operating hours
 
-Future goals are integrating Calnet Authentication and efficient communication across these buildings in order to make booking available directly through the website.
+We currently support authentication through Calnet.
 
+Future goals are efficient communication across these buildings in order to make booking and reservations available directly through the website. 
 Heroku link: https://room-reservation-169.herokuapp.com/
