@@ -2,23 +2,21 @@
 {<img src="https://api.codeclimate.com/v1/badges/a6e393aef63333c07923/maintainability" />}[https://codeclimate.com/github/jain-nikunj/room-reservation-app/maintainability]
 {<img src="https://api.codeclimate.com/v1/badges/a6e393aef63333c07923/test_coverage" />}[https://codeclimate.com/github/jain-nikunj/room-reservation-app/test_coverage]
 {<img src="https://travis-ci.org/jain-nikunj/room-reservation-app.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/jain-nikunj/room-reservation-app]
-{Pivotal Tracker}[https://www.pivotaltracker.com/projects/2118215]
 
-==== IMPORTANT
-The app will not work locally unless you add your specific redirect URL to Google API credentials (for log in) and also add Google Maps API credentials locally. 
 
-Room Reservation
+=== Room Reservation
 
-Room Reservation is a project that has as its main goal to provide students and staff members of UC Berkeley with a convenient way to obtain information on rooms across campus to be reserved. We will be focused on creating a very user-friendly website, displaying an interactive map of campus which highlights all the buildings that are part of this project.
- 	
-In our website, we will be displaying the features of all the rooms, and search filters will also be available based on those aspects:
-* Available time
+Room Reservation is a project whose main goal is to provide students and staff members of UC Berkeley a convenient way to obtain information on rooms across campus to be reserved. It is a very user-friendly website, displaying an interactive map of campus which highlights all the buildings that are part of this project. We currently support login authentication through Calnet.
+
+Our website displays the following features and search filters:
 * Capacity
 * Location
-* Technologies (projector, television, computer, speakers).
-* Operating hours
+* Technologies (Projector, AV Devices, Computer, et al)
+* Room Type
+* Misc. (ADA Accessible, et al)
 
-We currently support authentication through Calnet.
+Future goals are efficient communication across these buildings in order to make booking and reservations available directly through the website. Currently, there are administrative hindrances that limit the scope of this project.
 
-Future goals are efficient communication across these buildings in order to make booking and reservations available directly through the website. 
-Heroku link: https://room-reservation-169.herokuapp.com/
+Heroku link: https://room-reservation-169.herokuapp.com
+
+Pivotal Tracker Link: https://www.pivotaltracker.com/projects/2118215
