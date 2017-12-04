@@ -14,7 +14,7 @@ RSpec.describe BuildingsController, type: :controller do
       allow_any_instance_of(BuildingsController).to receive(:session_helper_user_id).and_return(@user_id)
       allow(Building).to receive(:find_by_id).with(@id).and_return(@fake_building)
       allow(@fake_building).to receive(:blank?).and_return(false)
-      allow(@unordered_fake).to receive(:order).and_return(@fake_rooms)
+      allow(@unordered_fake).to receive(:sort_by).and_return(@fake_rooms)
       allow(@room1).to receive(:misc).and_return("Misc")
       allow(@room1).to receive(:facilities).and_return("Facilities")
     end
