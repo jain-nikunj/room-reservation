@@ -3,7 +3,6 @@
 {<img src="https://api.codeclimate.com/v1/badges/a6e393aef63333c07923/test_coverage" />}[https://codeclimate.com/github/jain-nikunj/room-reservation-app/test_coverage]
 {<img src="https://travis-ci.org/jain-nikunj/room-reservation-app.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/jain-nikunj/room-reservation-app]
 
-
 === Room Reservation
 
 Room Reservation is a project whose main goal is to provide students and staff members of UC Berkeley a convenient way to obtain information on rooms across campus to be reserved. It is a very user-friendly website, displaying an interactive map of campus which highlights all the buildings that are part of this project. We currently support login authentication through Calnet.
@@ -20,3 +19,12 @@ Future goals are efficient communication across these buildings in order to make
 Heroku link: https://room-reservation-169.herokuapp.com
 
 Pivotal Tracker Link: https://www.pivotaltracker.com/projects/2118215
+
+==== App Setup
+
+* Run <code>bundle install -- without production</code> to install all dependencies
+* Run <code>sudo service postgresql start</code> to start the Postgres Database
+* Run <code>bundle exec rake db:setup</code> to setup the database (Migration + Seeding)
+* Run <code>openssl aes-256-cbc -d -in .env.enc -out .env</code> to decrypt the API keys for Google OmniAuth and Google Maps (ask Admin for decrpytion passphrase)
+  * The app will not work locally unless you add your specific redirect URL to Google API credentials (for OmniAuth)
+* Run <code>rails server</code> if running locally or run <code>rails server -b $IP -p $PORT</code> if using C9
